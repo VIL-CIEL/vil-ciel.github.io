@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio - IHM Pymodaq</title>
+  <link rel="stylesheet" href="../style/style.css">
+</head>
+<body>
+
+    <a class="back_return" href="../index.html">🏡</a>
+    <button id="toggle" class="theme-toggle" onclick="toggleTheme()">🌙</button>
+
+    <header class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+        <img src="../images/profil.jpeg" alt="Photo de profil" class="hero-avatar" />
+        <div class="hero-text">
+            <h1>Fabien Villedieu</h1>
+            <p class="hero-role">Développeur Novice • Créatif</p><div class="hero-socials">
+            <a href="https://github.com/VIL-CIEL" aria-label="GitHub" target="_blank">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 .5C5.73.5.5 5.74.5 12.02c0 5.11 3.29 9.44 7.86 10.97.57.1.78-.25.78-.55v-2.02c-3.2.7-3.87-1.54-3.87-1.54-.53-1.35-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.78 2.7 1.27 3.36.97.1-.75.4-1.27.72-1.56-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.45.11-3.02 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.79 0c2.21-1.5 3.18-1.18 3.18-1.18.63 1.57.23 2.73.11 3.02.74.81 1.19 1.84 1.19 3.1 0 4.43-2.69 5.4-5.25 5.69.41.36.77 1.07.77 2.15v3.18c0 .3.21.66.79.55A11.53 11.53 0 0 0 23.5 12C23.5 5.74 18.27.5 12 .5Z"/>
+                </svg>
+            </a>
+
+            <a href="https://linkedin.com/in/fabien-villedieu/" aria-label="LinkedIn" target="_blank">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.05-1.86-3.05-1.86 0-2.15 1.45-2.15 2.95v5.67H9.32V9h3.42v1.56h.05c.48-.9 1.65-1.85 3.4-1.85 3.63 0 4.3 2.39 4.3 5.49v6.25ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45Z"/>
+                </svg>
+            </a>
+            </div>
+        </div>
+        </div>
+    </header>
+
+    <section class="project-page">
+
+        <div class="title">
+            <h2>Présentation du projet</h2>
+        </div>
+
+        <div class="project-intro">
+            <p>Ce projet consiste en la création d'une interface d'acquisition de données pour un banc de test pour l'unité de recherche du <a href="https://cethil.insa-lyon.fr">CETHIL</a> (Centre d'énergétique et de thermique de Lyon).</p>
+            <p>Cette interface a été développé avec le framework <a href="https://pymodaq.cnrs.fr">Pymodaq</a> créé par <a href="https://github.com/seb5g">Sébastien Weber</a>, ingénieur au CNRS.</p>
+        </div>
+
+        <div class="project-gallery">
+            <img src="../images/IHM_Pymodaq_Explication.png" alt="Interface Pymodaq" data-description="L'interface finie et créé avec le framework Pymodaq pendant le stage">
+            <img src="../images/Log_exemple.PNG" alt="Module de sauvegarde" data-description="Le fameux module de saugarde permettant de sélectionner les machines que l'on veux suivre pour sauvegarder leurs données">
+            <img src="../images/composant_banc.png" alt="Banc de test" data-description="Plusieurs images des différentes machines et capteurs composant le banc de test sur lequel j'ai travaillé">
+        </div>
+
+        <div id="imageModal" class="modal" onclick="this.style.display='none'">
+            <span class="close">&times;</span>
+            <div class="modal-container">
+              <img class="modal-content" id="imgFull">
+              <div id="caption"></div> <div id="description"></div> </div>
+          </div>
+
+        <div class="cv">
+
+            <!-- Colonne principale -->
+            <div class="cv-main">
+
+                <h3>Objectifs du projet</h3>
+                <ul>
+                    <li>Créer une interface intuitive avec le framework Pymodaq</li>
+                    <li>Valider mes compétences en codage Python</li>
+                    <li>Découvrir et travailler dans un environnement de travail professionnel</li>
+                </ul>
+
+                <h3>Fonctionnalités clés</h3>
+                <ul>
+                    <li>Acquisition et pilotage de machines ainsi que de plusieurs capteurs</li>
+                    <li>Sauvegarde des données acquis pour un traitement des données</li>
+                    <li>Lecture des données acquises sur plusieurs graphes en temps réel</li>
+                    <li>Possibilité de piloter certaines machines du banc de test</li>
+                </ul>
+
+                <h3>Difficultées rencontrées</h3>
+                <p>
+                    Les graphes permettant d'afficher en temps réel les valeurs acquis des capteurs ne fonctionnait pas comme prévu, j'ai donc dû chercher un moyen pour régler le problème. Solution qui a été trouvé !
+                </p>
+
+                <br>
+
+                <p>
+                    La sauvegarde des données se fait via un module de Pymodaq qui n'a pas été totalement développé par le créateur et ses collaborateurs. Cela a entrainé des difficultées pour sauvegarder les valeurs acquises durant le test.
+                </p>
+                <p>
+                    Parfois la sauvegarde peut ne plus fonctionner à cause d'une raison que nous ne parvenons pas a trouver, surement lié au fait que le module ne soit pas fini.
+                </p>
+
+                <h3>Axes d’amélioration</h3>
+                <ul>
+                    <li>Rendre plus accessible l'interface (cela demande des modifications profondes du framework)</li>
+                    <li>Faciliter la sauvegarde des données et réduire les erreurs</li>
+                </ul>
+
+            </div>
+
+            <!-- Colonne droite -->
+            <div class="cv-side">
+                <div>
+                    <h3>Technologies</h3>
+                    <p>Python</p>
+                    <p>Framework Pymodaq</p>
+                    <p>Matlab</p>
+                </div>
+
+                <div>
+                    <h3>Durée</h3>
+                    <p>8 semaines</p>
+                </div>
+
+                <div>
+                    <h3>Type</h3>
+                    <p>Projet professionnel pour le stage de BTS de première année effectué au CETHIL</p>
+                </div>
+
+                <div>
+                    <h3>Liens</h3>
+                    <p><a href="https://cethil.insa-lyon.fr" class="project-link">Site du CETHIL</a></p>
+                    <p><a href="https://pymodaq.cnrs.fr" class="project-link">Site de Pymodaq</a></p>
+                    <p><a href="https://github.com/seb5g" class="project-link">Profil Github du créateur de Pymodaq</a></p>
+                </div>
+
+                <div>
+                    <h3>Code Source</h3>
+                    <p><a href="https://github.com/VIL-CIEL/pymodaq_plugins_cellkraft" class="project-link">Code Source lié au générateur à vapeur</a></p>
+                    <p><a href="https://github.com/Soungai00/pymodaq_plugins_daqmx" class="project-link">Code Source lié au boitier nidaqmx</a></p>
+                    <p>La majorité du code source à jour n'est disponible qu'en interne du CETHIL</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <a href="https://fabienvilledieu@free.fr">fabienvilledieu@free.fr</a>
+        <p>© 2026 – Villedieu Fabien</p>
+      </footer>
+    
+    <script>
+        const heroBg = document.querySelector('.hero-bg');
+        window.addEventListener('scroll', () => {
+        const value = window.scrollY;
+        heroBg.style.filter = `brightness(${Math.max(0.75, 1 - value / 800)})`;
+        });
+
+        function toggleTheme() {
+        document.body.classList.toggle('dark');
+        toogleB = document.querySelector("#toggle")
+
+        if(toogleB.innerHTML == "🌙")
+            toogleB.innerHTML = "☀️";
+        else
+            toogleB.innerHTML = "🌙";
+        }
+
+        const modal = document.getElementById("imageModal");
+        const modalImg = document.getElementById("imgFull");
+        const captionText = document.getElementById("caption");
+        const descriptionText = document.getElementById("description");
+
+        document.querySelectorAll('.project-gallery img').forEach(image => {
+        image.onclick = function() {
+            modal.style.display = "block";
+            modalImg.src = this.src;
+            
+            // Récupère l'alt et la data-description
+            captionText.innerHTML = this.alt;
+            descriptionText.innerHTML = this.getAttribute('data-description');
+        }
+        });
+    </script>
+</body>
+</html>
+    
