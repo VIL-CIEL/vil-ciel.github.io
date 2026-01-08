@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio - PlaceHolder</title>
+  <link rel="stylesheet" href="../style/style.css">
+</head>
+<body>
+
+    <a class="back_return" href="../index.html">🏡</a>
+    <button id="toggle" class="theme-toggle" onclick="toggleTheme()">🌙</button>
+
+    <header class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+        <img src="../images/profil.jpeg" alt="Photo de profil" class="hero-avatar" />
+        <div class="hero-text">
+            <h1>Fabien Villedieu</h1>
+            <p class="hero-role">Développeur Novice • Créatif</p><div class="hero-socials">
+            <a href="https://github.com/VIL-CIEL" aria-label="GitHub" target="_blank">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 .5C5.73.5.5 5.74.5 12.02c0 5.11 3.29 9.44 7.86 10.97.57.1.78-.25.78-.55v-2.02c-3.2.7-3.87-1.54-3.87-1.54-.53-1.35-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.78 2.7 1.27 3.36.97.1-.75.4-1.27.72-1.56-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.45.11-3.02 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.79 0c2.21-1.5 3.18-1.18 3.18-1.18.63 1.57.23 2.73.11 3.02.74.81 1.19 1.84 1.19 3.1 0 4.43-2.69 5.4-5.25 5.69.41.36.77 1.07.77 2.15v3.18c0 .3.21.66.79.55A11.53 11.53 0 0 0 23.5 12C23.5 5.74 18.27.5 12 .5Z"/>
+                </svg>
+            </a>
+
+            <a href="https://linkedin.com/in/fabien-villedieu/" aria-label="LinkedIn" target="_blank">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.05-1.86-3.05-1.86 0-2.15 1.45-2.15 2.95v5.67H9.32V9h3.42v1.56h.05c.48-.9 1.65-1.85 3.4-1.85 3.63 0 4.3 2.39 4.3 5.49v6.25ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45Z"/>
+                </svg>
+            </a>
+            </div>
+        </div>
+        </div>
+    </header>
+
+    <section class="project-page">
+
+        <div class="title">
+            <h2>Présentation du projet</h2>
+        </div>
+
+        <div class="project-intro">
+            <p>Ce projet consiste en la création d'un jeu vidéo pour apprendre et mettre en application mes competences en codage python.</p>
+            <p>J'ai réussi en autodidacte a apprendre comment utiliser pygame mais aussi comment coder certaines fonctionnalités typique du jeu tour par tour.</p>
+            <p>C'est un projet que j'ai beaucoup aimé faire et qui m'a donné envie de refaire des jeu comme cela pour pouvoir revivre ce plaisir de liberté dans le développement.</p>
+        </div>
+
+        <div class="project-gallery">
+            <img src="../images/Jeu_Pygame.png" alt="Combat de tutoriel - tour du joueur" data-description="Lors du tour du joueur vous pouvez attaquer Kopa, un personnage de tutoriel. Vous pouvez aussi vous soigner avec vos items, epargner kopa ou encore lui parler/inspecter ses statistiques">
+            <img src="../images/Jeu_Pygame-playerTurn.png" alt="Combat de tutoriel - tour de l'adversaire" data-description="Lors du tour de Kopa(adversaire) vous allez être sous forme d'un coeur representant votre ame, vous pouvez esquiver les projectiles librement sous forme ame bleue clair mais il y a une autre forme d'ame, cette fois bleue foncée qui est attiré vers le bas donc le joueur doit sauter pour esquiver les projectiles">
+            <img src="../images/Jeu_Pygame-Monde.png" alt="Fragment du monde semi-ouvert" data-description="Le monde semi-ouvert dans lequel vous pouvez naviguer et récuperer des objets (tarte en haut a gauche au sol pouvant etre récupéré avec 'Z')">
+        </div>
+
+        <div id="imageModal" class="modal" onclick="this.style.display='none'">
+            <span class="close">&times;</span>
+            <div class="modal-container">
+              <img class="modal-content" id="imgFull">
+              <div id="caption"></div> <div id="description"></div> </div>
+          </div>
+
+        <div class="cv">
+
+            <!-- Colonne principale -->
+            <div class="cv-main">
+
+                <h3>Objectifs du projet</h3>
+                <ul>
+                    <li>Mettre en application ce que j'ai appris au cours de ma formation sur le python</li>
+                    <li>Reussir a mettre en place une motif d'architecture MVC</li>
+                </ul>
+
+                <h3>Fonctionnalités clés</h3>
+                <ul>
+                    <li>Combat au tour par tour</li>
+                    <li>Un monde semi-ouvert avec des points d'interets et d'interactions</li>
+                    <li>Tout développer dans un motif d'architecture MVC</li>
+                </ul>
+
+                <h3>Difficultées rencontrées</h3>
+                <p>
+                  Difficulté dans la création des menus avec la création d'un menu fluide et facile d'accès 
+                </p>
+                <p>
+                  Difficulté dans la gestion des colisions dans la carte de jeu qui est fait de manière grossière et pas facilement modifiable (pour rajouter une zone par exemple)
+                  <br>-> Cette difficulté viens surtout de pygame en lui meme qui n'a pas vraiment de système de colisions poussé
+                </p>
+
+                <h3>Axes d’amélioration</h3>
+                <ul>
+                    <li>Un tutoriel qui guide plus le joueur (pour le moment le joueur est très perdu sur les touches etc..)</li>
+                    <li>Une meilleure gestion des colisions</li>
+                </ul>
+
+            </div>
+
+            <!-- Colonne droite -->
+            <div class="cv-side">
+                <div>
+                    <h3>Technologies</h3>
+                    <p>Python</p>
+                    <p>Pygame</p>
+                </div>
+
+                <div>
+                    <h3>Durée</h3>
+                    <p>8 semaines</p>
+                </div>
+
+                <div>
+                    <h3>Type</h3>
+                    <p>Projet Académique effectué en terminal NSI<br>Effectué en groupe de 3</p>
+                </div>
+
+                <div>
+                    <h3>Code Source</h3>
+                    <p><a href="https://github.com/VIL-CIEL/TaleUnder" class="project-link">Github</a></p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <a href="https://fabienvilledieu@free.fr">fabienvilledieu@free.fr</a>
+        <p>© 2026 – Villedieu Fabien</p>
+      </footer>
+    
+    <script>
+        const heroBg = document.querySelector('.hero-bg');
+        window.addEventListener('scroll', () => {
+        const value = window.scrollY;
+        heroBg.style.filter = `brightness(${Math.max(0.75, 1 - value / 800)})`;
+        });
+
+        function toggleTheme() {
+        document.body.classList.toggle('dark');
+        toogleB = document.querySelector("#toggle")
+
+        if(toogleB.innerHTML == "🌙")
+            toogleB.innerHTML = "☀️";
+        else
+            toogleB.innerHTML = "🌙";
+        }
+
+        const modal = document.getElementById("imageModal");
+        const modalImg = document.getElementById("imgFull");
+        const captionText = document.getElementById("caption");
+        const descriptionText = document.getElementById("description");
+
+        document.querySelectorAll('.project-gallery img').forEach(image => {
+        image.onclick = function() {
+            modal.style.display = "block";
+            modalImg.src = this.src;
+            
+            // Récupère l'alt et la data-description
+            captionText.innerHTML = this.alt;
+            descriptionText.innerHTML = this.getAttribute('data-description');
+        }
+        });
+    </script>
+</body>
+</html>
+    
