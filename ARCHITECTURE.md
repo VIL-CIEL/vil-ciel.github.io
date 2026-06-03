@@ -120,8 +120,8 @@ docs) respecte le §2.2 du référentiel : aucun fichier de configuration n'est 
 - Lien **canonical** par page ; `robots.txt` et `sitemap.xml`.
 - La page 404 est marquée `noindex`.
 
-Les URL absolues sont construites sur la base `https://vil-ciel.github.io/portfolio`
-(à adapter si l'adresse de déploiement change — voir README).
+Les URL absolues sont construites sur la base `https://vil-ciel.github.io` (page
+utilisateur, à la racine ; à adapter si l'adresse de déploiement change — voir README).
 
 ## Performance (§12)
 
