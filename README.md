@@ -88,7 +88,8 @@ s'exécutent automatiquement en CI à chaque push.
 
 ```bash
 npm install        # une seule fois
-npm run lint       # ESLint + Stylelint + vérification Prettier
+npm run lint       # ESLint + Stylelint (barrière CI)
+npm run lint:format # Vérification du formatage Prettier (manuel)
 npm run format     # Applique le formatage Prettier
 ```
 
