@@ -1,24 +1,24 @@
 <!doctype html>
-<html lang="fr" data-theme="dark" data-base="../" data-page="projets">
+<html lang="fr" data-theme="dark" data-base="../../../" data-page="projets">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Recherche textuelle — Fabien Villedieu</title>
+    <title>IHM Pymodaq — Fabien Villedieu</title>
     <meta
       name="description"
-      content="Logiciel Python de recherche d'un mot dans une base CSV via les algorithmes Naïf et Boyer-Moore-Horspool, avec interface Tkinter."
+      content="IHM Pymodaq : interface d'acquisition de données pour un banc de test du CETHIL, développée en Python avec le framework Pymodaq."
     />
     <meta name="color-scheme" content="dark light" />
 
-    <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="../../img/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="../assets/css/styles.css" />
+    <link rel="stylesheet" href="../../css/styles.css" />
 
     <script>
       (function () {
@@ -30,13 +30,13 @@
         } catch (e) {}
       })();
     </script>
-    <link rel="canonical" href="https://vil-ciel.github.io/portfolio/pages/recherche-textuelle.html" />
+    <link rel="canonical" href="https://vil-ciel.github.io/portfolio/assets/pages/projets/ihm-pymodaq.html" />
     <meta name="theme-color" content="#0d1117" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Portfolio — Fabien Villedieu" />
-    <meta property="og:title" content="Recherche textuelle — Fabien Villedieu" />
-    <meta property="og:description" content="Logiciel Python de recherche d'un mot dans une base CSV via les algorithmes Naïf et Boyer-Moore-Horspool, avec interface Tkinter." />
-    <meta property="og:url" content="https://vil-ciel.github.io/portfolio/pages/recherche-textuelle.html" />
+    <meta property="og:title" content="IHM Pymodaq — Fabien Villedieu" />
+    <meta property="og:description" content="IHM Pymodaq : interface d'acquisition de données pour un banc de test du CETHIL, développée en Python avec le framework Pymodaq." />
+    <meta property="og:url" content="https://vil-ciel.github.io/portfolio/assets/pages/projets/ihm-pymodaq.html" />
     <meta property="og:image" content="https://vil-ciel.github.io/portfolio/assets/img/profile.jpg" />
     <meta name="twitter:card" content="summary" />
   </head>
@@ -49,63 +49,64 @@
       <section class="section">
         <div class="section__inner">
           <nav class="breadcrumb" aria-label="Fil d'Ariane">
-            <a href="../index.html">Accueil</a>
+            <a href="../../../index.html">Accueil</a>
             <span class="breadcrumb__sep" aria-hidden="true">/</span>
             <a href="../projets.html">Projets</a>
             <span class="breadcrumb__sep" aria-hidden="true">/</span>
-            <span aria-current="page">Recherche textuelle</span>
+            <span aria-current="page">IHM Pymodaq</span>
           </nav>
 
-          <span class="badge badge--edu">
-            <i data-lucide="graduation-cap" aria-hidden="true"></i> Académique
+          <span class="badge badge--pro">
+            <i data-lucide="briefcase" aria-hidden="true"></i> Professionnel
           </span>
-          <h1 class="page-hero__title">Recherche textuelle</h1>
+          <h1 class="page-hero__title">IHM Pymodaq</h1>
 
           <div class="detail__layout">
             <div class="detail__content">
               <section class="detail__section">
                 <h2><i data-lucide="info" aria-hidden="true"></i> Présentation</h2>
                 <p>
-                  Ce projet consiste en la création d'un logiciel permettant de rechercher un mot
-                  dans une base de données au format CSV. Il s'appuie sur les algorithmes de
-                  recherche Naïf et Boyer-Moore-Horspool.
+                  Ce projet consiste en la création d'une interface d'acquisition de données pour
+                  un banc de test, destinée à l'unité de recherche du CETHIL.
                 </p>
                 <p>
-                  C'est un projet très simple mais qui m'a marqué : c'était mon tout premier
-                  logiciel, majoritairement construit par moi-même.
+                  Cette interface a été développée avec le framework Pymodaq, créé par Sébastien
+                  Weber, ingénieur au CNRS.
                 </p>
               </section>
 
               <section class="detail__section">
                 <h2><i data-lucide="target" aria-hidden="true"></i> Objectifs du projet</h2>
                 <ul class="checklist">
-                  <li>Mettre en application les algorithmes Naïf et Boyer-Moore-Horspool.</li>
-                  <li>Manipuler des fichiers CSV depuis le code pour effectuer les recherches.</li>
+                  <li>Créer une interface intuitive avec le framework Pymodaq.</li>
+                  <li>Valider mes compétences en codage Python.</li>
+                  <li>Découvrir et travailler dans un environnement professionnel.</li>
                 </ul>
               </section>
 
               <section class="detail__section">
                 <h2><i data-lucide="list-checks" aria-hidden="true"></i> Fonctionnalités clés</h2>
                 <ul class="checklist">
-                  <li>Une interface graphique réalisée avec Tkinter.</li>
-                  <li>Le choix entre les deux algorithmes et de la base de données à utiliser.</li>
-                  <li>Un travail mené en groupe.</li>
+                  <li>Acquisition et pilotage de machines ainsi que de plusieurs capteurs.</li>
+                  <li>Sauvegarde des données acquises en vue de leur traitement.</li>
+                  <li>Lecture des données sur plusieurs graphes en temps réel.</li>
+                  <li>Pilotage de certaines machines du banc de test.</li>
                 </ul>
               </section>
 
               <section class="detail__section">
                 <h2><i data-lucide="triangle-alert" aria-hidden="true"></i> Difficultés rencontrées</h2>
                 <p>
-                  L'algorithme Boyer-Moore-Horspool, relativement complexe, a été délicat à mettre
-                  en place et à coder. Trouver une base de données adaptée a également été compliqué.
+                  L'affichage des graphes en temps réel a posé des difficultés, tout comme le
+                  module de sauvegarde des données, resté incomplet à la fin du stage.
                 </p>
               </section>
 
               <section class="detail__section">
                 <h2><i data-lucide="trending-up" aria-hidden="true"></i> Axes d'amélioration</h2>
                 <ul class="checklist">
-                  <li>Utiliser une base de données SQL plutôt qu'un fichier CSV.</li>
-                  <li>Améliorer l'interface et permettre la recherche sur plusieurs supports.</li>
+                  <li>Rendre l'interface plus accessible.</li>
+                  <li>Faciliter la sauvegarde des données et réduire les erreurs.</li>
                 </ul>
               </section>
 
@@ -113,7 +114,32 @@
                 <h2><i data-lucide="images" aria-hidden="true"></i> Galerie</h2>
                 <div class="gallery">
                   <button class="gallery__item" type="button">
-                    <img src="../assets/img/projects/recherche.png" alt="Interface Tkinter du logiciel de recherche textuelle" loading="lazy" />
+                    <img
+                      src="../../img/projects/IHM_Pymodaq.PNG"
+                      alt="Vue d'ensemble de l'interface IHM Pymodaq"
+                      loading="lazy"
+                    />
+                  </button>
+                  <button class="gallery__item" type="button">
+                    <img
+                      src="../../img/projects/IHM_Pymodaq_Explication.png"
+                      alt="Schéma explicatif de l'interface Pymodaq"
+                      loading="lazy"
+                    />
+                  </button>
+                  <button class="gallery__item" type="button">
+                    <img
+                      src="../../img/projects/composant_banc.png"
+                      alt="Composants du banc de test"
+                      loading="lazy"
+                    />
+                  </button>
+                  <button class="gallery__item" type="button">
+                    <img
+                      src="../../img/projects/Log_exemple.PNG"
+                      alt="Exemple de journal (log) de l'application"
+                      loading="lazy"
+                    />
                   </button>
                 </div>
               </section>
@@ -125,22 +151,26 @@
                   <p class="meta-row__label"><i data-lucide="wrench" aria-hidden="true"></i> Technologies</p>
                   <ul class="tags tags--sm">
                     <li class="tag">Python</li>
-                    <li class="tag">Tkinter</li>
-                    <li class="tag">Naïf</li>
-                    <li class="tag">Boyer-Moore</li>
+                    <li class="tag">Pymodaq</li>
+                    <li class="tag">Matlab</li>
                   </ul>
                 </div>
                 <div class="meta-row">
                   <p class="meta-row__label"><i data-lucide="clock" aria-hidden="true"></i> Durée</p>
-                  <p class="meta-row__value">6 semaines</p>
+                  <p class="meta-row__value">8 semaines</p>
                 </div>
                 <div class="meta-row">
                   <p class="meta-row__label"><i data-lucide="tag" aria-hidden="true"></i> Type</p>
-                  <p class="meta-row__value">Projet académique (terminale NSI) — en groupe de 3</p>
+                  <p class="meta-row__value">Projet professionnel — stage de BTS</p>
                 </div>
                 <div class="meta-row">
                   <p class="meta-row__label"><i data-lucide="code" aria-hidden="true"></i> Code source</p>
-                  <a class="btn btn--ghost" href="https://github.com/VIL-CIEL" target="_blank" rel="noopener noreferrer">
+                  <a
+                    class="btn btn--ghost"
+                    href="https://github.com/VIL-CIEL"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <i data-lucide="external-link" aria-hidden="true"></i>
                     Voir sur GitHub
                   </a>
@@ -155,6 +185,6 @@
     <footer class="site-footer" data-shell="footer"></footer>
 
     <script src="https://unpkg.com/lucide@latest"></script>
-    <script defer src="../assets/js/main.js"></script>
+    <script defer src="../../js/main.js"></script>
   </body>
 </html>

@@ -13,12 +13,12 @@ par projet), le parcours et les moyens de contact. Construit en **vanilla**
 Pages :
 
 - **Accueil** (`index.html`) — présentation, projets phares, accès rapides.
-- **Projets** (`projets.html`) — liste des projets, liens vers les pages détail.
-- **Pages détail** (`pages/*.html`) — une page par projet (présentation, objectifs,
-  fonctionnalités, difficultés, axes d'amélioration, galerie d'images avec lightbox).
-- **À propos** (`a-propos.html`) — bio, compétences avec niveaux, qualités, parcours,
-  centres d'intérêt.
-- **Contact** (`contact.html`) — formulaire (validation + envoi) et coordonnées.
+- **Projets** (`assets/pages/projets.html`) — liste des projets, liens vers les détails.
+- **Pages détail** (`assets/pages/projets/*.html`) — une page par projet (présentation,
+  objectifs, fonctionnalités, difficultés, axes d'amélioration, galerie avec lightbox).
+- **À propos** (`assets/pages/a-propos.html`) — bio, compétences avec niveaux, qualités,
+  parcours, centres d'intérêt.
+- **Contact** (`assets/pages/contact.html`) — formulaire (validation + envoi) et coordonnées.
 - **404** (`404.html`) — page d'erreur.
 
 ## Stack technique
@@ -37,26 +37,27 @@ dépendance d'exécution, aucun backend.
 
 ```
 portfolio/
-├── public/                      # Tout ce qui est servi sur le web
-│   ├── index.html               # Accueil
-│   ├── projets.html             # Liste des projets
-│   ├── a-propos.html            # À propos / parcours
-│   ├── contact.html             # Contact (formulaire)
-│   ├── 404.html                 # Page d'erreur
-│   ├── version.json             # Version courante (affichée en footer)
+├── public/                      # Tout ce qui est servi sur le web (racine du site)
+│   ├── index.html               # Accueil (point d'entrée)
+│   ├── 404.html                 # Page d'erreur (racine requise par GitHub Pages)
+│   ├── robots.txt               # Directives robots + lien sitemap
 │   ├── sitemap.xml              # Plan du site (SEO)
-│   ├── robots.txt              # Directives robots + lien sitemap
+│   ├── version.json             # Version courante (affichée en footer)
 │   ├── .nojekyll                # Désactive le traitement Jekyll de GitHub Pages
-│   ├── pages/                   # Pages détail (une par projet)
-│   │   ├── ihm-pymodaq.html
-│   │   ├── jeu-unity.html
-│   │   ├── jeu-pygame.html
-│   │   └── recherche-textuelle.html
 │   └── assets/
 │       ├── css/styles.css       # Styles + variables de thème
 │       ├── js/main.js           # Coquille partagée + comportements UI
 │       ├── cv-fabien-villedieu.pdf
-│       └── img/                 # Photo, favicon, captures (projects/)
+│       ├── img/                 # Photo, favicon, captures (projects/)
+│       └── pages/               # Pages HTML secondaires
+│           ├── projets.html
+│           ├── a-propos.html
+│           ├── contact.html
+│           └── projets/         # Pages détail (une par projet)
+│               ├── ihm-pymodaq.html
+│               ├── jeu-unity.html
+│               ├── jeu-pygame.html
+│               └── recherche-textuelle.html
 ├── .github/workflows/           # CI/CD GitHub Actions
 ├── package.json                 # Outillage de lint/format (dev uniquement)
 ├── ARCHITECTURE.md              # Choix techniques et organisation

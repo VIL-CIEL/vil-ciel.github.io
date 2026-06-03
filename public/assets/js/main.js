@@ -15,9 +15,9 @@ const ACTIVE = document.documentElement.dataset.page ?? '';
 // Liens de navigation (source unique).
 const NAV = [
   { key: 'accueil', href: 'index.html', label: 'Accueil' },
-  { key: 'projets', href: 'projets.html', label: 'Projets' },
-  { key: 'a-propos', href: 'a-propos.html', label: 'À propos' },
-  { key: 'contact', href: 'contact.html', label: 'Contact' },
+  { key: 'projets', href: 'assets/pages/projets.html', label: 'Projets' },
+  { key: 'a-propos', href: 'assets/pages/a-propos.html', label: 'À propos' },
+  { key: 'contact', href: 'assets/pages/contact.html', label: 'Contact' },
 ];
 
 // Coordonnées / réseaux (source unique).
@@ -86,7 +86,7 @@ function injectFooter() {
     <div class="site-footer__inner">
       <p class="site-footer__copy">© ${year} Fabien Villedieu</p>
       <ul class="site-footer__socials" aria-label="Réseaux et contact">${socialsMarkup()}</ul>
-      <p class="site-footer__version" data-version>v1.0.0</p>
+      <p class="site-footer__version" data-version>v1.0.1</p>
     </div>
   `;
 }

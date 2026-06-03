@@ -35,10 +35,12 @@ Contact, 404, et une page détail par projet dans `pages/`). Pour rester **DRY**
 - **Coquille partagée** : l'en-tête (navigation + bascule de thème) et le pied de page
   sont injectés par `main.js` depuis une **source unique**, dans les emplacements
   `<header data-shell="header">` et `<footer data-shell="footer">`.
-- **Chemins relatifs** : chaque page déclare sur `<html>` un attribut `data-base`
-  (`""` à la racine, `"../"` dans `pages/`) et `data-page` (clé de la page active pour
-  surligner le bon lien de navigation). Le site fonctionne donc aussi bien à la racine
-  d'un domaine que dans un sous-dossier (`/portfolio/`).
+- **Chemins relatifs** : chaque page déclare sur `<html>` un attribut `data-base` égal
+  au chemin relatif vers la racine du site (`""` à la racine, `"../../"` dans
+  `assets/pages/`, `"../../../"` dans `assets/pages/projets/`) et `data-page` (clé de la
+  page active pour surligner le bon lien de navigation). Les liens de la coquille et la
+  lecture de `version.json` sont préfixés par `data-base`, si bien que le site fonctionne
+  aussi bien à la racine d'un domaine que dans un sous-dossier (`/portfolio/`).
 - **Thème sans clignotement** : un petit script inline dans le `<head>` applique le
   thème (depuis `localStorage` ou la préférence système) **avant le premier rendu**.
 - **Robustesse** : les scripts sont des scripts classiques `defer` (et non des modules
@@ -50,25 +52,26 @@ Contact, 404, et une page détail par projet dans `pages/`). Pour rester **DRY**
 
 ```
 public/                          # Racine web (seul dossier publié)
-├── index.html                   # Accueil
-├── projets.html                 # Liste des projets
-├── a-propos.html                # À propos / parcours
-├── contact.html                 # Contact (formulaire)
-├── 404.html                     # Page d'erreur
-├── version.json                 # Version courante (lue par main.js, affichée en footer)
-├── sitemap.xml                  # Plan du site (SEO)
+├── index.html                   # Accueil (point d'entrée)
+├── 404.html                     # Page d'erreur (racine requise par GitHub Pages)
 ├── robots.txt                   # Directives robots + lien sitemap
+├── sitemap.xml                  # Plan du site (SEO)
+├── version.json                 # Version courante (lue par main.js, affichée en footer)
 ├── .nojekyll                    # Empêche GitHub Pages de traiter le site avec Jekyll
-├── pages/                       # Pages détail (une par projet)
-│   ├── ihm-pymodaq.html
-│   ├── jeu-unity.html
-│   ├── jeu-pygame.html
-│   └── recherche-textuelle.html
 └── assets/
     ├── css/styles.css           # Styles + variables de thème
     ├── js/main.js               # Coquille partagée + comportements UI
     ├── cv-fabien-villedieu.pdf
-    └── img/                     # Photo, favicon, et captures dans projects/
+    ├── img/                     # Photo, favicon, et captures dans projects/
+    └── pages/                   # Pages HTML secondaires
+        ├── projets.html
+        ├── a-propos.html
+        ├── contact.html
+        └── projets/             # Pages détail (une par projet)
+            ├── ihm-pymodaq.html
+            ├── jeu-unity.html
+            ├── jeu-pygame.html
+            └── recherche-textuelle.html
 
 # Racine du dépôt (hors web) : outillage et documentation
 .github/workflows/deploy.yml     # CI/CD : lint + déploiement Pages
