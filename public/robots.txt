@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://vil-ciel.github.io/sitemap.xml
