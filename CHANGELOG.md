@@ -5,14 +5,26 @@ Toutes les modifications notables de ce projet sont documentées ici.
 Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/)
 et le projet respecte le [versionnage sémantique](https://semver.org/lang/fr/) (`MAJEUR.MINEUR.CORRECTIF`).
 
+## [0.3.1] - 2026-06-03
+
+### Corrigé
+- Le site s'affiche désormais correctement même ouvert en `file://` ou si le
+  JavaScript échoue : passage des scripts ES modules à des scripts classiques
+  `defer`, et le contenu n'est masqué pour l'animation que lorsque le JS est actif.
+- Le contenu déjà visible à l'écran est révélé immédiatement (plus de page « vide »
+  si l'IntersectionObserver ne se déclenche pas) ; révélation complète en cas de
+  `prefers-reduced-motion`.
+
 ## [0.3.0] - 2026-06-03
 
 ### Ajouté
-- Une **page détail par projet** (IHM Pymodaq, Jeu Unity, Jeu Pygame, Recherche textuelle),
-  fidèle à l'original : présentation, objectifs, fonctionnalités clés, difficultés,
-  axes d'amélioration, technologies, durée, type et code source.
-- **Galerie d'images** par projet avec agrandissement (lightbox) navigable au clavier.
-- Fil d'Ariane sur les pages détail et liens « Voir le détail » depuis la liste des projets.
+- **Pages détail des projets** : IHM Pymodaq, Jeu Unity, Jeu Pygame, Recherche textuelle.
+- Gabarit commun : présentation, objectifs, fonctionnalités, difficultés, axes
+  d'amélioration, et panneau méta (technologies, durée, type, code source).
+- **Galerie d'images** par projet avec **lightbox** accessible (clavier : Échap,
+  flèches gauche/droite ; navigation précédent/suivant).
+- Fil d'Ariane sur les pages détail.
+- Liens « voir le détail » depuis la page Projets et les projets phares de l'accueil.
 
 ## [0.2.0] - 2026-06-03
 
