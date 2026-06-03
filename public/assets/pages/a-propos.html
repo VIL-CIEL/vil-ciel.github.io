@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="fr" data-theme="dark" data-base="../../" data-page="a-propos">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>À propos — Fabien Villedieu</title>
+    <meta
+      name="description"
+      content="Parcours de Fabien Villedieu : expérience au CETHIL, compétences techniques, formation BTS CIEL, qualités et centres d'intérêt."
+    />
+    <meta name="color-scheme" content="dark light" />
+
+    <link rel="icon" href="../img/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/styles.css" />
+
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem('portfolio-theme');
+          var sysLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+          document.documentElement.classList.add('js');
+          document.documentElement.setAttribute('data-theme', t || (sysLight ? 'light' : 'dark'));
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="canonical" href="https://vil-ciel.github.io/a-propos.html" />
+    <meta name="theme-color" content="#0d1117" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Portfolio — Fabien Villedieu" />
+    <meta property="og:title" content="À propos — Fabien Villedieu" />
+    <meta property="og:description" content="Parcours de Fabien Villedieu : expérience au CETHIL, compétences techniques, formation BTS CIEL, qualités et centres d'intérêt." />
+    <meta property="og:url" content="https://vil-ciel.github.io/a-propos.html" />
+    <meta property="og:image" content="https://vil-ciel.github.io/assets/img/profile.jpg" />
+    <meta name="twitter:card" content="summary" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Aller au contenu principal</a>
+
+    <header class="site-header" data-shell="header"></header>
+
+    <main id="main">
+      <section class="page-hero">
+        <div class="page-hero__inner reveal">
+          <p class="hero__eyebrow">Qui suis-je</p>
+          <h1 class="page-hero__title">À propos</h1>
+          <p class="page-hero__lead">
+            Étudiant en BTS CIEL et développeur junior à Lyon, passionné de logiciel et de
+            résolution de problèmes techniques.
+          </p>
+          <a class="btn btn--ghost" href="../cv-fabien-villedieu.pdf" download>
+            <i data-lucide="download" aria-hidden="true"></i>
+            Télécharger mon CV
+          </a>
+        </div>
+      </section>
+
+      <!-- Bio + faits rapides -->
+      <section class="section">
+        <div class="section__inner reveal">
+          <div class="about-intro">
+            <img
+              class="about-intro__photo"
+              src="../img/profile.jpg"
+              alt="Portrait de Fabien Villedieu"
+              width="240"
+              height="240"
+              loading="lazy"
+              onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'about-intro__photo about-intro__photo--fallback',textContent:'FV'}))"
+            />
+            <div class="about-intro__body">
+              <h2 class="section__title">
+                <i data-lucide="user" aria-hidden="true"></i> Bonjour, moi c'est Fabien
+              </h2>
+              <p>
+                Futur développeur logiciel, je transforme chaque problématique technique en une
+                opportunité d'apprentissage pour repousser sans cesse mes standards de qualité.
+                J'ai découvert la programmation au lycée (spécialité NSI) et je n'ai plus arrêté
+                depuis : du logiciel scientifique aux jeux vidéo, j'aime comprendre les choses en
+                profondeur et construire des outils qui fonctionnent vraiment.
+              </p>
+              <p>
+                Aujourd'hui en BTS CIEL (Informatique et Réseaux), je code principalement en
+                Python, C++ et C#, et je me forme au développement web. Curieux et largement
+                autodidacte, je suis à la recherche d'une poursuite d'études en école d'ingénieurs.
+              </p>
+
+              <ul class="about-facts">
+                <li>
+                  <i data-lucide="map-pin" aria-hidden="true"></i>
+                  <span><strong>Localisation</strong> — Lyon, France</span>
+                </li>
+                <li>
+                  <i data-lucide="graduation-cap" aria-hidden="true"></i>
+                  <span><strong>Formation</strong> — BTS CIEL, Informatique &amp; Réseaux</span>
+                </li>
+                <li>
+                  <i data-lucide="briefcase" aria-hidden="true"></i>
+                  <span><strong>Statut</strong> — Développeur junior, ouvert aux opportunités</span>
+                </li>
+                <li>
+                  <i data-lucide="languages" aria-hidden="true"></i>
+                  <span><strong>Langues</strong> — Français (natif), Anglais (B1)</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Compétences avec niveaux -->
+      <section class="section section--alt">
+        <div class="section__inner reveal">
+          <h2 class="section__title">
+            <i data-lucide="cpu" aria-hidden="true"></i> Compétences techniques
+          </h2>
+
+          <div class="skills-detail">
+            <div class="skill-meter">
+              <h3 class="skill-group__title">Langages &amp; technologies</h3>
+
+              <div class="skill-meter__row">
+                <div class="skill-meter__head">
+                  <span>Python</span><span class="skill-meter__level">Avancé</span>
+                </div>
+                <div class="skill-meter__track">
+                  <div class="skill-meter__fill" style="width: 85%"></div>
+                </div>
+              </div>
+
+              <div class="skill-meter__row">
+                <div class="skill-meter__head">
+                  <span>C#</span><span class="skill-meter__level">Intermédiaire</span>
+                </div>
+                <div class="skill-meter__track">
+                  <div class="skill-meter__fill" style="width: 60%"></div>
+                </div>
+              </div>
+
+              <div class="skill-meter__row">
+                <div class="skill-meter__head">
+                  <span>C++</span><span class="skill-meter__level">Intermédiaire</span>
+                </div>
+                <div class="skill-meter__track">
+                  <div class="skill-meter__fill" style="width: 55%"></div>
+                </div>
+              </div>
+
+              <div class="skill-meter__row">
+                <div class="skill-meter__head">
+                  <span>HTML &amp; CSS</span><span class="skill-meter__level">Intermédiaire</span>
+                </div>
+                <div class="skill-meter__track">
+                  <div class="skill-meter__fill" style="width: 55%"></div>
+                </div>
+              </div>
+
+              <div class="skill-meter__row">
+                <div class="skill-meter__head">
+                  <span>JavaScript</span><span class="skill-meter__level">Bases</span>
+                </div>
+                <div class="skill-meter__track">
+                  <div class="skill-meter__fill" style="width: 40%"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="skill-aside">
+              <article class="skill-group">
+                <h3 class="skill-group__title">Outils &amp; méthodes</h3>
+                <ul class="tags">
+                  <li class="tag">Git</li>
+                  <li class="tag">GitHub</li>
+                  <li class="tag">GitLab</li>
+                  <li class="tag">Diagrammes UML</li>
+                  <li class="tag">Architecture MVC</li>
+                </ul>
+              </article>
+              <article class="skill-group">
+                <h3 class="skill-group__title">Domaines</h3>
+                <ul class="tags">
+                  <li class="tag">Acquisition de données</li>
+                  <li class="tag">Développement de jeux</li>
+                  <li class="tag">Algorithmique</li>
+                </ul>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Qualités -->
+      <section class="section">
+        <div class="section__inner reveal">
+          <h2 class="section__title">
+            <i data-lucide="sparkles" aria-hidden="true"></i> Ce qui me caractérise
+          </h2>
+          <div class="quality-grid">
+            <article class="quality-card">
+              <i data-lucide="book-open" aria-hidden="true"></i>
+              <h3>Autodidacte</h3>
+              <p>J'apprends vite et seul, par la pratique et la documentation.</p>
+            </article>
+            <article class="quality-card">
+              <i data-lucide="badge-check" aria-hidden="true"></i>
+              <h3>Rigueur</h3>
+              <p>Je soigne la qualité et la lisibilité de mon code.</p>
+            </article>
+            <article class="quality-card">
+              <i data-lucide="lightbulb" aria-hidden="true"></i>
+              <h3>Curiosité</h3>
+              <p>J'aime comprendre comment les choses fonctionnent en profondeur.</p>
+            </article>
+            <article class="quality-card">
+              <i data-lucide="puzzle" aria-hidden="true"></i>
+              <h3>Résolution de problèmes</h3>
+              <p>Chaque difficulté technique est un défi à décortiquer.</p>
+            </article>
+            <article class="quality-card">
+              <i data-lucide="users" aria-hidden="true"></i>
+              <h3>Esprit d'équipe</h3>
+              <p>Habitué au travail en groupe sur des projets communs.</p>
+            </article>
+            <article class="quality-card">
+              <i data-lucide="list-todo" aria-hidden="true"></i>
+              <h3>Organisation</h3>
+              <p>Je planifie mes projets (plans, diagrammes) pour mieux avancer.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Expérience -->
+      <section class="section section--alt">
+        <div class="section__inner reveal">
+          <h2 class="section__title">
+            <i data-lucide="briefcase" aria-hidden="true"></i> Expérience professionnelle
+          </h2>
+          <ol class="timeline">
+            <li class="timeline__item">
+              <span class="timeline__date">19 mai – 11 juillet 2025 · 8 semaines</span>
+              <h3 class="timeline__heading">Stage — Développeur logiciel</h3>
+              <p class="timeline__org">CETHIL — Centre d'Énergétique et de Thermique de Lyon</p>
+              <p class="timeline__text">
+                Développement d'une interface d'acquisition de données pour un banc de test,
+                réalisée en Python avec le framework Pymodaq. Première expérience en milieu
+                professionnel et de recherche.
+              </p>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- Formation -->
+      <section class="section">
+        <div class="section__inner reveal">
+          <h2 class="section__title">
+            <i data-lucide="graduation-cap" aria-hidden="true"></i> Formation
+          </h2>
+          <ol class="timeline">
+            <li class="timeline__item">
+              <span class="timeline__date">2026 – 2027 · Admissible</span>
+              <h3 class="timeline__heading">Poursuite d'études (admissible)</h3>
+              <ul class="timeline__list">
+                <li>CPE Lyon — Informatique et Réseaux de Communication</li>
+                <li>EPSI — Développement &amp; Intelligence Artificielle</li>
+                <li>MyDigitalSchool — Développement Web et Mobile</li>
+              </ul>
+            </li>
+            <li class="timeline__item">
+              <span class="timeline__date">En cours</span>
+              <h3 class="timeline__heading">BTS CIEL</h3>
+              <p class="timeline__text">Option Informatique et Réseaux.</p>
+            </li>
+            <li class="timeline__item">
+              <span class="timeline__date">2020 – 2024</span>
+              <h3 class="timeline__heading">Baccalauréat Général</h3>
+              <p class="timeline__text">Spécialités Mathématiques et NSI.</p>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- Centres d'intérêt -->
+      <section class="section section--alt">
+        <div class="section__inner reveal">
+          <h2 class="section__title">
+            <i data-lucide="heart" aria-hidden="true"></i> Centres d'intérêt
+          </h2>
+          <div class="interests">
+            <span class="interest">
+              <i data-lucide="gamepad-2" aria-hidden="true"></i> Développement de jeux vidéo
+            </span>
+            <span class="interest">
+              <i data-lucide="code" aria-hidden="true"></i> Programmation
+            </span>
+            <span class="interest">
+              <i data-lucide="cpu" aria-hidden="true"></i> Nouvelles technologies
+            </span>
+            <span class="interest">
+              <i data-lucide="sigma" aria-hidden="true"></i> Mathématiques &amp; algorithmes
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="section section--contact">
+        <div class="section__inner section__inner--center reveal">
+          <h2 class="section__title section__title--center">
+            <i data-lucide="send" aria-hidden="true"></i> Travaillons ensemble
+          </h2>
+          <p class="section__lead">
+            Mon profil vous intéresse pour un stage ou une alternance&nbsp;? Discutons-en.
+          </p>
+          <div class="hero__actions">
+            <a class="btn btn--primary btn--lg" href="contact.html">
+              <i data-lucide="mail" aria-hidden="true"></i>
+              Me contacter
+            </a>
+            <a class="btn btn--ghost btn--lg" href="../cv-fabien-villedieu.pdf" download>
+              <i data-lucide="download" aria-hidden="true"></i>
+              Mon CV
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer" data-shell="footer"></footer>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script defer src="../js/main.js"></script>
+  </body>
+</html>
