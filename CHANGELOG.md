@@ -5,6 +5,22 @@ Toutes les modifications notables de ce projet sont documentées ici.
 Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/)
 et le projet respecte le [versionnage sémantique](https://semver.org/lang/fr/) (`MAJEUR.MINEUR.CORRECTIF`).
 
+## [1.0.3] - 2026-06-03
+
+### Corrigé
+- Erreurs Stylelint qui faisaient échouer le job de lint en CI (longueur des
+  couleurs hexadécimales, casse des mots-clés, longhands `flex-flow`, ligne vide
+  avant commentaire).
+
+### Modifié
+- Trois règles Stylelint désactivées avec justification (`property-no-vendor-prefix`
+  pour `-webkit-background-clip`, `media-feature-range-notation` pour la
+  compatibilité, `custom-property-empty-line-before` pour le regroupement lisible
+  des variables).
+- Le lint exécuté en CI (`npm run lint`) couvre ESLint + Stylelint ; la vérification
+  de formatage Prettier est désormais séparée (`npm run lint:format`), car elle ne
+  peut pas être satisfaite sans Node en local.
+
 ## [1.0.2] - 2026-06-03
 
 ### Corrigé
