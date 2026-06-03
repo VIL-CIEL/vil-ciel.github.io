@@ -33,6 +33,27 @@ Pages :
 Conforme au niveau « Vanilla » (Niveau 1) du référentiel de développement : aucune
 dépendance d'exécution, aucun backend.
 
+## Mention IA
+
+Ce portfolio a été conçu et développé avec l'assistance d'outils d'intelligence
+artificielle, utilisés comme de véritables **outils de productivité**. C'est une démarche
+assumée : l'IA fait aujourd'hui partie intégrante du métier de développeur, et je choisis
+de **m'y adapter et de la maîtriser** plutôt que de l'ignorer.
+
+Ce qui fait la différence, c'est l'usage : je me **documente en profondeur** sur ces
+outils pour les exploiter avec discernement. L'IA accélère la mise en œuvre — elle ne
+remplace ni la conception, ni les décisions techniques, ni la compréhension du code. La
+très grande majorité des **fonctionnalités** et de la **stack technique** employées ici
+me sont familières : je sais ce qui a été construit, pourquoi, et comment le faire évoluer
+et le maintenir.
+
+Concrètement, un projet de cette envergure représente normalement **5 à 7 semaines de
+travail à temps plein** (plusieurs mois en parallèle de mes études). En m'appuyant sur
+l'IA, je l'ai réalisé en une fraction de ce temps, en concentrant mon énergie sur
+l'**architecture**, la **qualité** et les **détails** plutôt que sur les tâches
+répétitives. C'est exactement le gain de productivité que je recherche dans un
+environnement de travail moderne.
+
 ## Structure du projet
 
 ```
@@ -68,47 +89,11 @@ portfolio/
 
 Voir [ARCHITECTURE.md](ARCHITECTURE.md) pour le détail des choix techniques.
 
-## Développement local
-
-Aucune compilation n'est nécessaire. Il suffit de servir le dossier `public/` via HTTP.
-
-```bash
-# Avec Python (déjà installé)
-python -m http.server 8000 --directory public
-# → http://localhost:8000
-```
-
-> ⚠️ Ouvrir `public/index.html` par double-clic (`file://`) fonctionne, mais privilégier
-> un petit serveur local reproduit fidèlement le comportement de GitHub Pages.
-
-## Qualité de code (linters)
-
-Les linters sont optionnels en local (nécessitent [Node.js](https://nodejs.org/)) et
-s'exécutent automatiquement en CI à chaque push.
-
-```bash
-npm install        # une seule fois
-npm run lint       # ESLint + Stylelint (barrière CI)
-npm run lint:format # Vérification du formatage Prettier (manuel)
-npm run format     # Applique le formatage Prettier
-```
-
 ## Déploiement
 
 Le déploiement est **automatique** : tout push sur `main` déclenche le workflow
 GitHub Actions ([.github/workflows/deploy.yml](.github/workflows/deploy.yml)) qui
 lint le code puis publie `public/` sur GitHub Pages (Source : « GitHub Actions »).
-
-## Référencement (SEO)
-
-Chaque page porte un titre et une description propres, des balises **Open Graph**
-(partage sur les réseaux), un lien **canonical** et une couleur de thème
-(`theme-color`). Le site fournit un `sitemap.xml` et un `robots.txt`.
-
-> ⚠️ Les URL absolues (Open Graph, canonical, sitemap) utilisent la base
-> `https://vil-ciel.github.io` (page utilisateur, à la racine). Si le site est déployé à
-> une autre adresse (ex. page projet `…/portfolio/`), adapter cette base dans les pages,
-> `sitemap.xml` et `robots.txt`.
 
 ## Méthode de travail et versionnage
 
