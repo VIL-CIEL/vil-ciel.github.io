@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="fr" data-theme="dark" data-base="" data-page="a-propos">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>À propos — Fabien Villedieu</title>
+    <meta
+      name="description"
+      content="Parcours de Fabien Villedieu : expérience au CETHIL, compétences techniques, formation BTS CIEL et langues."
+    />
+    <meta name="color-scheme" content="dark light" />
+
+    <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem('portfolio-theme');
+          var sysLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+          document.documentElement.setAttribute('data-theme', t || (sysLight ? 'light' : 'dark'));
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Aller au contenu principal</a>
+
+    <header class="site-header" data-shell="header"></header>
+
+    <main id="main">
+      <section class="page-hero">
+        <div class="page-hero__inner reveal">
+          <p class="hero__eyebrow">Qui suis-je</p>
+          <h1 class="page-hero__title">À propos</h1>
+          <p class="page-hero__lead">
+            Étudiant en BTS CIEL et développeur junior à Lyon, passionné de logiciel et de
+            résolution de problèmes techniques.
+          </p>
+          <a class="btn btn--ghost" href="assets/cv-fabien-villedieu.pdf" download>
+            <i data-lucide="download" aria-hidden="true"></i>
+            Télécharger mon CV
+          </a>
+        </div>
+      </section>
+
+      <!-- Expérience -->
+      <section class="section">
+        <div class="section__inner reveal">
+          <h2 class="section__title">
+            <i data-lucide="briefcase" aria-hidden="true"></i> Expérience professionnelle
+          </h2>
+          <ol class="timeline">
+            <li class="timeline__item">
+              <span class="timeline__date">19 mai – 11 juillet 2025 · 8 semaines</span>
+              <h3 class="timeline__heading">Stage — Développeur logiciel</h3>
+              <p class="timeline__org">CETHIL — Centre d'Énergétique et de Thermique de Lyon</p>
+              <p class="timeline__text">
+                Développement d'une interface d'acquisition de données pour un banc de test,
+                réalisée en Python avec le framework Pymodaq.
+              </p>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- Compétences -->
+      <section class="section section--alt">
+        <div class="section__inner reveal">
+          <h2 class="section__title">
+            <i data-lucide="cpu" aria-hidden="true"></i> Compétences techniques
+          </h2>
+          <div class="skills">
+            <article class="skill-group">
+              <h3 class="skill-group__title">Langages</h3>
+              <ul class="tags">
+                <li class="tag">Python</li>
+                <li class="tag">C++</li>
+                <li class="tag">C#</li>
+                <li class="tag">JavaScript</li>
+              </ul>
+            </article>
+            <article class="skill-group">
+              <h3 class="skill-group__title">Web</h3>
+              <ul class="tags">
+                <li class="tag">HTML</li>
+                <li class="tag">CSS</li>
+                <li class="tag">JavaScript</li>
+              </ul>
+            </article>
+            <article class="skill-group">
+              <h3 class="skill-group__title">Outils &amp; méthodes</h3>
+              <ul class="tags">
+                <li class="tag">Git</li>
+                <li class="tag">GitHub</li>
+                <li class="tag">GitLab</li>
+                <li class="tag">Diagrammes UML</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Formation -->
+      <section class="section">
+        <div class="section__inner reveal">
+          <h2 class="section__title">
+            <i data-lucide="graduation-cap" aria-hidden="true"></i> Formation
+          </h2>
+          <ol class="timeline">
+            <li class="timeline__item">
+              <span class="timeline__date">2026 – 2027 · Admissible</span>
+              <h3 class="timeline__heading">Poursuite d'études (admissible)</h3>
+              <ul class="timeline__list">
+                <li>CPE Lyon — Informatique et Réseaux de Communication</li>
+                <li>EPSI — Développement &amp; Intelligence Artificielle</li>
+                <li>MyDigitalSchool — Développement Web et Mobile</li>
+              </ul>
+            </li>
+            <li class="timeline__item">
+              <span class="timeline__date">En cours</span>
+              <h3 class="timeline__heading">BTS CIEL</h3>
+              <p class="timeline__text">Option Informatique et Réseaux.</p>
+            </li>
+            <li class="timeline__item">
+              <span class="timeline__date">2020 – 2024</span>
+              <h3 class="timeline__heading">Baccalauréat Général</h3>
+              <p class="timeline__text">Spécialités Mathématiques et NSI.</p>
+            </li>
+          </ol>
+
+          <h3 class="section__subtitle">
+            <i data-lucide="languages" aria-hidden="true"></i> Langues
+          </h3>
+          <ul class="tags">
+            <li class="tag">Français — langue maternelle</li>
+            <li class="tag">Anglais — B1</li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer" data-shell="footer"></footer>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script type="module" src="assets/js/main.js"></script>
+  </body>
+</html>
