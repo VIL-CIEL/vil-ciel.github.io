@@ -5,6 +5,16 @@ Toutes les modifications notables de ce projet sont documentées ici.
 Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/)
 et le projet respecte le [versionnage sémantique](https://semver.org/lang/fr/) (`MAJEUR.MINEUR.CORRECTIF`).
 
+## [0.4.0] - 2026-06-03
+
+### Ajouté
+- Page **À propos** enrichie : présentation personnelle avec photo et faits rapides
+  (localisation, formation, statut, langues).
+- Compétences techniques avec **niveaux** (barres de progression) + panneaux outils,
+  méthodes et domaines.
+- Section **« Ce qui me caractérise »** (qualités) et section **centres d'intérêt**.
+- Appel à l'action de bas de page (contact + téléchargement du CV).
+
 ## [0.3.1] - 2026-06-03
 
 ### Corrigé
