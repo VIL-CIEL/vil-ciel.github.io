@@ -105,9 +105,9 @@ Chaque page porte un titre et une description propres, des balises **Open Graph*
 (`theme-color`). Le site fournit un `sitemap.xml` et un `robots.txt`.
 
 > ⚠️ Les URL absolues (Open Graph, canonical, sitemap) utilisent la base
-> `https://vil-ciel.github.io/portfolio`. Si le site est déployé à une autre adresse
-> (ex. dépôt utilisateur `vil-ciel.github.io` à la racine), adapter cette base dans les
-> pages, `sitemap.xml` et `robots.txt`.
+> `https://vil-ciel.github.io` (page utilisateur, à la racine). Si le site est déployé à
+> une autre adresse (ex. page projet `…/portfolio/`), adapter cette base dans les pages,
+> `sitemap.xml` et `robots.txt`.
 
 ## Méthode de travail et versionnage
 

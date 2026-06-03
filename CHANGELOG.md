@@ -5,6 +5,15 @@ Toutes les modifications notables de ce projet sont documentées ici.
 Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/)
 et le projet respecte le [versionnage sémantique](https://semver.org/lang/fr/) (`MAJEUR.MINEUR.CORRECTIF`).
 
+## [1.0.2] - 2026-06-03
+
+### Corrigé
+- Mise à jour du CV (`assets/cv-fabien-villedieu.pdf`).
+
+### Modifié
+- URL absolues (`canonical`, Open Graph, `sitemap.xml`, `robots.txt`) passées à la
+  racine `https://vil-ciel.github.io` en vue du déploiement sur la page utilisateur.
+
 ## [1.0.1] - 2026-06-03
 
 ### Modifié
