@@ -44,6 +44,8 @@ portfolio/
 │   ├── contact.html             # Contact (formulaire)
 │   ├── 404.html                 # Page d'erreur
 │   ├── version.json             # Version courante (affichée en footer)
+│   ├── sitemap.xml              # Plan du site (SEO)
+│   ├── robots.txt              # Directives robots + lien sitemap
 │   ├── .nojekyll                # Désactive le traitement Jekyll de GitHub Pages
 │   ├── pages/                   # Pages détail (une par projet)
 │   │   ├── ihm-pymodaq.html
@@ -94,6 +96,17 @@ npm run format     # Applique le formatage Prettier
 Le déploiement est **automatique** : tout push sur `main` déclenche le workflow
 GitHub Actions ([.github/workflows/deploy.yml](.github/workflows/deploy.yml)) qui
 lint le code puis publie `public/` sur GitHub Pages (Source : « GitHub Actions »).
+
+## Référencement (SEO)
+
+Chaque page porte un titre et une description propres, des balises **Open Graph**
+(partage sur les réseaux), un lien **canonical** et une couleur de thème
+(`theme-color`). Le site fournit un `sitemap.xml` et un `robots.txt`.
+
+> ⚠️ Les URL absolues (Open Graph, canonical, sitemap) utilisent la base
+> `https://vil-ciel.github.io/portfolio`. Si le site est déployé à une autre adresse
+> (ex. dépôt utilisateur `vil-ciel.github.io` à la racine), adapter cette base dans les
+> pages, `sitemap.xml` et `robots.txt`.
 
 ## Méthode de travail et versionnage
 

@@ -32,6 +32,7 @@ Formulaire de contact (validation temps réel, toasts de feedback, envoi mailto
 sans dépendance + Formspree optionnel, honeypot anti-spam), coordonnées (email,
 GitHub, LinkedIn, localisation).
 
-## ⬜ Sprint 5 — SEO, performance & accessibilité (v1.0.0)
-Métadonnées + Open Graph par page, `sitemap.xml`, `robots.txt`, Lighthouse > 80,
-lazy-loading, contrastes, navigation clavier, tag Git `v1.0.0`.
+## ✅ Sprint 5 — SEO, performance & accessibilité (v1.0.0)
+Métadonnées + Open Graph + `canonical` + `theme-color` par page, `sitemap.xml`,
+`robots.txt`, lazy-loading des images, navigation clavier et contrastes vérifiés,
+documentation racine actualisée. Première version « production », tag Git `v1.0.0`.

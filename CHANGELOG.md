@@ -5,6 +5,18 @@ Toutes les modifications notables de ce projet sont documentées ici.
 Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/)
 et le projet respecte le [versionnage sémantique](https://semver.org/lang/fr/) (`MAJEUR.MINEUR.CORRECTIF`).
 
+## [1.0.0] - 2026-06-03
+
+Première version « production ».
+
+### Ajouté
+- **SEO** : balises Open Graph, `theme-color` et lien `canonical` sur chaque page.
+- `sitemap.xml` et `robots.txt`.
+
+### Modifié
+- Documentation racine (`README.md`, `ARCHITECTURE.md`) actualisée pour l'architecture
+  multi-pages et le référencement.
+
 ## [0.5.0] - 2026-06-03
 
 ### Ajouté

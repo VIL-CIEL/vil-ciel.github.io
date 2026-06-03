@@ -56,6 +56,8 @@ public/                          # Racine web (seul dossier publié)
 ├── contact.html                 # Contact (formulaire)
 ├── 404.html                     # Page d'erreur
 ├── version.json                 # Version courante (lue par main.js, affichée en footer)
+├── sitemap.xml                  # Plan du site (SEO)
+├── robots.txt                   # Directives robots + lien sitemap
 ├── .nojekyll                    # Empêche GitHub Pages de traiter le site avec Jekyll
 ├── pages/                       # Pages détail (une par projet)
 │   ├── ihm-pymodaq.html
@@ -107,6 +109,16 @@ docs) respecte le §2.2 du référentiel : aucun fichier de configuration n'est 
   lien d'évitement (« skip link »).
 - Mode sombre par défaut, avec respect de `prefers-color-scheme` et bascule manuelle persistée.
 - Animations désactivées si `prefers-reduced-motion` (contenu toujours visible).
+
+## Référencement (SEO)
+
+- Titre et description propres à chaque page.
+- Balises **Open Graph** (`og:*`) et `theme-color` pour le partage et l'UI navigateur.
+- Lien **canonical** par page ; `robots.txt` et `sitemap.xml`.
+- La page 404 est marquée `noindex`.
+
+Les URL absolues sont construites sur la base `https://vil-ciel.github.io/portfolio`
+(à adapter si l'adresse de déploiement change — voir README).
 
 ## Performance (§12)
 
