@@ -23,9 +23,9 @@ Une page détail par projet, fidèle à l'original (présentation, objectifs,
 fonctionnalités, difficultés, axes d'amélioration, technologies, durée, type,
 code source), avec galerie d'images et agrandissement (lightbox).
 
-## ⬜ Sprint 3 — Page À propos détaillée (v0.4.0)
-Bio, timeline expérience (CETHIL), formation, langues, compétences détaillées,
-téléchargement du CV mis en avant.
+## ✅ Sprint 3 — Page À propos détaillée (v0.4.0)
+Bio + photo et faits rapides, compétences avec niveaux, qualités, centres d'intérêt,
+expérience (CETHIL), formation, langues, et téléchargement du CV mis en avant.
 
 ## ⬜ Sprint 4 — Page Contact (v0.5.0)
 Email, réseaux sociaux, mobilité, formulaire de contact.

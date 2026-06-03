@@ -86,7 +86,7 @@ function injectFooter() {
     <div class="site-footer__inner">
       <p class="site-footer__copy">© ${year} Fabien Villedieu</p>
       <ul class="site-footer__socials" aria-label="Réseaux et contact">${socialsMarkup()}</ul>
-      <p class="site-footer__version" data-version>v0.3.1</p>
+      <p class="site-footer__version" data-version>v0.4.0</p>
     </div>
   `;
 }
