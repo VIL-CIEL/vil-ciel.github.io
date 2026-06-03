@@ -18,7 +18,7 @@ Passage d'une page unique à un site **multi-pages**, comme le portfolio d'origi
 Coquille partagée, thème persistant sans clignotement, assets importés depuis GitHub,
 pages Accueil / Projets / À propos / Contact / 404, navigation avec page active.
 
-## ⬜ Sprint 2 — Pages détail des projets (v0.3.0)
+## ✅ Sprint 2 — Pages détail des projets (v0.3.0)
 Une page détail par projet, fidèle à l'original (présentation, objectifs,
 fonctionnalités, difficultés, axes d'amélioration, technologies, durée, type,
 code source), avec galerie d'images et agrandissement (lightbox).
