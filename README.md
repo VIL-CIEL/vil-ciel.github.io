@@ -1,23 +1,32 @@
 # Portfolio — Fabien Villedieu
 
 Portfolio web personnel de Fabien Villedieu (étudiant BTS CIEL, développeur junior).
-Site **statique** déployé via **GitHub Pages**.
-
-🔗 **En ligne** : https://vil-ciel.github.io/
+Site **statique multi-pages** déployé via **GitHub Pages**.
 
 ## Aperçu
 
-Site vitrine d'une seule page (single-page scroll) présentant le profil, l'expérience,
-les compétences, les projets, la formation et les moyens de contact. Construit en
-**vanilla** (HTML5 / CSS3 / JavaScript ES6+), sans framework ni étape de build :
-les fichiers de `public/` sont servis directement.
+Site vitrine **multi-pages** présentant le profil, les projets (avec une page détail
+par projet), le parcours et les moyens de contact. Construit en **vanilla**
+(HTML5 / CSS3 / JavaScript ES6+), sans framework ni étape de build : les fichiers de
+`public/` sont servis directement.
+
+Pages :
+
+- **Accueil** (`index.html`) — présentation, projets phares, accès rapides.
+- **Projets** (`projets.html`) — liste des projets, liens vers les pages détail.
+- **Pages détail** (`pages/*.html`) — une page par projet (présentation, objectifs,
+  fonctionnalités, difficultés, axes d'amélioration, galerie d'images avec lightbox).
+- **À propos** (`a-propos.html`) — bio, compétences avec niveaux, qualités, parcours,
+  centres d'intérêt.
+- **Contact** (`contact.html`) — formulaire (validation + envoi) et coordonnées.
+- **404** (`404.html`) — page d'erreur.
 
 ## Stack technique
 
 - **HTML5** sémantique
-- **CSS vanilla** (variables CSS, Grid, Flexbox, dark mode)
-- **JavaScript vanilla** (ES6+, modules, `fetch`, `IntersectionObserver`)
-- **Icônes** : [Lucide](https://lucide.dev/)
+- **CSS vanilla** (variables CSS, Grid, Flexbox, thème clair/sombre)
+- **JavaScript vanilla** (ES6+, scripts classiques `defer`, `fetch`, `IntersectionObserver`)
+- **Icônes** : [Lucide](https://lucide.dev/) (icônes de marque GitHub/LinkedIn en SVG inline)
 - **Hébergement** : GitHub Pages
 - **CI/CD** : GitHub Actions (lint + déploiement)
 
@@ -28,36 +37,46 @@ dépendance d'exécution, aucun backend.
 
 ```
 portfolio/
-├── public/                 # Tout ce qui est servi sur le web
-│   ├── index.html
-│   ├── version.json        # Version courante (affichée en footer)
-│   ├── .nojekyll           # Désactive le traitement Jekyll de GitHub Pages
+├── public/                      # Tout ce qui est servi sur le web
+│   ├── index.html               # Accueil
+│   ├── projets.html             # Liste des projets
+│   ├── a-propos.html            # À propos / parcours
+│   ├── contact.html             # Contact (formulaire)
+│   ├── 404.html                 # Page d'erreur
+│   ├── version.json             # Version courante (affichée en footer)
+│   ├── .nojekyll                # Désactive le traitement Jekyll de GitHub Pages
+│   ├── pages/                   # Pages détail (une par projet)
+│   │   ├── ihm-pymodaq.html
+│   │   ├── jeu-unity.html
+│   │   ├── jeu-pygame.html
+│   │   └── recherche-textuelle.html
 │   └── assets/
-│       ├── css/styles.css
-│       ├── js/main.js
-│       └── img/            # Images (photo de profil, miniatures projets)
-├── .github/workflows/      # CI/CD GitHub Actions
-├── package.json            # Outillage de lint/format (dev uniquement)
-├── ARCHITECTURE.md         # Choix techniques et organisation
-├── CHANGELOG.md            # Historique des versions
+│       ├── css/styles.css       # Styles + variables de thème
+│       ├── js/main.js           # Coquille partagée + comportements UI
+│       ├── cv-fabien-villedieu.pdf
+│       └── img/                 # Photo, favicon, captures (projects/)
+├── .github/workflows/           # CI/CD GitHub Actions
+├── package.json                 # Outillage de lint/format (dev uniquement)
+├── ARCHITECTURE.md              # Choix techniques et organisation
+├── CHANGELOG.md                 # Historique des versions
+├── SPRINTS.md                   # Backlog et avancement par sprint
 └── README.md
 ```
 
-Voir [ARCHITECTURE.md](ARCHITECTURE.md) pour le détail.
+Voir [ARCHITECTURE.md](ARCHITECTURE.md) pour le détail des choix techniques.
 
 ## Développement local
 
-Aucune compilation n'est nécessaire. Il suffit de servir le dossier `public/`.
+Aucune compilation n'est nécessaire. Il suffit de servir le dossier `public/` via HTTP.
 
 ```bash
 # Avec Python (déjà installé)
-cd public
-python -m http.server 8000
+python -m http.server 8000 --directory public
 # → http://localhost:8000
 ```
 
-> Astuce : ouvrir `public/index.html` directement dans le navigateur fonctionne aussi,
-> mais un petit serveur local évite les restrictions liées au protocole `file://`.
+> ⚠️ Ouvrir `public/index.html` par double-clic (`file://`) fonctionne, mais privilégier
+> un petit serveur local reproduit fidèlement le comportement de GitHub Pages.
 
 ## Qualité de code (linters)
 
@@ -74,13 +93,15 @@ npm run format     # Applique le formatage Prettier
 
 Le déploiement est **automatique** : tout push sur `main` déclenche le workflow
 GitHub Actions ([.github/workflows/deploy.yml](.github/workflows/deploy.yml)) qui
-lint le code puis publie `public/` sur GitHub Pages.
+lint le code puis publie `public/` sur GitHub Pages (Source : « GitHub Actions »).
 
-Flux Git : on travaille sur des branches `feature/<nom-court>` puis on fusionne dans
-`main`. Un tag Git (`vX.Y.Z`) est posé à chaque version publiée.
+## Méthode de travail et versionnage
 
-## Versionnage
-
-Format `MAJEUR.MINEUR.CORRECTIF`. La version courante est définie dans
-[public/version.json](public/version.json), affichée dans le footer du site, et
-historisée dans [CHANGELOG.md](CHANGELOG.md).
+- Le projet avance par **sprints** (1 sprint = 1 fonctionnalité), suivis dans
+  [SPRINTS.md](SPRINTS.md).
+- On **commite directement sur `main`** ; un **tag Git** (`vX.Y.Z`) est posé à chaque
+  version publiée.
+- Versionnage sémantique `MAJEUR.MINEUR.CORRECTIF`. La version courante est définie
+  dans [public/version.json](public/version.json), affichée dans le footer du site,
+  et historisée dans [CHANGELOG.md](CHANGELOG.md).
+- Les fichiers de documentation racine sont mis à jour **à chaque sprint**.
