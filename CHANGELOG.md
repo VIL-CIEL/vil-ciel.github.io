@@ -5,6 +5,16 @@ Toutes les modifications notables de ce projet sont documentées ici.
 Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/)
 et le projet respecte le [versionnage sémantique](https://semver.org/lang/fr/) (`MAJEUR.MINEUR.CORRECTIF`).
 
+## [1.0.1] - 2026-06-03
+
+### Modifié
+- Réorganisation de l'arborescence du site pour un déploiement plus clair :
+  les pages secondaires sont regroupées dans `assets/pages/` (et les pages détail
+  dans `assets/pages/projets/`). `index.html`, `404.html`, `robots.txt` et
+  `sitemap.xml` restent à la racine du site (requis par GitHub Pages).
+- Chemins, navigation, fils d'Ariane, `canonical`/Open Graph et `sitemap.xml`
+  mis à jour en conséquence.
+
 ## [1.0.0] - 2026-06-03
 
 Première version « production ».
