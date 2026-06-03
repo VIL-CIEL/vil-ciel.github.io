@@ -86,7 +86,7 @@ function injectFooter() {
     <div class="site-footer__inner">
       <p class="site-footer__copy">© ${year} Fabien Villedieu</p>
       <ul class="site-footer__socials" aria-label="Réseaux et contact">${socialsMarkup()}</ul>
-      <p class="site-footer__version" data-version>v0.4.0</p>
+      <p class="site-footer__version" data-version>v0.5.0</p>
     </div>
   `;
 }
@@ -246,6 +246,108 @@ function setupGallery() {
   });
 }
 
+/**
+ * Toast notification (role=status, aria-live) for success / error feedback (§6.3).
+ */
+let toastTimer = null;
+function showToast(message, type = 'success') {
+  let toast = document.querySelector('.toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.setAttribute('role', 'status');
+    toast.setAttribute('aria-live', 'polite');
+    document.body.appendChild(toast);
+  }
+  toast.textContent = message;
+  toast.dataset.type = type;
+  toast.classList.add('is-visible');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('is-visible'), 5000);
+}
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+/**
+ * Contact form: client-side validation with inline errors, then sends either
+ * through Formspree (if an endpoint id is configured) or via a mailto: fallback
+ * that works on a purely static host. No backend required.
+ */
+function setupContactForm() {
+  const form = document.querySelector('[data-contact-form]');
+  if (!form) return;
+
+  const formspreeId = form.dataset.formspreeId || '';
+  const fields = [...form.querySelectorAll('[required]')];
+
+  const messageFor = (field) => {
+    if (!field.value.trim()) return 'Ce champ est obligatoire.';
+    if (field.type === 'email' && !EMAIL_RE.test(field.value)) return 'Adresse email invalide.';
+    return '';
+  };
+
+  const setError = (field, msg) => {
+    const errEl = form.querySelector(`#${field.id}-error`);
+    if (errEl) errEl.textContent = msg;
+    field.setAttribute('aria-invalid', msg ? 'true' : 'false');
+  };
+
+  // Validation en temps réel une fois qu'un champ a déjà été signalé en erreur.
+  fields.forEach((field) => {
+    field.addEventListener('input', () => {
+      if (field.getAttribute('aria-invalid') === 'true') setError(field, messageFor(field));
+    });
+  });
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // Anti-spam : champ piège (honeypot) rempli => on ignore silencieusement.
+    if (form.querySelector('[name="_gotcha"]')?.value) return;
+
+    let valid = true;
+    fields.forEach((field) => {
+      const msg = messageFor(field);
+      setError(field, msg);
+      if (msg) valid = false;
+    });
+    if (!valid) {
+      showToast('Veuillez corriger les champs indiqués.', 'error');
+      fields.find((f) => f.getAttribute('aria-invalid') === 'true')?.focus();
+      return;
+    }
+
+    const data = Object.fromEntries(new FormData(form).entries());
+
+    if (formspreeId) {
+      try {
+        const res = await fetch(`https://formspree.io/f/${formspreeId}`, {
+          method: 'POST',
+          headers: { Accept: 'application/json' },
+          body: new FormData(form),
+        });
+        if (res.ok) {
+          form.reset();
+          showToast('Message envoyé, merci ! Je vous réponds rapidement.');
+        } else {
+          showToast("L'envoi a échoué. Réessayez ou écrivez-moi directement par email.", 'error');
+        }
+      } catch {
+        showToast('Erreur réseau. Réessayez plus tard ou écrivez-moi par email.', 'error');
+      }
+      return;
+    }
+
+    // Repli sans dépendance : ouverture du client mail pré-rempli.
+    const subject = encodeURIComponent(data.sujet || 'Contact depuis le portfolio');
+    const body = encodeURIComponent(
+      `Nom : ${data.nom}\nEmail : ${data.email}\n\n${data.message}`
+    );
+    window.location.href = `mailto:${LINKS.email}?subject=${subject}&body=${body}`;
+    showToast('Votre logiciel de messagerie va s’ouvrir pour finaliser l’envoi.');
+  });
+}
+
 /** Footer version number, read from version.json (§1.1). */
 async function loadVersion() {
   const versionEl = document.querySelector('[data-version]');
@@ -267,6 +369,7 @@ setupTheme();
 setupMobileMenu();
 setupReveal();
 setupGallery();
+setupContactForm();
 loadVersion();
 
 // Génère les icônes Lucide une fois la coquille et la lightbox injectées.

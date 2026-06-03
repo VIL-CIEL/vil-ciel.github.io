@@ -5,6 +5,20 @@ Toutes les modifications notables de ce projet sont documentées ici.
 Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/)
 et le projet respecte le [versionnage sémantique](https://semver.org/lang/fr/) (`MAJEUR.MINEUR.CORRECTIF`).
 
+## [0.5.0] - 2026-06-03
+
+### Ajouté
+- **Formulaire de contact** (nom, email, sujet, message) avec validation côté client
+  en temps réel et messages d'erreur accessibles (ARIA).
+- **Notifications (toasts)** de succès et d'erreur après envoi (§6.3).
+- Envoi par `mailto:` sans dépendance par défaut, avec branchement **Formspree**
+  optionnel via l'attribut `data-formspree-id` (envoi asynchrone réel).
+- Champ piège anti-spam (honeypot).
+- Mise en page Contact en deux colonnes : formulaire + coordonnées (email, GitHub, LinkedIn, localisation).
+
+### Modifié
+- Page Contact restructurée autour du formulaire.
+
 ## [0.4.0] - 2026-06-03
 
 ### Ajouté
