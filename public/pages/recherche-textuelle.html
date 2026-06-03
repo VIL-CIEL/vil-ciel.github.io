@@ -25,6 +25,7 @@
         try {
           var t = localStorage.getItem('portfolio-theme');
           var sysLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+          document.documentElement.classList.add('js');
           document.documentElement.setAttribute('data-theme', t || (sysLight ? 'light' : 'dark'));
         } catch (e) {}
       })();
@@ -145,6 +146,6 @@
     <footer class="site-footer" data-shell="footer"></footer>
 
     <script src="https://unpkg.com/lucide@latest"></script>
-    <script type="module" src="../assets/js/main.js"></script>
+    <script defer src="../assets/js/main.js"></script>
   </body>
 </html>
