@@ -5,6 +5,15 @@ Toutes les modifications notables de ce projet sont documentées ici.
 Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/)
 et le projet respecte le [versionnage sémantique](https://semver.org/lang/fr/) (`MAJEUR.MINEUR.CORRECTIF`).
 
+## [0.3.0] - 2026-06-03
+
+### Ajouté
+- Une **page détail par projet** (IHM Pymodaq, Jeu Unity, Jeu Pygame, Recherche textuelle),
+  fidèle à l'original : présentation, objectifs, fonctionnalités clés, difficultés,
+  axes d'amélioration, technologies, durée, type et code source.
+- **Galerie d'images** par projet avec agrandissement (lightbox) navigable au clavier.
+- Fil d'Ariane sur les pages détail et liens « Voir le détail » depuis la liste des projets.
+
 ## [0.2.0] - 2026-06-03
 
 ### Ajouté
