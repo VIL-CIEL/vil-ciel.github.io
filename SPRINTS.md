@@ -27,8 +27,10 @@ code source), avec galerie d'images et agrandissement (lightbox).
 Bio + photo et faits rapides, compétences avec niveaux, qualités, centres d'intérêt,
 expérience (CETHIL), formation, langues, et téléchargement du CV mis en avant.
 
-## ⬜ Sprint 4 — Page Contact (v0.5.0)
-Email, réseaux sociaux, mobilité, formulaire de contact.
+## ✅ Sprint 4 — Page Contact (v0.5.0)
+Formulaire de contact (validation temps réel, toasts de feedback, envoi mailto
+sans dépendance + Formspree optionnel, honeypot anti-spam), coordonnées (email,
+GitHub, LinkedIn, localisation).
 
 ## ⬜ Sprint 5 — SEO, performance & accessibilité (v1.0.0)
 Métadonnées + Open Graph par page, `sitemap.xml`, `robots.txt`, Lighthouse > 80,
