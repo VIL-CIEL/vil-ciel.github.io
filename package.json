@@ -1,0 +1,23 @@
+{
+  "name": "portfolio-fabien-villedieu",
+  "version": "0.1.0",
+  "description": "Portfolio web statique de Fabien Villedieu, déployé sur GitHub Pages.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "lint": "npm run lint:js && npm run lint:css",
+    "lint:js": "eslint \"public/assets/js/**/*.js\"",
+    "lint:css": "stylelint \"public/assets/css/**/*.css\"",
+    "lint:all": "npm run lint && npm run lint:format",
+    "lint:format": "prettier --check \"public/**/*.{html,css,js,json}\"",
+    "format": "prettier --write \"public/**/*.{html,css,js,json}\""
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.0.0",
+    "eslint": "^9.0.0",
+    "globals": "^15.0.0",
+    "prettier": "^3.2.0",
+    "stylelint": "^16.0.0",
+    "stylelint-config-standard": "^36.0.0"
+  }
+}

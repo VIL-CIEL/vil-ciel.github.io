@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="fr" data-theme="dark" data-base="" data-page="">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Page introuvable — Fabien Villedieu</title>
+    <meta name="robots" content="noindex" />
+    <meta name="color-scheme" content="dark light" />
+
+    <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem('portfolio-theme');
+          var sysLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+          document.documentElement.classList.add('js');
+          document.documentElement.setAttribute('data-theme', t || (sysLight ? 'light' : 'dark'));
+        } catch (e) {}
+      })();
+    </script>
+    <meta name="theme-color" content="#0d1117" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Aller au contenu principal</a>
+
+    <header class="site-header" data-shell="header"></header>
+
+    <main id="main">
+      <section class="section section--center">
+        <div class="section__inner section__inner--center reveal">
+          <p class="error-code">404</p>
+          <h1 class="page-hero__title">Page introuvable</h1>
+          <p class="section__lead">
+            La page que vous cherchez n'existe pas ou a été déplacée.
+          </p>
+          <a class="btn btn--primary btn--lg" href="index.html">
+            <i data-lucide="home" aria-hidden="true"></i>
+            Retour à l'accueil
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer" data-shell="footer"></footer>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script defer src="assets/js/main.js"></script>
+  </body>
+</html>
