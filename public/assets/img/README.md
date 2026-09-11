@@ -5,4 +5,4 @@
 - **`favicon.svg`** — icône d'onglet.
 - **`projects/`** — captures d'écran des projets (utilisées par la page Projets).
 
-Le CV est servi depuis `public/assets/cv-fabien-villedieu.pdf`.
+Le CV est servi depuis `public/assets/pdf/CV_VILLEDIEU_FABIEN.pdf`.

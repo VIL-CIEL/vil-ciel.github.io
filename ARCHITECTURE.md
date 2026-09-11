@@ -61,7 +61,7 @@ public/                          # Racine web (seul dossier publié)
 └── assets/
     ├── css/styles.css           # Styles + variables de thème
     ├── js/main.js               # Coquille partagée + comportements UI
-    ├── cv-fabien-villedieu.pdf
+    ├── pdf/CV_VILLEDIEU_FABIEN.pdf
     ├── img/                     # Photo, favicon, et captures dans projects/
     └── pages/                   # Pages HTML secondaires
         ├── projets.html
