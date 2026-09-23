@@ -17,23 +17,23 @@ Légende : ✅ terminé · 🚧 en cours · ⬜ à faire
 - Nouveau projet ajouté au portfolio existant : **Plugins DAP Pymodaq** (projet
   d'examen E6/U62, BTS CIEL, CETHIL), avec page de détail, carte projets, mise en
   avant sur l'accueil et entrée dans la timeline À propos.
-- 🚧 **Refonte DA en réflexion — piste « Cynosure » / « GIMMI »** : deux maquettes
-  statiques autonomes ont été produites hors dépôt (thème programme corpo type
-  Cyberpunk 2077, et une variante palette « Gimmi »). Retours reçus sur la première
-  maquette (retrait LED, retrait thème clair, renommage GIMMI). Question en cours de
-  discussion avec l'utilisateur : la bascule DA impliquerait de refaire aussi le CV,
-  de futures cartes de visite et la bannière LinkedIn (même dégradé bleu-violet
-  partout) — à évaluer face à l'échéance de recherche d'alternance du 30 novembre.
-  Pas de décision prise, voir Journal.
+- ⏸ **Refonte DA mise en pause — piste « Cynosure » / « GIMMI »** : deux maquettes
+  statiques autonomes existent hors dépôt (thème programme corpo type Cyberpunk 2077,
+  et une variante palette « Gimmi »), avec des retours déjà donnés sur la première
+  (retrait LED, retrait thème clair, renommage GIMMI). Décision : ne pas généraliser
+  la DA (CV, cartes de visite, bannière LinkedIn, portfolio) tant que la recherche
+  d'alternance est active (échéance 30 novembre) et tant que l'utilisateur n'a pas
+  lui-même envie de reprendre ce chantier, pour que l'identité visuelle reste la
+  sienne plutôt que produite sous pression de deadline. Voir Journal. Ne rien changer
+  au portfolio d'ici là sauf demande explicite.
 - L'historique Git a été nettoyé de toute mention IA (`Co-Authored-By: Claude`) dans
   les messages de commit existants, conformément à la règle « Mention IA » du
   `README.md`. Nouvelle convention : plus de mention IA dans aucun commit à venir.
 
 ## Prochaines étapes
 
-- [ ] Trancher s'il faut généraliser la DA Cynosure/GIMMI à tout le reste (CV,
-      cartes de visite, bannière LinkedIn) maintenant ou après la recherche
-      d'alternance (échéance 30 novembre) : discussion en cours, pas de décision.
+- [ ] Reprendre la refonte DA Cynosure/GIMMI (portfolio, CV, cartes de visite,
+      bannière LinkedIn) quand l'utilisateur en aura besoin, pas avant.
 - [ ] Vraies captures d'écran supplémentaires pour la page Plugins DAP Pymodaq si
       disponibles (dashboard, wiki), en complément de la capture déjà intégrée.
 
@@ -45,10 +45,13 @@ Légende : ✅ terminé · 🚧 en cours · ⬜ à faire
   convention de versionnage par commit.
 - 2026-09-23 : nettoyage de l'historique Git (suppression des mentions
   `Co-Authored-By: Claude` dans les commits existants) à la demande de l'utilisateur.
-- 2026-09-23 : échange amorcé sur l'intérêt de généraliser la DA Cynosure/GIMMI (CV,
-  cartes de visite, bannière LinkedIn) à moins de 3 mois de la fin de la recherche
-  d'alternance (statut spécial de l'école, échéance 30 novembre). Pas de décision
-  prise à ce stade.
+- 2026-09-23 : échange sur l'intérêt de généraliser la DA Cynosure/GIMMI (CV, cartes
+  de visite, bannière LinkedIn) à moins de 3 mois de la fin de la recherche
+  d'alternance (statut spécial de l'école, échéance 30 novembre), et sur le fait
+  qu'une identité visuelle personnelle a plus de valeur construite soi-même, sans
+  urgence de deadline, que produite en une série de sessions pressées. Décision :
+  mise en pause du chantier DA (portfolio compris), à reprendre plus tard sans
+  contrainte de calendrier.
 - 2026-09-10 : reprise du projet. `git pull` (branche locale réalignée sur `origin/main`,
   jusqu'à `05793d7`). Documentation racine réalignée sur le nouveau chemin du CV
   (`assets/pdf/`). Lien CV cassé repéré dans `a-propos.html`.
