@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="fr" data-theme="dark" data-base="../../../" data-page="projets">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Plugins DAP Pymodaq · Fabien Villedieu</title>
+    <meta
+      name="description"
+      content="Projet de fin de BTS CIEL (E6/U62) : trois plugins Pymodaq pour piloter des cartes microcontrôleurs low-cost (Raspberry Pi, Arduino) en remplacement de modules NI-DAQMX, pour le CETHIL."
+    />
+    <meta name="color-scheme" content="dark light" />
+
+    <link rel="icon" href="../../img/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../css/styles.css" />
+
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem('portfolio-theme');
+          var sysLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+          document.documentElement.classList.add('js');
+          document.documentElement.setAttribute('data-theme', t || (sysLight ? 'light' : 'dark'));
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="canonical" href="https://vil-ciel.github.io/assets/pages/projets/plugins-dap-pymodaq.html" />
+    <meta name="theme-color" content="#0d1117" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Portfolio — Fabien Villedieu" />
+    <meta property="og:title" content="Plugins DAP Pymodaq · Fabien Villedieu" />
+    <meta property="og:description" content="Projet de fin de BTS CIEL (E6/U62) : trois plugins Pymodaq pour piloter des cartes microcontrôleurs low-cost (Raspberry Pi, Arduino) en remplacement de modules NI-DAQMX, pour le CETHIL." />
+    <meta property="og:url" content="https://vil-ciel.github.io/assets/pages/projets/plugins-dap-pymodaq.html" />
+    <meta property="og:image" content="https://vil-ciel.github.io/assets/img/profile.jpg" />
+    <meta name="twitter:card" content="summary" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Aller au contenu principal</a>
+
+    <header class="site-header" data-shell="header"></header>
+
+    <main id="main">
+      <section class="section">
+        <div class="section__inner">
+          <nav class="breadcrumb" aria-label="Fil d'Ariane">
+            <a href="../../../index.html">Accueil</a>
+            <span class="breadcrumb__sep" aria-hidden="true">/</span>
+            <a href="../projets.html">Projets</a>
+            <span class="breadcrumb__sep" aria-hidden="true">/</span>
+            <span aria-current="page">Plugins DAP Pymodaq</span>
+          </nav>
+
+          <span class="badge badge--pro">
+            <i data-lucide="briefcase" aria-hidden="true"></i> Professionnel
+          </span>
+          <h1 class="page-hero__title">Plugins DAP Pymodaq</h1>
+
+          <div class="detail__layout">
+            <div class="detail__content">
+              <section class="detail__section">
+                <h2><i data-lucide="info" aria-hidden="true"></i> Présentation</h2>
+                <p>
+                  Projet de fin de BTS CIEL (épreuve E6/U62), mené en équipe de 4 avec le CETHIL
+                  comme partenaire. Le laboratoire utilisait des modules d'acquisition NI-DAQMX,
+                  coûtant environ 1&nbsp;000&nbsp;€ pièce, un frein budgétaire réel pour ses
+                  doctorants. L'objectif était de les remplacer par des cartes microcontrôleurs
+                  low-cost (Raspberry&nbsp;Pi&nbsp;3B, Raspberry&nbsp;Pi&nbsp;Zero, Arduino) utilisées
+                  comme DAP (Dispositif d'Acquisition et de Pilotage), pilotables depuis Pymodaq.
+                </p>
+                <p>
+                  Environ 150 heures de travail réparties sur l'année scolaire, avec un double rôle
+                  pour moi : responsable de la planification générale de l'équipe, et développeur du
+                  plugin Raspberry&nbsp;Pi&nbsp;3B.
+                </p>
+              </section>
+
+              <section class="detail__section">
+                <h2><i data-lucide="target" aria-hidden="true"></i> Objectifs du projet</h2>
+                <ul class="checklist">
+                  <li>Remplacer des modules d'acquisition propriétaires coûteux par des cartes low-cost.</li>
+                  <li>Livrer des plugins Pymodaq réutilisables, documentés et publiés officiellement.</li>
+                  <li>Structurer et suivre le travail d'une équipe de 4 sur toute la durée du projet.</li>
+                </ul>
+              </section>
+
+              <section class="detail__section">
+                <h2><i data-lucide="user-check" aria-hidden="true"></i> Mon rôle</h2>
+                <p>
+                  Deux casquettes sur ce projet : j'ai piloté la planification générale et le suivi
+                  d'avancement de l'équipe (répartition des tâches, coordination), et développé en
+                  parallèle le plugin Pymodaq du Raspberry&nbsp;Pi&nbsp;3B : communication en ZeroMQ
+                  et configuration par fichier TOML pour le rendre réutilisable sur d'autres bancs de
+                  mesure, ainsi que la sauvegarde des données acquises. Le script embarqué côté
+                  Raspberry a été développé par un autre membre de l'équipe.
+                </p>
+              </section>
+
+              <section class="detail__section">
+                <h2><i data-lucide="list-checks" aria-hidden="true"></i> Méthode de gestion de projet</h2>
+                <ul class="checklist">
+                  <li>Planning de type Gantt, découpé en tâches et sous-tâches.</li>
+                  <li>Six versions successives (v0 analyse du besoin → v5 documentée et publiable).</li>
+                  <li>Fiches de suivi individuelles par membre de l'équipe.</li>
+                  <li>Recettes de validation par plugin (Validé / Partiel / Non validé).</li>
+                </ul>
+              </section>
+
+              <section class="detail__section">
+                <h2><i data-lucide="triangle-alert" aria-hidden="true"></i> Difficultés rencontrées</h2>
+                <p>
+                  Certains critères d'adaptabilité et d'extensibilité des plugins sont restés
+                  partiellement ou non validés à l'issue du projet, un point assumé et documenté
+                  dans le rapport plutôt que masqué.
+                </p>
+              </section>
+
+              <section class="detail__section">
+                <h2><i data-lucide="trending-up" aria-hidden="true"></i> Axes d'amélioration</h2>
+                <ul class="checklist">
+                  <li>Finaliser les recettes d'adaptabilité et d'extensibilité restées incomplètes.</li>
+                  <li>Étendre la compatibilité des plugins à d'autres bancs de mesure du laboratoire.</li>
+                </ul>
+              </section>
+
+              <section class="detail__section">
+                <h2><i data-lucide="award" aria-hidden="true"></i> Reconnaissance</h2>
+                <p>
+                  Ce projet m'a valu une invitation à présenter le DAP aux
+                  <strong>PyMoDAQ Days</strong>, du 7 au 9 octobre 2026 à Paris, un événement
+                  organisé autour du framework open source par son créateur, Sébastien Weber,
+                  ingénieur CNRS.
+                </p>
+              </section>
+
+              <section class="detail__section">
+                <h2><i data-lucide="images" aria-hidden="true"></i> Galerie</h2>
+                <div class="gallery">
+                  <button class="gallery__item" type="button">
+                    <img
+                      src="../../img/projects/dap-pymodaq-dashboard.png"
+                      alt="Dashboard Pymodaq pilotant les capteurs et actionneurs du DAP Raspberry Pi"
+                      loading="lazy"
+                    />
+                  </button>
+                </div>
+              </section>
+            </div>
+
+            <aside class="detail__aside">
+              <div class="meta-card">
+                <div class="meta-row">
+                  <p class="meta-row__label"><i data-lucide="wrench" aria-hidden="true"></i> Technologies</p>
+                  <ul class="tags tags--sm">
+                    <li class="tag">Python</li>
+                    <li class="tag">Pymodaq</li>
+                    <li class="tag">ZeroMQ</li>
+                    <li class="tag">TOML</li>
+                    <li class="tag">Raspberry Pi</li>
+                    <li class="tag">UML</li>
+                  </ul>
+                </div>
+                <div class="meta-row">
+                  <p class="meta-row__label"><i data-lucide="clock" aria-hidden="true"></i> Durée</p>
+                  <p class="meta-row__value">≈150 h · année scolaire 2025-2026</p>
+                </div>
+                <div class="meta-row">
+                  <p class="meta-row__label"><i data-lucide="tag" aria-hidden="true"></i> Type</p>
+                  <p class="meta-row__value">Projet d'examen (E6/U62), BTS CIEL, équipe de 4</p>
+                </div>
+                <div class="meta-row">
+                  <p class="meta-row__label"><i data-lucide="book-open" aria-hidden="true"></i> Documentation</p>
+                  <a
+                    class="btn btn--ghost"
+                    href="https://wiki-plugins-dap-pymodaq.github.io"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <i data-lucide="external-link" aria-hidden="true"></i>
+                    Voir le wiki des plugins
+                  </a>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer" data-shell="footer"></footer>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script defer src="../../js/main.js"></script>
+  </body>
+</html>

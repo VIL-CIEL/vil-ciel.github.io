@@ -10,51 +10,52 @@ Légende : ✅ terminé · 🚧 en cours · ⬜ à faire
 
 ## État actuel
 
-- Dernière version publiée : **v1.0.3** (`public/version.json`, `CHANGELOG.md`).
+- Dernière version publiée : **v1.7.0** (`public/version.json`, `CHANGELOG.md`). Le
+  projet passe à un versionnage par commit, un commit publié = une version taguée
+  `vMAJEUR.MINEUR.CORRECTIF`.
 - Sprints 0 à 5 (v1) terminés.
-- 🚧 **Refonte v2 en cours — direction artistique « Cynosure »** (thème programme
-  corpo fictif façon Cyberpunk 2077 / Phantom Liberty). Nom conservé, aucun asset du
-  jeu réutilisé (tout recréé maison : logo SVG, schémas filaires, effets CSS). Voir
-  détails palette/typo/motifs dans le fichier de règles multi-PC.
-- Une **maquette statique HTML autonome** (`cynosure-maquette.html`, une seule page,
-  contenu de démonstration) a été produite et envoyée à l'utilisateur **hors dépôt**
-  (pas commitée, pas présente automatiquement sur les deux PC). Elle sert de référence
-  visuelle validée pour la suite. Si absente sur le poste courant, la redemander à
-  l'utilisateur plutôt que de réinventer la DA.
-- Le CV a été déplacé vers `public/assets/pdf/CV_VILLEDIEU_FABIEN.pdf` (commits distants
-  « Update CV » / « Fix Button Download CV »). `index.html` pointe sur le nouveau chemin.
-- Documentation racine (`README.md`, `ARCHITECTURE.md`, `public/assets/img/README.md`)
-  réalignée sur ce nouveau chemin (en attente de commit, voir Prochaines étapes).
+- Nouveau projet ajouté au portfolio existant : **Plugins DAP Pymodaq** (projet
+  d'examen E6/U62, BTS CIEL, CETHIL), avec page de détail, carte projets, mise en
+  avant sur l'accueil et entrée dans la timeline À propos.
+- 🚧 **Refonte DA en réflexion — piste « Cynosure » / « GIMMI »** : deux maquettes
+  statiques autonomes ont été produites hors dépôt (thème programme corpo type
+  Cyberpunk 2077, et une variante palette « Gimmi »). Retours reçus sur la première
+  maquette (retrait LED, retrait thème clair, renommage GIMMI). Question en cours de
+  discussion avec l'utilisateur : la bascule DA impliquerait de refaire aussi le CV,
+  de futures cartes de visite et la bannière LinkedIn (même dégradé bleu-violet
+  partout) — à évaluer face à l'échéance de recherche d'alternance du 30 novembre.
+  Pas de décision prise, voir Journal.
+- L'historique Git a été nettoyé de toute mention IA (`Co-Authored-By: Claude`) dans
+  les messages de commit existants, conformément à la règle « Mention IA » du
+  `README.md`. Nouvelle convention : plus de mention IA dans aucun commit à venir.
 
 ## Prochaines étapes
 
-- [ ] Valider/ajuster la maquette Cynosure avec l'utilisateur (retours en attente).
-- [ ] **Reset de l'historique Git distant** (branche orpheline + tag de sauvegarde
-      `archive/pre-cynosure` avant force-push) — proposé, **pas encore exécuté**,
-      nécessite un feu vert explicite avant toute action destructive.
-- [ ] Une fois la DA validée : sprint 1 de la refonte sur la page d'accueil réelle
-      (intégration multi-pages, vrai contenu, accessibilité WCAG AA, thème clair/sombre
-      ou « papier »).
-- [ ] `public/assets/pages/a-propos.html` référence encore `../cv-fabien-villedieu.pdf`
-      (2 liens) : chemin cassé, à corriger en `../pdf/CV_VILLEDIEU_FABIEN.pdf`.
-- [ ] Committer le nettoyage de `.gitignore` (bloc `.claude/` retiré, dossier déplacé
-      hors du dépôt) + les mises à jour de doc du chemin CV.
-- [ ] Décider si le déplacement du CV justifie une entrée `CHANGELOG.md` + un bump de
-      `version.json` (correctif v1.0.4) — probablement obsolète si la refonte v2 réécrit
-      l'historique.
+- [ ] Trancher s'il faut généraliser la DA Cynosure/GIMMI à tout le reste (CV,
+      cartes de visite, bannière LinkedIn) maintenant ou après la recherche
+      d'alternance (échéance 30 novembre) : discussion en cours, pas de décision.
+- [ ] Vraies captures d'écran supplémentaires pour la page Plugins DAP Pymodaq si
+      disponibles (dashboard, wiki), en complément de la capture déjà intégrée.
 
 ## Journal
 
+- 2026-09-23 : ajout du projet « Plugins DAP Pymodaq » au portfolio (projet
+  d'examen E6/U62, invitation aux PyMoDAQ Days 2026), correction du lien CV cassé
+  dans `a-propos.html`. Publication en v1.7.0, premier commit sous la nouvelle
+  convention de versionnage par commit.
+- 2026-09-23 : nettoyage de l'historique Git (suppression des mentions
+  `Co-Authored-By: Claude` dans les commits existants) à la demande de l'utilisateur.
+- 2026-09-23 : échange amorcé sur l'intérêt de généraliser la DA Cynosure/GIMMI (CV,
+  cartes de visite, bannière LinkedIn) à moins de 3 mois de la fin de la recherche
+  d'alternance (statut spécial de l'école, échéance 30 novembre). Pas de décision
+  prise à ce stade.
 - 2026-09-10 : reprise du projet. `git pull` (branche locale réalignée sur `origin/main`,
-  jusqu'à `05793d7`). Ajout des sections de suivi ci-dessus. Documentation racine
-  réalignée sur le nouveau chemin du CV (`assets/pdf/`). Lien CV cassé repéré dans
-  `a-propos.html` (voir Prochaines étapes).
+  jusqu'à `05793d7`). Documentation racine réalignée sur le nouveau chemin du CV
+  (`assets/pdf/`). Lien CV cassé repéré dans `a-propos.html`.
 - 2026-09-10 : décision de refonte complète de la charte graphique, DA « Cynosure »
   (inspiration Cyberpunk 2077 / Phantom Liberty, fan work non officiel, nom conservé
   car usage strictement personnel). Analyse des sources d'inspiration locales et
   production d'une maquette statique HTML de validation (envoyée hors dépôt).
-  Proposition de reset de l'historique Git en branche orpheline, en attente de
-  validation avant exécution.
 
 ---
 

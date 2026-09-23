@@ -5,6 +5,17 @@ Toutes les modifications notables de ce projet sont documentées ici.
 Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/)
 et le projet respecte le [versionnage sémantique](https://semver.org/lang/fr/) (`MAJEUR.MINEUR.CORRECTIF`).
 
+## [1.7.0] - 2026-09-23
+
+### Ajouté
+- Nouveau projet « Plugins DAP Pymodaq » (projet d'examen E6/U62, BTS CIEL) : page de
+  détail, carte dans la liste des projets, mise en avant sur l'accueil, entrée dans la
+  timeline « Expérience professionnelle » de la page À propos.
+
+### Corrigé
+- Lien de téléchargement du CV cassé dans la page À propos (chemin obsolète
+  `cv-fabien-villedieu.pdf`, corrigé vers `assets/pdf/CV_VILLEDIEU_FABIEN.pdf`).
+
 ## [1.0.3] - 2026-06-03
 
 ### Corrigé
