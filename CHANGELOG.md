@@ -18,6 +18,11 @@ et le projet respecte le [versionnage sémantique](https://semver.org/lang/fr/) 
 - Statut affiché lu depuis `data/profile.json`, modifiable depuis GitHub.
 - Affichage mobile : écran d'accueil et fenêtres plein écran.
 - Terminal : un clic dans la zone noire place le curseur dans la saisie.
+- Fond d'écran généré depuis une image (bannière) convertie en ASCII par
+  correspondance de forme, dessiné sur canvas.
+- Scènes pixel art animées dans les fenêtres DAP (capteurs → Raspberry Pi → ZeroMQ →
+  PyMoDAQ), stage (banc thermique relié par NI-DAQmx) et bénévolat (plaine, cycle
+  jour/nuit), avec un moteur d'animation unique qui s'arrête hors écran.
 
 ### Modifié
 - Contenus mis à jour : BTS CIEL obtenu (2026), recherche d'alternance pour la rentrée

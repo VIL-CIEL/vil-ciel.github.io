@@ -56,6 +56,7 @@ public/                          # Racine web (seul dossier publié)
     │   ├── icons.js             # Icônes 16×16 dessinées en code
     │   ├── wallpaper.js         # Fond d'écran ASCII (statique)
     │   ├── windows.js           # Fenêtres, barre des tâches, menu, notifications, terminal
+    │   ├── scenes.js            # Moteur et scènes pixel art des fenêtres
     │   └── boot.js              # Boot + initialisation (chargé en dernier)
     ├── pdf/CV_VILLEDIEU_FABIEN.pdf
     ├── img/                     # Photo, favicon, captures dans projects/
@@ -76,13 +77,20 @@ exposé dans le site.
 
 ## Pixel art et performance
 
-- Fond d'écran ASCII **généré une fois** (et au redimensionnement), regroupé en
-  segments de même couleur pour limiter le nombre de nœuds DOM, puis **statique**.
+- Fond d'écran ASCII **calculé une fois** (et au redimensionnement), dessiné sur un
+  canvas, puis **statique**. Variante bannière : l'image est convertie en ASCII par
+  correspondance de forme (6 zones circulaires par caractère, comparées aux 95
+  caractères ASCII dessinés dans la police du site) avec renforcement du contraste.
 - Icônes dessinées une fois sur des canvas 16×16 agrandis sans lissage
   (`image-rendering: pixelated`).
-- Scènes animées (sprint 2) : une **seule boucle `requestAnimationFrame`**, 8 à 10 images
-  par seconde, arrêtée quand aucune scène n'est visible (fenêtre fermée ou réduite,
-  scène hors écran, onglet caché) ; décors fixes pré-rendus sur des calques.
+- Scènes animées (`scenes.js`, 192×64 agrandies sans lissage) : une **seule boucle
+  `requestAnimationFrame`** pour tout le site, 8 à 10 images par seconde. Elle ne dessine
+  que les scènes visibles (fenêtre ouverte et non réduite, canvas à l'écran via
+  `IntersectionObserver`, onglet actif), **dort entre deux images** (`setTimeout` jusqu'à
+  la prochaine image utile) et s'arrête complètement quand rien n'est visible. Décors
+  fixes pré-rendus sur des calques ; courbes sur de petits calques qui défilent d'un
+  pixel. Les images/s s'affichent dans la barre d'état de chaque fenêtre et
+  `FV.scenes.stats` donne le coût (ms de JS par seconde).
 - `prefers-reduced-motion` : pas de boot, pas de glitch, scènes figées.
 
 ## Conventions

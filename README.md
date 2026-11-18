@@ -73,7 +73,7 @@ portfolio/
 │   ├── data/profile.json        # Statut affiché (modifiable depuis GitHub)
 │   └── assets/
 │       ├── css/os.css           # Styles de l'interface
-│       ├── js/                  # core, icons, wallpaper, windows, boot
+│       ├── js/                  # core, icons, wallpaper, windows, scenes, boot
 │       ├── pdf/CV_VILLEDIEU_FABIEN.pdf
 │       ├── img/                 # Photo, favicon, captures (projects/)
 │       └── pages/               # Anciennes adresses v1 → redirections vers /#fenêtre

@@ -17,18 +17,18 @@ Légende : ✅ terminé · 🚧 en cours · ⬜ à faire
   d'exploitation fictif, chaque projet est un programme avec une animation pixel art
   dessinée en code. Style rétro / terminal, base sombre, violet en minorité, glitch
   ponctuel. Maquette de référence hors dépôt : `Portofolio_Project/maquette-os.html`.
-- **Sprint v2-1 (fondations) terminé côté code**, en attente du test dans Firefox et
-  du choix du fond d'écran ASCII (3 variantes dans le menu ◆, ou `?fond=1|2|3`).
+- Sprints v2-1 (fondations) et **v2-2 (pixel art)** terminés côté code, en attente du
+  test dans Firefox. Fond d'écran : bannière convertie en ASCII (variante 4), image
+  définitive à récupérer.
 - Le statut affiché vient de `public/data/profile.json`.
 
 ## Prochaines étapes
 
 - [ ] Fond d'écran : piste retenue = bannière LinkedIn convertie en ASCII (variante 4).
-      Décider si le logo du serveur communautaire reste visible (anonymat), récupérer
-      l'image définitive (`public/assets/img/fond-banniere.png`, pas encore versionnée),
+      Le logo du serveur communautaire reste visible (décision du 2026-11-18). Récupérer
+      l'image définitive en haute résolution (`public/assets/img/fond-banniere.png`, pas encore versionnée),
       puis retirer les variantes 1-3 et le sélecteur de test du menu.
-- [ ] Sprint v2-2 : moteur pixel art + scènes DAP (capteurs → Raspberry → un lien ZMQ
-      → PC), stage (banc vapeur, bain thermostaté, ventilateur, NI-DAQmx → PC), plaine.
+- [ ] Tester dans Firefox les scènes DAP, stage et plaine (rendu, fluidité, consommation).
 - [ ] Sprint v2-3 : Profil (méthode de travail + aparté sur l'usage de l'IA), Parcours
       en timeline façon *Loki* (branches, CPE élagué, futur non dessiné), aperçu du CV
       généré au déploiement, contact via Formspree (compte à créer), terminal.
@@ -41,6 +41,15 @@ Légende : ✅ terminé · 🚧 en cours · ⬜ à faire
 
 ## Journal
 
+- 2026-11-18 : sprint v2-2 (pixel art). Moteur `scenes.js` : une seule boucle
+  d'animation, qui ne dessine que les scènes visibles (fenêtre ouverte, non réduite, à
+  l'écran, onglet actif) et dort entre deux images (≈15 réveils/s avec trois scènes,
+  0 quand rien n'est visible) ; décors fixes pré-rendus ; image fixe si les animations
+  sont réduites ; images/s affichées dans la barre d'état de la fenêtre. Scènes :
+  DAP (trois capteurs → Raspberry Pi → un seul lien ZMQ → PyMoDAQ, chaque trame met à
+  jour les trois voies), stage (PC d'acquisition, NI-DAQmx, bain thermostaté avec
+  afficheur, veine d'essai, vapeur, ventilateur), plaine (cycle jour/nuit). Mesure dans
+  le navigateur interne : ≈12 ms de JS par seconde avec les trois scènes ouvertes.
 - 2026-11-18 : fond d'écran bannière illisible en première version (un caractère traité
   comme un pixel, résolution trop faible). Réécriture : choix du caractère par
   correspondance de forme (6 zones circulaires par caractère, comparées aux 95
@@ -92,8 +101,9 @@ Boot, bureau, fond d'écran ASCII, barre des tâches (raccourci CV, statut), ges
 de fenêtres (Échap, défilement réinitialisé, adresses directes), mobile, `profile.json`,
 LISEZ-MOI, redirections des anciennes adresses, 404.
 
-### ⬜ Sprint v2-2 — Pixel art
+### 🚧 Sprint v2-2 — Pixel art
 Moteur d'animation (une boucle, arrêt hors écran), scènes DAP, stage et plaine.
+Code terminé, en attente du test Firefox.
 
 ### ⬜ Sprint v2-3 — Programmes système
 Profil, Parcours en timeline façon *Loki*, CV avec aperçu, contact Formspree, terminal.
