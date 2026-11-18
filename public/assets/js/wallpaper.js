@@ -1,32 +1,96 @@
 /* =====================================================================
-   Fond d'écran ASCII : généré une fois (et au redimensionnement), statique.
-   Variantes en test : 1 nébuleuse, 2 circuit, 3 signal + initiales,
-   4 bannière (image convertie en ASCII).
+   Fond d'écran ASCII : calculé une fois (et au redimensionnement), dessiné
+   sur un canvas, statique. Variantes en test : 1 nébuleuse, 2 circuit,
+   3 signal + initiales, 4 bannière (image convertie en ASCII).
    ===================================================================== */
 'use strict';
 
 (function (FV) {
   // Niveaux de violet, du plus discret au plus visible (0 = vide).
   const SHADES = [null, '#221932', '#2e2145', '#3f2c60', '#56398a', '#6f4cb5', '#8a63db'];
+  const FONT_FAMILY = '"IBM Plex Mono", consolas, monospace';
+  // la bannière demande une police plus fine pour garder le détail des logos
+  const FONT_SIZE = { 1: 13, 2: 13, 3: 13, 4: 8 };
 
-  // Taille d'une cellule de caractère, selon la police réellement appliquée.
-  function measureCell(pre) {
-    const probe = FV.el('span', null, 'MMMMMMMMMM');
-    pre.append(probe);
-    const width = probe.getBoundingClientRect().width / 10 || 7.8;
-    probe.remove();
-    const height = parseFloat(window.getComputedStyle(pre).lineHeight) || 16;
-    return { width, height };
+  /* =====================================================================
+     Conversion image → ASCII par correspondance de forme
+     Chaque caractère est décrit par 6 valeurs (son « encre » dans 6 zones
+     circulaires en quinconce) ; chaque case de l'image est mesurée dans les
+     mêmes zones, puis on choisit le caractère le plus proche. Méthode décrite
+     par Alex Harri, « ASCII characters are not pixels ».
+     ===================================================================== */
+  const CIRCLES = [
+    [0.28, 0.14], [0.72, 0.22],
+    [0.28, 0.46], [0.72, 0.54],
+    [0.28, 0.78], [0.72, 0.86],
+  ];
+  const RADIUS = 0.3; // rayon des zones, relatif à la largeur d'une case
+  const CONTRAST = 2.2; // exposant du renforcement de contraste
+  const CHARSET = Array.from({ length: 95 }, (_, i) => String.fromCharCode(32 + i));
+
+  // Pour une grille de gw×gh échantillons couvrant une case de cw×ch pixels,
+  // liste des échantillons qui tombent dans chacune des 6 zones.
+  function zoneSamples(gw, gh, cw, ch) {
+    return CIRCLES.map(([cx, cy]) => {
+      const list = [];
+      const r2 = (RADIUS * cw) ** 2;
+      for (let sy = 0; sy < gh; sy++) {
+        for (let sx = 0; sx < gw; sx++) {
+          const dx = ((sx + 0.5) / gw) * cw - cx * cw;
+          const dy = ((sy + 0.5) / gh) * ch - cy * ch;
+          if (dx * dx + dy * dy <= r2) list.push(sy * gw + sx);
+        }
+      }
+      return list;
+    });
   }
 
-  /* ---------- 4. bannière : conversion d'une image en ASCII ---------- */
-  // L'image est réduite par le navigateur à 1 pixel = 1 caractère, puis lue une seule
-  // fois. Remplacer le fichier suffit : la zone des logos est détectée automatiquement.
+  let glyphs = null; // { key, vecs: Float32Array(95 × 6) }
+
+  // Mesure la forme des 95 caractères dans la police réelle (une seule fois).
+  function buildGlyphs(cell, size) {
+    const key = cell.width.toFixed(2) + 'x' + cell.height + '@' + size;
+    if (glyphs && glyphs.key === key) return glyphs;
+    const K = 4; // sur-échantillonnage
+    const w = Math.round(cell.width * K);
+    const h = Math.round(cell.height * K);
+    const c = document.createElement('canvas');
+    c.width = w;
+    c.height = h;
+    const ctx = c.getContext('2d', { willReadFrequently: true });
+    ctx.font = `${size * K}px ${FONT_FAMILY}`;
+    ctx.textBaseline = 'middle';
+    const zones = zoneSamples(w, h, w, h);
+    const vecs = new Float32Array(CHARSET.length * 6);
+    CHARSET.forEach((ch, i) => {
+      ctx.fillStyle = '#000';
+      ctx.fillRect(0, 0, w, h);
+      ctx.fillStyle = '#fff';
+      ctx.fillText(ch, 0, h / 2);
+      const d = ctx.getImageData(0, 0, w, h).data;
+      zones.forEach((list, z) => {
+        let sum = 0;
+        for (const p of list) sum += d[p * 4];
+        vecs[i * 6 + z] = list.length ? sum / list.length / 255 : 0;
+      });
+    });
+    // normalisation par composante : répartit mieux les caractères
+    for (let z = 0; z < 6; z++) {
+      let max = 0;
+      for (let i = 0; i < CHARSET.length; i++) max = Math.max(max, vecs[i * 6 + z]);
+      if (max > 0) for (let i = 0; i < CHARSET.length; i++) vecs[i * 6 + z] /= max;
+    }
+    glyphs = { key, vecs };
+    return glyphs;
+  }
+
+  /* ---------- 4. bannière ---------- */
+  // Remplacer le fichier suffit : la zone des logos est détectée automatiquement.
   const BANNER_SRC = 'assets/img/fond-banniere.png';
-  const LOGO_HEIGHT = 0.6; // hauteur max du bloc de logos, en part de l'écran
-  const LOGO_WIDTH = 0.72; // largeur max du bloc de logos
+  const LOGO_HEIGHT = 0.62; // hauteur max du bloc de logos, en part de l'écran
+  const LOGO_WIDTH = 0.8; // largeur max du bloc de logos
   const LOGO_LUM = 30; // en dessous : trait sombre des logos (le dégradé ne descend pas sous ~35)
-  const SUB = 3; // sous-échantillons par axe et par caractère (3×3)
+  const SUB = 6; // échantillons par axe et par case
   const BAYER = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5];
   let bannerImg = null;
   let logoBox = null;
@@ -58,7 +122,7 @@
       }
     }
     if (x1 <= x0) return { x: 0, y: 0, w, h };
-    const m = Math.round(Math.max(x1 - x0, y1 - y0) * 0.03);
+    const m = Math.round(Math.max(x1 - x0, y1 - y0) * 0.02);
     x0 = Math.max(0, x0 - m);
     y0 = Math.max(0, y0 - m);
     return { x: x0, y: y0, w: Math.min(w, x1 + m) - x0, h: Math.min(h, y1 + m) - y0 };
@@ -77,24 +141,10 @@
     });
   }
 
-  // Choix du caractère selon la forme du trait dans la cellule (masque 3×3).
-  function glyph(m) {
-    const n = m.reduce((a, b) => a + b, 0);
-    if (n >= 7) return '#';
-    const row = [0, 1, 2].map((r) => m[r * 3] + m[r * 3 + 1] + m[r * 3 + 2]);
-    const col = [0, 1, 2].map((c) => m[c] + m[3 + c] + m[6 + c]);
-    if (n <= 5 && col.includes(3)) return '|';
-    if (n <= 5 && row.includes(3)) return row[2] === 3 && !row[0] ? '_' : '-';
-    if (n <= 5 && m[0] && m[4] && m[8]) return '\\';
-    if (n <= 5 && m[2] && m[4] && m[6]) return '/';
-    if (n <= 2) return '.';
-    return n <= 4 ? '+' : '%';
-  }
-
-  function banner(cols, rows, rand, cell) {
-    if (!bannerImg) return Array.from({ length: cols * rows }, () => [' ', 0]);
+  function banner(cols, rows, rand, cell, size) {
     const iw = bannerImg.naturalWidth;
     const box = logoBox;
+    const { vecs } = buildGlyphs(cell, size);
 
     // fond : la ligne du haut de l'image (pur dégradé) étirée sur tout l'écran
     const bg = document.createElement('canvas');
@@ -104,11 +154,10 @@
     bctx.drawImage(bannerImg, 0, 0, iw, 1, 0, 0, cols, 1);
     const bgd = bctx.getImageData(0, 0, cols, 1).data;
 
-    // bloc de logos, à la bonne proportion (cellules plus hautes que larges)
+    // bloc de logos, à la bonne proportion (cases plus hautes que larges)
     let hCells = Math.round(rows * LOGO_HEIGHT);
     let wCells = Math.round((hCells * cell.height * box.w) / box.h / cell.width);
-    // sur écran étroit (mobile), le bloc peut occuper presque toute la largeur
-    const maxW = cols < 120 ? cols - 4 : cols * LOGO_WIDTH;
+    const maxW = cols < 120 ? cols - 4 : cols * LOGO_WIDTH; // mobile : toute la largeur
     if (wCells > maxW) {
       wCells = Math.round(maxW);
       hCells = Math.round((wCells * cell.width * box.h) / box.w / cell.height);
@@ -119,29 +168,53 @@
     lc.width = wCells * SUB;
     lc.height = hCells * SUB;
     const lctx = lc.getContext('2d', { willReadFrequently: true });
+    lctx.imageSmoothingQuality = 'high';
     lctx.drawImage(bannerImg, box.x, box.y, box.w, box.h, 0, 0, lc.width, lc.height);
     const ld = lctx.getImageData(0, 0, lc.width, lc.height).data;
+    // « encre » de chaque échantillon : trait sombre sur fond bleu
+    const ink = new Float32Array(lc.width * lc.height);
+    for (let i = 0; i < ink.length; i++) ink[i] = Math.min(1, Math.max(0, (55 - lumAt(ld, i * 4)) / 45));
 
+    const zones = zoneSamples(SUB, SUB, cell.width, cell.height);
+    const cache = new Map();
+    const v = new Float32Array(6);
     const grid = [];
-    const mask = new Array(9);
     for (let y = 0; y < rows; y++) {
       for (let x = 0; x < cols; x++) {
         const lx = x - ox;
         const ly = y - oy;
         if (lx >= 0 && ly >= 0 && lx < wCells && ly < hCells) {
-          let n = 0;
-          for (let sy = 0; sy < SUB; sy++) {
-            for (let sx = 0; sx < SUB; sx++) {
-              const i = ((ly * SUB + sy) * lc.width + lx * SUB + sx) * 4;
-              const dark = lumAt(ld, i) < LOGO_LUM ? 1 : 0;
-              mask[sy * SUB + sx] = dark;
-              n += dark;
+          let max = 0;
+          zones.forEach((list, z) => {
+            let sum = 0;
+            for (const p of list) sum += ink[(ly * SUB + ((p / SUB) | 0)) * lc.width + lx * SUB + (p % SUB)];
+            v[z] = list.length ? sum / list.length : 0;
+            if (v[z] > max) max = v[z];
+          });
+          if (max >= 0.06) {
+            // contraste : les zones faibles s'effacent devant les fortes
+            let key = 0;
+            for (let z = 0; z < 6; z++) {
+              v[z] = (v[z] / max) ** CONTRAST * max;
+              key = key * 16 + Math.min(15, (v[z] * 16) | 0);
             }
-          }
-          if (n) {
-            // trait des logos : ressort en violet clair
-            grid.push([glyph(mask), n >= 5 ? 6 : 5]);
-            continue;
+            let best = cache.get(key);
+            if (best === undefined) {
+              let bestD = Infinity;
+              for (let i = 0; i < CHARSET.length; i++) {
+                let dist = 0;
+                for (let z = 0; z < 6; z++) dist += (vecs[i * 6 + z] - v[z]) ** 2;
+                if (dist < bestD) {
+                  bestD = dist;
+                  best = i;
+                }
+              }
+              cache.set(key, best);
+            }
+            if (best > 0) {
+              grid.push([CHARSET[best], max > 0.55 ? 6 : 5]);
+              continue;
+            }
           }
         }
         // dégradé : texture tramée très discrète, densité selon la luminosité
@@ -289,61 +362,69 @@
     return VARIANTS[chosen] ? chosen : '1';
   }
 
-  let lastSize = '';
+  /* ---------- dessin sur canvas (une passe par teinte) ---------- */
+  function paint(canvas, grid, cols, rows, cell, size, cssW, cssH) {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = Math.round(cssW * dpr);
+    canvas.height = Math.round(cssH * dpr);
+    const ctx = canvas.getContext('2d');
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, cssW, cssH);
+    ctx.font = `${size}px ${FONT_FAMILY}`;
+    ctx.textBaseline = 'middle';
+    const byShade = SHADES.map(() => []);
+    for (let i = 0; i < grid.length; i++) {
+      const [ch, lvl] = grid[i];
+      if (ch !== ' ' && lvl) byShade[lvl].push(i);
+    }
+    byShade.forEach((cells, lvl) => {
+      if (!cells.length) return;
+      ctx.fillStyle = SHADES[lvl];
+      for (const i of cells) {
+        const x = i % cols;
+        const y = (i / cols) | 0;
+        ctx.fillText(grid[i][0], x * cell.width, y * cell.height + cell.height / 2);
+      }
+    });
+  }
 
-  FV.drawWallpaper = (force) => {
-    const pre = FV.$('#wallpaper');
-    if (!pre) return;
+  let lastSize = '';
+  let drawing = false;
+
+  FV.drawWallpaper = async (force) => {
+    const canvas = FV.$('#wallpaper');
+    if (!canvas || drawing) return;
     const current = variant();
-    // la bannière demande une police plus fine pour garder le détail des logos
-    pre.classList.toggle('wallpaper--fine', current === '4');
-    if (current === '4' && !bannerImg) {
-      loadBanner()
-        .then(() => FV.drawWallpaper(true))
-        .catch(() => {
-          /* image absente : on retombe sur la première variante */
-          FV.store.set('fv-fond', '1');
-          FV.drawWallpaper(true);
-        });
-      return;
-    }
-    const cell = measureCell(pre);
-    const cols = Math.ceil(pre.clientWidth / cell.width) + 1;
-    const rows = Math.ceil(pre.clientHeight / cell.height) + 1;
-    const size = cols + 'x' + rows + ':' + current;
-    if (!force && size === lastSize) return;
-    lastSize = size;
-    const grid = VARIANTS[current](cols, rows, FV.rng(2026), cell);
-    // regroupe les caractères de même teinte : peu de nœuds DOM
-    const frag = document.createDocumentFragment();
-    let run = '';
-    let runLvl = 0;
-    const flush = () => {
-      if (!run) return;
-      if (runLvl) {
-        const span = FV.el('span', null, run);
-        span.style.color = SHADES[runLvl];
-        frag.append(span);
-      } else {
-        frag.append(run);
+    const size = FONT_SIZE[current];
+    const cssW = canvas.clientWidth;
+    const cssH = canvas.clientHeight;
+    const key = cssW + 'x' + cssH + ':' + current;
+    if (!force && key === lastSize) return;
+    drawing = true;
+    let fallback = false;
+    try {
+      // la police doit être chargée avant de mesurer les caractères
+      if (document.fonts) await document.fonts.load(`${size}px "IBM Plex Mono"`).catch(() => {});
+      if (current === '4') await loadBanner();
+      const ctx = canvas.getContext('2d');
+      ctx.font = `${size}px ${FONT_FAMILY}`;
+      const cell = { width: ctx.measureText('M').width || size * 0.6, height: Math.ceil(size * 1.15) };
+      const cols = Math.ceil(cssW / cell.width) + 1;
+      const rows = Math.ceil(cssH / cell.height) + 1;
+      const grid = VARIANTS[current](cols, rows, FV.rng(2026), cell, size);
+      paint(canvas, grid, cols, rows, cell, size, cssW, cssH);
+      lastSize = key;
+    } catch (err) {
+      // image absente ou erreur : on retombe sur la première variante
+      console.warn('Fond d\'écran :', err);
+      if (current !== '1') {
+        FV.store.set('fv-fond', '1');
+        fallback = true;
       }
-      run = '';
-    };
-    for (let y = 0; y < rows; y++) {
-      for (let x = 0; x < cols; x++) {
-        const [ch, lvl] = grid[y * cols + x];
-        const l = ch === ' ' ? 0 : lvl;
-        if (l !== runLvl) {
-          flush();
-          runLvl = l;
-        }
-        run += ch;
-      }
-      flush();
-      runLvl = 0;
-      frag.append('\n');
+    } finally {
+      drawing = false;
     }
-    pre.replaceChildren(frag);
+    if (fallback) FV.drawWallpaper(true);
   };
 
   FV.setWallpaper = (n) => {

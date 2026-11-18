@@ -41,6 +41,14 @@ Légende : ✅ terminé · 🚧 en cours · ⬜ à faire
 
 ## Journal
 
+- 2026-11-18 : fond d'écran bannière illisible en première version (un caractère traité
+  comme un pixel, résolution trop faible). Réécriture : choix du caractère par
+  correspondance de forme (6 zones circulaires par caractère, comparées aux 95
+  caractères ASCII dessinés dans la police du site, méthode d'Alex Harri « ASCII
+  characters are not pixels ») + renforcement du contraste, police de 8 px (≈300
+  colonnes sur un écran 1440 px), bloc de logos agrandi, dessin sur un canvas au lieu
+  de milliers d'éléments texte. Calcul unique ≈250 ms dans le navigateur interne. Les
+  textes minuscules des logos restent illisibles (taille inférieure à une case).
 - 2026-11-18 : correction du bouton de fermeture des fenêtres (une variable locale
   masquait la fonction de fermeture ; Échap fonctionnait). Fond d'écran : ajout d'un
   convertisseur image → ASCII dans le navigateur (variante 4) — détection automatique
