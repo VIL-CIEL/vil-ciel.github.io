@@ -5,6 +5,32 @@ Toutes les modifications notables de ce projet sont documentées ici.
 Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/)
 et le projet respecte le [versionnage sémantique](https://semver.org/lang/fr/) (`MAJEUR.MINEUR.CORRECTIF`).
 
+## [Non publié] — refonte v2 (branche `refonte-v2`)
+
+### Ajouté
+- Nouvelle interface en forme de **système d'exploitation** : boot de première visite
+  (passable, non rejoué), bureau avec icônes de programmes dessinées en code, encadré
+  Profil, fond d'écran ASCII généré (3 variantes en test), barre des tâches (menu,
+  fenêtres ouvertes, raccourci de téléchargement du CV, statut, heure).
+- Gestionnaire de fenêtres : déplacer, réduire, fermer (bouton ou Échap, en cascade),
+  défilement remis en haut à chaque ouverture, une adresse par fenêtre (`/#dap`…).
+- Fenêtre LISEZ-MOI ouverte à la première visite (par où commencer).
+- Statut affiché lu depuis `data/profile.json`, modifiable depuis GitHub.
+- Affichage mobile : écran d'accueil et fenêtres plein écran.
+- Terminal : un clic dans la zone noire place le curseur dans la saisie.
+
+### Modifié
+- Contenus mis à jour : BTS CIEL obtenu (2026), recherche d'alternance pour la rentrée
+  2027, présentation en anglais aux PyMoDAQ Days, piste V2 du projet DAP (LECO),
+  description du banc de test du stage.
+- Page 404 refaite au style de l'interface (chemins absolus).
+- `sitemap.xml` réduit à la page unique.
+
+### Supprimé
+- Ancienne feuille de style `styles.css`, ancien script `main.js` et dépendance Lucide.
+- Anciennes pages v1 : remplacées par des redirections vers la fenêtre correspondante,
+  pour que les liens déjà partagés continuent de fonctionner.
+
 ## [1.7.0] - 2026-09-23
 
 ### Ajouté

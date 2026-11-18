@@ -8,11 +8,12 @@ export default [
     files: ['public/assets/js/**/*.js'],
     languageOptions: {
       ecmaVersion: 2022,
-      sourceType: 'module',
+      // Classic scripts loaded with `defer` (works over file:// too),
+      // sharing a single global namespace.
+      sourceType: 'script',
       globals: {
         ...globals.browser,
-        // Lucide is loaded globally via CDN.
-        lucide: 'readonly',
+        FV: 'readonly',
       },
     },
     rules: {

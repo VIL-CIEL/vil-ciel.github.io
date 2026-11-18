@@ -1,8 +1,8 @@
 # Sprints — Portfolio Fabien Villedieu
 
 Chaque sprint livre **une fonctionnalité** complète et vérifiée. Une fonctionnalité
-n'est « terminée » qu'après vérification (thème clair/sombre, icônes, navigation,
-responsive) et mise à jour du `CHANGELOG.md`.
+n'est « terminée » qu'après vérification (navigateur interne, puis test dans Firefox)
+et mise à jour du `CHANGELOG.md`.
 
 Légende : ✅ terminé · 🚧 en cours · ⬜ à faire
 
@@ -10,57 +10,87 @@ Légende : ✅ terminé · 🚧 en cours · ⬜ à faire
 
 ## État actuel
 
-- Dernière version publiée : **v1.7.0** (`public/version.json`, `CHANGELOG.md`). Le
-  projet passe à un versionnage par commit, un commit publié = une version taguée
-  `vMAJEUR.MINEUR.CORRECTIF`.
-- Sprints 0 à 5 (v1) terminés.
-- Nouveau projet ajouté au portfolio existant : **Plugins DAP Pymodaq** (projet
-  d'examen E6/U62, BTS CIEL, CETHIL), avec page de détail, carte projets, mise en
-  avant sur l'accueil et entrée dans la timeline À propos.
-- ⏸ **Refonte DA mise en pause — piste « Cynosure » / « GIMMI »** : deux maquettes
-  statiques autonomes existent hors dépôt (thème programme corpo type Cyberpunk 2077,
-  et une variante palette « Gimmi »), avec des retours déjà donnés sur la première
-  (retrait LED, retrait thème clair, renommage GIMMI). Décision : ne pas généraliser
-  la DA (CV, cartes de visite, bannière LinkedIn, portfolio) tant que la recherche
-  d'alternance est active (échéance 30 novembre) et tant que l'utilisateur n'a pas
-  lui-même envie de reprendre ce chantier, pour que l'identité visuelle reste la
-  sienne plutôt que produite sous pression de deadline. Voir Journal. Ne rien changer
-  au portfolio d'ici là sauf demande explicite.
-- L'historique Git a été nettoyé de toute mention IA (`Co-Authored-By: Claude`) dans
-  les messages de commit existants, conformément à la règle « Mention IA » du
-  `README.md`. Nouvelle convention : plus de mention IA dans aucun commit à venir.
+- Version en ligne : **v1.7.0** (`main`, `public/version.json`). Un commit publié sur
+  `main` = une version taguée `vMAJEUR.MINEUR.CORRECTIF`.
+- 🚧 **Refonte v2 « OS personnel »** sur la branche **`refonte-v2`** (la v1 reste en
+  ligne jusqu'à la fusion). DA validée le 2026-11-18 : le portfolio est un système
+  d'exploitation fictif, chaque projet est un programme avec une animation pixel art
+  dessinée en code. Style rétro / terminal, base sombre, violet en minorité, glitch
+  ponctuel. Maquette de référence hors dépôt : `Portofolio_Project/maquette-os.html`.
+- **Sprint v2-1 (fondations) terminé côté code**, en attente du test dans Firefox et
+  du choix du fond d'écran ASCII (3 variantes dans le menu ◆, ou `?fond=1|2|3`).
+- Le statut affiché vient de `public/data/profile.json`.
 
 ## Prochaines étapes
 
-- [ ] Reprendre la refonte DA Cynosure/GIMMI (portfolio, CV, cartes de visite,
-      bannière LinkedIn) quand l'utilisateur en aura besoin, pas avant.
-- [ ] Vraies captures d'écran supplémentaires pour la page Plugins DAP Pymodaq si
-      disponibles (dashboard, wiki), en complément de la capture déjà intégrée.
+- [ ] Tester le sprint v2-1 dans Firefox et choisir le fond d'écran (1 nébuleuse,
+      2 circuit, 3 signal + initiales), puis retirer le sélecteur de test du menu.
+- [ ] Sprint v2-2 : moteur pixel art + scènes DAP (capteurs → Raspberry → un lien ZMQ
+      → PC), stage (banc vapeur, bain thermostaté, ventilateur, NI-DAQmx → PC), plaine.
+- [ ] Sprint v2-3 : Profil (méthode de travail + aparté sur l'usage de l'IA), Parcours
+      en timeline façon *Loki* (branches, CPE élagué, futur non dessiné), aperçu du CV
+      généré au déploiement, contact via Formspree (compte à créer), terminal.
+- [ ] Sprint v2-4 : fenêtres complètes des autres projets + animations (s'appuie sur
+      les fiches projet en Markdown à rassembler).
+- [ ] Sprint v2-5 : accessibilité, audit de performance, polices hébergées sur le site,
+      SEO, docs, `version.json` 2.0.0, fusion dans `main`, tag `v2.0.0`.
+- [ ] Photos des PyMoDAQ Days à intégrer dans la fenêtre DAP ; dates des projets
+      d'école à confirmer pour la timeline.
 
 ## Journal
 
+- 2026-11-18 : sprint v2-1 (fondations) sur la branche `refonte-v2`. Nouvelle page
+  unique en forme de bureau : boot de première visite (passable, non rejoué), encadré
+  Profil, icônes dessinées en code, fond d'écran ASCII (3 variantes en test), barre des
+  tâches avec raccourci CV et statut, gestionnaire de fenêtres (déplacer, réduire,
+  fermer, Échap en cascade, défilement remis en haut à chaque ouverture, une adresse
+  par fenêtre), affichage mobile en écran d'accueil, statut lu depuis
+  `data/profile.json`. Contenus des fenêtres DAP, stage et bénévolat repris de la
+  maquette (scènes au sprint 2). Anciennes pages v1 remplacées par des redirections
+  vers les fenêtres correspondantes ; 404 refaite ; `styles.css` et `main.js` retirés.
+- 2026-11-18 : retours sur la maquette OS et validation du plan v2 (5 sprints, branche
+  dédiée pour ne pas exposer un site à moitié fait pendant la recherche d'alternance).
+- 2026-11-17 : reprise du chantier DA. Analyse du portfolio v1 et du TVA Dashboard ;
+  maquette « dashboard » écartée (trop proche du TVA), maquette « OS » retenue.
 - 2026-09-23 : ajout du projet « Plugins DAP Pymodaq » au portfolio (projet
   d'examen E6/U62, invitation aux PyMoDAQ Days 2026), correction du lien CV cassé
   dans `a-propos.html`. Publication en v1.7.0, premier commit sous la nouvelle
   convention de versionnage par commit.
-- 2026-09-23 : nettoyage de l'historique Git (suppression des mentions
-  `Co-Authored-By: Claude` dans les commits existants) à la demande de l'utilisateur.
-- 2026-09-23 : échange sur l'intérêt de généraliser la DA Cynosure/GIMMI (CV, cartes
-  de visite, bannière LinkedIn) à moins de 3 mois de la fin de la recherche
-  d'alternance (statut spécial de l'école, échéance 30 novembre), et sur le fait
-  qu'une identité visuelle personnelle a plus de valeur construite soi-même, sans
-  urgence de deadline, que produite en une série de sessions pressées. Décision :
-  mise en pause du chantier DA (portfolio compris), à reprendre plus tard sans
-  contrainte de calendrier.
+- 2026-09-23 : nettoyage de l'historique Git (suppression des lignes d'attribution
+  automatique dans les messages de commit existants), conformément à la règle
+  « Mention IA » du `README.md`.
+- 2026-09-23 : mise en pause du chantier DA (pistes Cynosure / GIMMI) pendant la
+  recherche d'alternance, pour construire l'identité visuelle sans urgence.
 - 2026-09-10 : reprise du projet. `git pull` (branche locale réalignée sur `origin/main`,
   jusqu'à `05793d7`). Documentation racine réalignée sur le nouveau chemin du CV
   (`assets/pdf/`). Lien CV cassé repéré dans `a-propos.html`.
-- 2026-09-10 : décision de refonte complète de la charte graphique, DA « Cynosure »
-  (inspiration Cyberpunk 2077 / Phantom Liberty, fan work non officiel, nom conservé
-  car usage strictement personnel). Analyse des sources d'inspiration locales et
-  production d'une maquette statique HTML de validation (envoyée hors dépôt).
+- 2026-09-10 : première piste de refonte, DA « Cynosure » (inspiration Cyberpunk 2077),
+  maquette statique produite hors dépôt.
 
 ---
+
+## 🚧 Refonte v2 — « OS personnel »
+
+### 🚧 Sprint v2-1 — Fondations
+Boot, bureau, fond d'écran ASCII, barre des tâches (raccourci CV, statut), gestionnaire
+de fenêtres (Échap, défilement réinitialisé, adresses directes), mobile, `profile.json`,
+LISEZ-MOI, redirections des anciennes adresses, 404.
+
+### ⬜ Sprint v2-2 — Pixel art
+Moteur d'animation (une boucle, arrêt hors écran), scènes DAP, stage et plaine.
+
+### ⬜ Sprint v2-3 — Programmes système
+Profil, Parcours en timeline façon *Loki*, CV avec aperçu, contact Formspree, terminal.
+
+### ⬜ Sprint v2-4 — Autres projets
+TVA Dashboard, CC Radio System, Unity, Pygame, recherche textuelle, portfolio.
+
+### ⬜ Sprint v2-5 — Finitions et sortie
+Accessibilité, performance, polices locales, SEO, documentation, v2.0.0.
+
+---
+
+## v1 — site multi-pages (archivé)
 
 ## ✅ Sprint 0 — Fondations (v0.1.0)
 Scaffold du projet : structure `public/`, thème clair/sombre, icônes Lucide,

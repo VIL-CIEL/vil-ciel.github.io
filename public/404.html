@@ -1,58 +1,38 @@
 <!doctype html>
-<html lang="fr" data-theme="dark" data-base="" data-page="">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <title>Page introuvable — Fabien Villedieu</title>
+    <title>Programme introuvable — Fabien Villedieu</title>
     <meta name="robots" content="noindex" />
-    <meta name="color-scheme" content="dark light" />
-
-    <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#0e0d11" />
+    <!-- Chemins absolus : GitHub Pages sert cette page à n'importe quelle profondeur d'URL -->
+    <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=VT323&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="assets/css/styles.css" />
-
-    <script>
-      (function () {
-        try {
-          var t = localStorage.getItem('portfolio-theme');
-          var sysLight = window.matchMedia('(prefers-color-scheme: light)').matches;
-          document.documentElement.classList.add('js');
-          document.documentElement.setAttribute('data-theme', t || (sysLight ? 'light' : 'dark'));
-        } catch (e) {}
-      })();
-    </script>
-    <meta name="theme-color" content="#0d1117" />
+    <link rel="stylesheet" href="/assets/css/os.css" />
   </head>
   <body>
-    <a class="skip-link" href="#main">Aller au contenu principal</a>
-
-    <header class="site-header" data-shell="header"></header>
-
-    <main id="main">
-      <section class="section section--center">
-        <div class="section__inner section__inner--center reveal">
-          <p class="error-code">404</p>
-          <h1 class="page-hero__title">Page introuvable</h1>
-          <p class="section__lead">
-            La page que vous cherchez n'existe pas ou a été déplacée.
-          </p>
-          <a class="btn btn--primary btn--lg" href="index.html">
-            <i data-lucide="home" aria-hidden="true"></i>
-            Retour à l'accueil
-          </a>
+    <main class="desk" style="display: grid; place-items: center">
+      <section class="win win--narrow" style="width: 100%" aria-labelledby="err-title">
+        <div class="win__bar">
+          <span class="win__title">ERREUR.log</span>
+          <span class="win__path">C:/INTROUVABLE</span>
         </div>
+        <div class="win__body">
+          <div class="txt txt--pad">
+            <h1 class="txt__title" id="err-title">ERREUR 404_</h1>
+            <p><strong>Programme introuvable.</strong> Cette adresse n'existe pas, ou elle a déménagé avec la nouvelle version du portfolio.</p>
+            <p><a class="btn btn--violet" href="/">Retour au bureau</a></p>
+          </div>
+        </div>
+        <div class="win__status"><span>CODE 0x194</span><span class="win__run">En attente</span></div>
       </section>
     </main>
-
-    <footer class="site-footer" data-shell="footer"></footer>
-
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script defer src="assets/js/main.js"></script>
   </body>
 </html>

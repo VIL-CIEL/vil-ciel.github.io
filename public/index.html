@@ -1,249 +1,491 @@
 <!doctype html>
-<html lang="fr" data-theme="dark" data-base="" data-page="accueil">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <title>Fabien Villedieu — Développeur Junior</title>
+    <title>Fabien Villedieu — Développeur logiciel</title>
     <meta
       name="description"
-      content="Portfolio de Fabien Villedieu, étudiant en BTS CIEL et développeur junior à Lyon. Python, C++, C#, développement web."
+      content="Portfolio de Fabien Villedieu, développeur logiciel à Lyon (BTS CIEL). Projets en Python, C#, C++ et web. Recherche d'alternance pour la rentrée 2027."
     />
     <meta name="author" content="Fabien Villedieu" />
-    <meta name="color-scheme" content="dark light" />
-
-
-    <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#0e0d11" />
+    <link rel="canonical" href="https://vil-ciel.github.io/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Portfolio — Fabien Villedieu" />
+    <meta property="og:title" content="Fabien Villedieu — Développeur logiciel" />
+    <meta
+      property="og:description"
+      content="Un portfolio en forme de système d'exploitation : chaque projet est un programme."
     />
-    <link rel="stylesheet" href="assets/css/styles.css" />
+    <meta property="og:url" content="https://vil-ciel.github.io/" />
+    <meta property="og:locale" content="fr_FR" />
+    <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
 
-    <!-- Applique le thème avant le rendu pour éviter tout clignotement -->
+    <!-- JS actif + boot de première visite, avant le rendu (aucun flash du bureau) -->
     <script>
       (function () {
+        var root = document.documentElement;
+        root.classList.add('js');
         try {
-          var t = localStorage.getItem('portfolio-theme');
-          var sysLight = window.matchMedia('(prefers-color-scheme: light)').matches;
-          document.documentElement.classList.add('js');
-          document.documentElement.setAttribute('data-theme', t || (sysLight ? 'light' : 'dark'));
+          var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          if (!reduced && localStorage.getItem('fv-booted') !== '1') root.classList.add('is-booting');
         } catch (e) {}
       })();
     </script>
-    <link rel="canonical" href="https://vil-ciel.github.io/" />
-    <meta name="theme-color" content="#0d1117" />
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Portfolio — Fabien Villedieu" />
-    <meta property="og:title" content="Fabien Villedieu — Développeur Junior" />
-    <meta property="og:description" content="Portfolio de Fabien Villedieu, étudiant en BTS CIEL et développeur junior à Lyon. Python, C++, C#, développement web." />
-    <meta property="og:url" content="https://vil-ciel.github.io/" />
-    <meta property="og:image" content="https://vil-ciel.github.io/assets/img/profile.jpg" />
-    <meta name="twitter:card" content="summary" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=VT323&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/os.css" />
+
+    <script src="assets/js/core.js" defer></script>
+    <script src="assets/js/icons.js" defer></script>
+    <script src="assets/js/wallpaper.js" defer></script>
+    <script src="assets/js/windows.js" defer></script>
+    <script src="assets/js/boot.js" defer></script>
   </head>
   <body>
-    <a class="skip-link" href="#main">Aller au contenu principal</a>
-
-    <!-- En-tête partagé (injecté par main.js) -->
-    <header class="site-header" data-shell="header"></header>
-
-    <main id="main">
-      <!-- ───────────────────────── Hero / présentation ───────────────────────── -->
-      <section class="hero">
-        <div class="hero__inner reveal">
-          <img
-            class="hero__avatar"
-            src="assets/img/profile.jpg"
-            alt="Portrait de Fabien Villedieu"
-            width="160"
-            height="160"
-            onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'hero__avatar hero__avatar--fallback',textContent:'FV'}))"
-          />
-          <p class="hero__eyebrow">Étudiant • Développeur Junior</p>
-          <h1 class="hero__title">Fabien Villedieu</h1>
-          <p class="hero__lead">
-            Futur développeur logiciel, je transforme chaque problématique technique en une
-            opportunité d'apprentissage pour repousser sans cesse mes standards de qualité.
-          </p>
-
-          <div class="hero__actions">
-            <a class="btn btn--primary" href="assets/pages/projets.html">
-              <i data-lucide="folder-git-2" aria-hidden="true"></i>
-              Voir mes projets
-            </a>
-            <a class="btn btn--ghost" href="assets/pdf/CV_VILLEDIEU_FABIEN.pdf" download>
-              <i data-lucide="download" aria-hidden="true"></i>
-              Télécharger mon CV
-            </a>
-          </div>
-
-          <ul class="hero__socials" aria-label="Réseaux et contact">
-            <li>
-              <a
-                class="icon-link"
-                href="https://github.com/VIL-CIEL"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="GitHub"
-              >
-                <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true">
-                  <path
-                    d="M12 .5C5.73.5.5 5.73.5 12.02c0 5.1 3.29 9.42 7.86 10.95.58.11.79-.25.79-.56v-2c-3.2.7-3.88-1.54-3.88-1.54-.53-1.34-1.3-1.7-1.3-1.7-1.06-.72.08-.71.08-.71 1.17.08 1.79 1.2 1.79 1.2 1.04 1.79 2.73 1.27 3.4.97.1-.76.41-1.27.74-1.56-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.69 5.41-5.25 5.69.42.36.79 1.08.79 2.18v3.23c0 .31.21.68.8.56A11.52 11.52 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z"
-                  />
-                </svg>
-              </a>
-            </li>
-            <li>
-              <a
-                class="icon-link"
-                href="https://linkedin.com/in/fabien-villedieu/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-              >
-                <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true">
-                  <path
-                    d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.22.79 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"
-                  />
-                </svg>
-              </a>
-            </li>
-            <li>
-              <a
-                class="icon-link"
-                href="mailto:fabien.villedieu.pro@gmail.com"
-                aria-label="Envoyer un email"
-              >
-                <i data-lucide="mail" aria-hidden="true"></i>
-              </a>
-            </li>
-          </ul>
+    <!-- ============================ BOOT ============================ -->
+    <div class="boot" id="boot" aria-live="polite">
+      <div class="boot__inner">
+        <div class="boot__log" id="boot-log"></div>
+        <div class="boot__bar"><i id="boot-bar"></i></div>
+        <div class="boot__name" id="boot-name">
+          FABIEN VILLEDIEU<small>SYSTÈME PERSONNEL // v2.0</small>
         </div>
-      </section>
+      </div>
+      <button class="boot__skip" id="boot-skip" type="button">PASSER [ÉCHAP]</button>
+    </div>
 
-      <!-- ───────────────────────── Teaser À propos ───────────────────────── -->
-      <section class="section section--alt">
-        <div class="section__inner reveal">
-          <h2 class="section__title">
-            <i data-lucide="user" aria-hidden="true"></i> En quelques mots
-          </h2>
-          <p class="section__lead">
-            Étudiant en BTS CIEL (Informatique et Réseaux) à Lyon, je conçois des logiciels en
-            Python, C++ et C#, et je découvre le développement web. Curieux et autodidacte, j'aime
-            comprendre en profondeur et soigner la qualité de mon code.
-          </p>
-          <a class="btn btn--ghost" href="assets/pages/a-propos.html">
-            <i data-lucide="arrow-right" aria-hidden="true"></i>
-            En savoir plus sur mon parcours
-          </a>
+    <!-- ============================ BUREAU ============================ -->
+    <main class="desk" id="desk">
+      <pre class="wallpaper" id="wallpaper" aria-hidden="true"></pre>
+      <h1 class="sr">Fabien Villedieu — portfolio de développeur logiciel</h1>
+
+      <aside class="widget" aria-label="Profil">
+        <div class="widget__label">Profil système</div>
+        <p class="widget__name" aria-hidden="true">FABIEN<br />VILLEDIEU<span class="cursor">_</span></p>
+        <p class="widget__role">Développeur logiciel · Python, C#, C++, web</p>
+        <dl class="kv">
+          <dt>Statut</dt>
+          <dd><span class="led"></span><span data-profile="statut">Alternance 2027</span></dd>
+          <dt>Début</dt>
+          <dd data-profile="debut">Rentrée 2027</dd>
+          <dt>Domaine</dt>
+          <dd data-profile="domaine">Développement logiciel</dd>
+          <dt>Zone</dt>
+          <dd data-profile="zone">Lyon &amp; alentours</dd>
+        </dl>
+        <div class="widget__actions">
+          <button class="btn btn--violet" type="button" data-open="profil">Profil</button>
+          <a class="btn" href="assets/pdf/CV_VILLEDIEU_FABIEN.pdf" download>⤓ CV</a>
+          <button class="btn" type="button" data-open="contact">Contact</button>
         </div>
-      </section>
+      </aside>
 
-      <!-- ───────────────────────── Projets phares ───────────────────────── -->
-      <section class="section">
-        <div class="section__inner reveal">
-          <h2 class="section__title">
-            <i data-lucide="folder-git-2" aria-hidden="true"></i> Projets phares
-          </h2>
+      <nav class="icons" aria-label="Programmes">
+        <div class="group">
+          <div class="group__title">Système</div>
+          <button class="ico" type="button" data-open="lisezmoi"><canvas class="px" width="16" height="16" data-icon="lisezmoi" aria-hidden="true"></canvas><span>LISEZ-MOI.txt</span></button>
+          <button class="ico" type="button" data-open="profil"><canvas class="px" width="16" height="16" data-icon="profil" aria-hidden="true"></canvas><span>PROFIL.exe</span></button>
+          <button class="ico" type="button" data-open="parcours"><canvas class="px" width="16" height="16" data-icon="parcours" aria-hidden="true"></canvas><span>PARCOURS.log</span></button>
+          <button class="ico" type="button" data-open="cv"><canvas class="px" width="16" height="16" data-icon="cv" aria-hidden="true"></canvas><span>CV.pdf</span></button>
+          <button class="ico" type="button" data-open="contact"><canvas class="px" width="16" height="16" data-icon="contact" aria-hidden="true"></canvas><span>CONTACT.msg</span></button>
+          <button class="ico" type="button" data-open="terminal"><canvas class="px" width="16" height="16" data-icon="terminal" aria-hidden="true"></canvas><span>TERMINAL</span></button>
+        </div>
+        <div class="group">
+          <div class="group__title">Projets</div>
+          <button class="ico" type="button" data-open="dap"><canvas class="px" width="16" height="16" data-icon="dap" aria-hidden="true"></canvas><span>DAP.exe</span></button>
+          <button class="ico" type="button" data-open="ihm"><canvas class="px" width="16" height="16" data-icon="ihm" aria-hidden="true"></canvas><span>STAGE_IHM.exe</span></button>
+          <button class="ico" type="button" data-open="tva"><canvas class="px" width="16" height="16" data-icon="tva" aria-hidden="true"></canvas><span>TVA_DASH.exe</span></button>
+          <button class="ico" type="button" data-open="rsmp"><canvas class="px" width="16" height="16" data-icon="rsmp" aria-hidden="true"></canvas><span>CC_RADIO.exe</span></button>
+        </div>
+        <div class="group">
+          <div class="group__title" aria-hidden="true">&nbsp;</div>
+          <button class="ico" type="button" data-open="unity"><canvas class="px" width="16" height="16" data-icon="unity" aria-hidden="true"></canvas><span>UNITY.exe</span></button>
+          <button class="ico" type="button" data-open="pygame"><canvas class="px" width="16" height="16" data-icon="pygame" aria-hidden="true"></canvas><span>PYGAME.exe</span></button>
+          <button class="ico" type="button" data-open="recherche"><canvas class="px" width="16" height="16" data-icon="recherche" aria-hidden="true"></canvas><span>RECHERCHE.exe</span></button>
+          <button class="ico" type="button" data-open="folio"><canvas class="px" width="16" height="16" data-icon="folio" aria-hidden="true"></canvas><span>PORTFOLIO.exe</span></button>
+        </div>
+        <div class="group">
+          <div class="group__title">Bénévolat</div>
+          <button class="ico" type="button" data-open="arcadia"><canvas class="px" width="16" height="16" data-icon="arcadia" aria-hidden="true"></canvas><span>SERVEUR_MC</span></button>
+        </div>
+      </nav>
 
-          <div class="projects projects--featured">
-            <article class="project-card">
-              <img
-                class="project-card__thumb"
-                src="assets/img/projects/dap-pymodaq-dashboard.png"
-                alt="Dashboard Pymodaq pilotant les capteurs et actionneurs du DAP Raspberry Pi"
-                loading="lazy"
-              />
-              <div class="project-card__body">
-                <span class="badge badge--pro">
-                  <i data-lucide="briefcase" aria-hidden="true"></i> Professionnel
-                </span>
-                <h3 class="project-card__title">Plugins DAP Pymodaq</h3>
-                <p class="project-card__text">
-                  Trois plugins Pymodaq (Raspberry Pi, Arduino) publiés sur PyPI pour le CETHIL,
-                  présentés aux PyMoDAQ Days 2026.
-                </p>
-                <a class="project-card__link" href="assets/pages/projets/plugins-dap-pymodaq.html">
-                  Voir le détail <i data-lucide="arrow-right" aria-hidden="true"></i>
-                </a>
-              </div>
-            </article>
-
-            <article class="project-card">
-              <img
-                class="project-card__thumb"
-                src="assets/img/projects/IHM_Pymodaq.PNG"
-                alt="Capture de l'interface IHM Pymodaq"
-                loading="lazy"
-              />
-              <div class="project-card__body">
-                <span class="badge badge--pro">
-                  <i data-lucide="briefcase" aria-hidden="true"></i> Professionnel
-                </span>
-                <h3 class="project-card__title">IHM Pymodaq</h3>
-                <p class="project-card__text">
-                  Interface d'acquisition de données pour un banc de test, en Python, pour le CETHIL.
-                </p>
-                <a class="project-card__link" href="assets/pages/projets/ihm-pymodaq.html">
-                  Voir le détail <i data-lucide="arrow-right" aria-hidden="true"></i>
-                </a>
-              </div>
-            </article>
-
-            <article class="project-card">
-              <img
-                class="project-card__thumb"
-                src="assets/img/projects/jeuUnity.png"
-                alt="Capture du jeu réalisé sous Unity"
-                loading="lazy"
-              />
-              <div class="project-card__body">
-                <span class="badge badge--edu">
-                  <i data-lucide="graduation-cap" aria-hidden="true"></i> Académique
-                </span>
-                <h3 class="project-card__title">Jeu sur Unity</h3>
-                <p class="project-card__text">
-                  Jeu amateur reprenant les mécaniques d'Undertale, développé sous Unity en C#.
-                </p>
-                <a class="project-card__link" href="assets/pages/projets/jeu-unity.html">
-                  Voir le détail <i data-lucide="arrow-right" aria-hidden="true"></i>
-                </a>
-              </div>
-            </article>
-          </div>
-
-          <div class="section__cta">
-            <a class="btn btn--primary" href="assets/pages/projets.html">
-              <i data-lucide="layout-grid" aria-hidden="true"></i>
-              Voir tous les projets
-            </a>
+      <!-- ===================== LISEZ-MOI ===================== -->
+      <section class="win win--narrow" id="w-lisezmoi" data-app="lisezmoi" data-title="LISEZ-MOI.txt" data-path="C:/" data-share="no" aria-label="Bienvenue">
+        <div class="win__body">
+          <div class="txt txt--pad">
+            <h2 class="txt__title">BIENVENUE.</h2>
+            <p>Ce portfolio est un petit système d'exploitation : <strong>chaque projet est un programme</strong>. Cliquez sur une icône pour l'ouvrir.</p>
+            <h3>Par où commencer</h3>
+            <ul>
+              <li><button class="btn btn--violet" type="button" data-open="dap">DAP.exe</button> mon projet de fin de BTS, présenté aux PyMoDAQ Days.</li>
+              <li><button class="btn" type="button" data-open="ihm">STAGE_IHM.exe</button> mon stage en laboratoire.</li>
+              <li><button class="btn" type="button" data-open="profil">PROFIL.exe</button> qui je suis, ce que je cherche.</li>
+              <li><a class="btn" href="assets/pdf/CV_VILLEDIEU_FABIEN.pdf" download>⤓ CV.pdf</a> mon CV, directement.</li>
+            </ul>
+            <p class="txt__hint">Astuce : chaque fenêtre a sa propre adresse, pratique pour partager un projet. Échap ferme la fenêtre active.</p>
           </div>
         </div>
       </section>
 
-      <!-- ───────────────────────── Contact ───────────────────────── -->
-      <section class="section section--contact">
-        <div class="section__inner section__inner--center reveal">
-          <h2 class="section__title section__title--center">
-            <i data-lucide="send" aria-hidden="true"></i> Une opportunité&nbsp;?
-          </h2>
-          <p class="section__lead">
-            Stage, alternance ou simple échange : je suis joignable et ouvert aux discussions.
-          </p>
-          <a class="btn btn--primary btn--lg" href="assets/pages/contact.html">
-            <i data-lucide="mail" aria-hidden="true"></i>
-            Me contacter
-          </a>
+      <!-- ===================== DAP ===================== -->
+      <section class="win" id="w-dap" data-app="dap" data-title="DAP.exe" data-path="C:/PROJETS/PRO" aria-label="Plugins DAP Pymodaq">
+        <div class="win__body">
+          <div class="scene"><canvas class="px" width="192" height="64" data-scene="dap" aria-hidden="true"></canvas><span class="scene__todo">ANIMATION À VENIR</span></div>
+          <div class="win__head">
+            <span class="code" aria-hidden="true">DAP</span>
+            <div>
+              <h2>PLUGINS DAP PYMODAQ</h2>
+              <p>Remplacer des modules d'acquisition à ~1 000 € par des cartes à quelques dizaines d'euros.</p>
+            </div>
+          </div>
+          <div class="pills">
+            <span class="pill pill--ok"><span>PyPI</span><span>Publié</span></span>
+            <span class="pill pill--violet"><span>PyMoDAQ Days</span><span>Présenté en anglais</span></span>
+            <span class="pill"><span>Équipe</span><span>4</span></span>
+            <span class="pill"><span>Cadre</span><span>Projet d'examen E6</span></span>
+          </div>
+          <div class="cols">
+            <div class="txt">
+              <h3>Le problème</h3>
+              <p>Le <strong>CETHIL</strong>, laboratoire de thermique de Lyon, utilisait des modules NI-DAQmx à environ 1 000 € pièce : un frein pour équiper les bancs de mesure des doctorants.</p>
+              <h3>Ce qu'on a livré</h3>
+              <ul>
+                <li>Trois plugins PyMoDAQ pour piloter des cartes low-cost : Raspberry Pi 3B, Pi Zero et Arduino.</li>
+                <li>Plusieurs capteurs branchés sur une carte, reliée au PC par un seul lien ZeroMQ.</li>
+                <li>Publiés sur PyPI et documentés dans un wiki.</li>
+              </ul>
+              <h3>Mon rôle</h3>
+              <ul>
+                <li><strong>Planification</strong> de l'équipe : répartition, suivi, coordination sur l'année.</li>
+                <li><strong>Plugin Raspberry Pi 3B</strong> : communication ZeroMQ, configuration TOML réutilisable, sauvegarde des données.</li>
+              </ul>
+              <h3>Méthode</h3>
+              <p>Gantt, six versions successives (v0 analyse → v5 publiable), fiches de suivi par membre, recettes de validation. Les critères non atteints sont documentés plutôt que masqués.</p>
+              <h3>Résultat</h3>
+              <p>Invitation puis <strong>présentation en anglais aux PyMoDAQ Days 2026</strong> à Paris, l'événement du framework organisé par son créateur.</p>
+              <h3>Piste V2</h3>
+              <p>Relier plusieurs Raspberry, chacun avec ses instruments, au même PC grâce à <strong>LECO</strong>, déjà disponible dans PyMoDAQ.</p>
+            </div>
+            <dl class="meta">
+              <dt>Stack</dt>
+              <dd><div class="chips"><span class="chip">Python</span><span class="chip">PyMoDAQ</span><span class="chip">ZeroMQ</span><span class="chip">TOML</span><span class="chip">Raspberry Pi</span></div></dd>
+              <dt>Durée</dt>
+              <dd>≈150 h · 2025-2026</dd>
+              <dt>Partenaire</dt>
+              <dd>CETHIL</dd>
+            </dl>
+          </div>
+          <div class="gallery">
+            <figure><img src="assets/img/projects/dap-pymodaq-dashboard.png" alt="Interface PyMoDAQ avec le plugin Raspberry Pi" loading="lazy" /><figcaption>PyMoDAQ — plugin Pi 3B</figcaption></figure>
+            <figure><div class="placeholder">Photo<br />PyMoDAQ Days</div><figcaption>Paris — oct. 2026</figcaption></figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== STAGE ===================== -->
+      <section class="win" id="w-ihm" data-app="ihm" data-title="STAGE_IHM.exe" data-path="C:/PROJETS/STAGE" aria-label="IHM Pymodaq, stage au CETHIL">
+        <div class="win__body">
+          <div class="scene"><canvas class="px" width="192" height="64" data-scene="lab" aria-hidden="true"></canvas><span class="scene__todo">ANIMATION À VENIR</span></div>
+          <div class="win__head">
+            <span class="code" aria-hidden="true">IHM</span>
+            <div>
+              <h2>IHM PYMODAQ</h2>
+              <p>Mon stage de BTS : une interface d'acquisition pour un banc de test de laboratoire.</p>
+            </div>
+          </div>
+          <div class="pills">
+            <span class="pill pill--violet"><span>Type</span><span>Stage BTS</span></span>
+            <span class="pill"><span>Durée</span><span>8 semaines</span></span>
+            <span class="pill"><span>Lieu</span><span>CETHIL · Lyon</span></span>
+          </div>
+          <div class="cols">
+            <div class="txt">
+              <h3>Contexte</h3>
+              <p>Première expérience en milieu professionnel et de recherche : l'unité du <strong>CETHIL</strong> avait besoin d'une interface pour piloter un banc de test thermique et en lire les mesures.</p>
+              <h3>Le banc</h3>
+              <p>Un banc de test avec de la vapeur, un bain thermostaté et un ventilateur, relié au PC par un module d'acquisition NI-DAQmx.</p>
+              <h3>Ce que fait l'interface</h3>
+              <ul>
+                <li>Acquisition et pilotage de machines et de plusieurs capteurs.</li>
+                <li>Lecture des données sur plusieurs graphes en temps réel.</li>
+                <li>Sauvegarde des données en vue de leur traitement.</li>
+              </ul>
+              <h3>Difficultés</h3>
+              <p>L'affichage temps réel des graphes, et le module de sauvegarde, resté incomplet à la fin du stage.</p>
+              <h3>Ce que j'en retiens</h3>
+              <p>La découverte du framework <strong>PyMoDAQ</strong>, qui a mené l'année suivante au projet DAP.</p>
+            </div>
+            <dl class="meta">
+              <dt>Stack</dt>
+              <dd><div class="chips"><span class="chip">Python</span><span class="chip">PyMoDAQ</span><span class="chip">NI-DAQmx</span><span class="chip">Matlab</span></div></dd>
+              <dt>Période</dt>
+              <dd>19 mai – 11 juillet 2025</dd>
+              <dt>Suite</dt>
+              <dd><button class="btn btn--violet" type="button" data-open="dap">Ouvrir DAP →</button></dd>
+            </dl>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== BÉNÉVOLAT ===================== -->
+      <section class="win" id="w-arcadia" data-app="arcadia" data-title="SERVEUR_MC" data-path="C:/BÉNÉVOLAT" aria-label="Bénévolat sur un serveur Minecraft communautaire">
+        <div class="win__body">
+          <div class="scene"><canvas class="px" width="192" height="64" data-scene="plain" aria-hidden="true"></canvas><span class="scene__todo">ANIMATION À VENIR</span></div>
+          <div class="win__head">
+            <span class="code" aria-hidden="true">MC</span>
+            <div>
+              <h2>SERVEUR COMMUNAUTAIRE</h2>
+              <p>Bénévole dans l'équipe d'un serveur Minecraft moddé.</p>
+            </div>
+          </div>
+          <div class="pills">
+            <span class="pill pill--violet"><span>Catégorie</span><span>Bénévolat</span></span>
+            <span class="pill"><span>Rémunération</span><span>Aucune</span></span>
+            <span class="pill"><span>Statut</span><span>En cours</span></span>
+          </div>
+          <div class="cols">
+            <div class="txt">
+              <h3>Ce que je fais</h3>
+              <ul>
+                <li><strong>Écriture de l'univers</strong> (lore) du serveur, sur plusieurs versions successives.</li>
+                <li><strong>Organisation d'événements</strong> pour la communauté : compétitions, animations.</li>
+                <li><strong>Rédaction</strong> d'articles et d'annonces communautaires.</li>
+              </ul>
+              <h3>Pourquoi c'est ici</h3>
+              <p>Ce n'est pas un projet de code, mais du travail d'équipe dans la durée : rédiger, coordonner, tenir des délais pour une communauté, sans contrepartie financière.</p>
+            </div>
+            <dl class="meta">
+              <dt>Rôle</dt>
+              <dd>Staff bénévole</dd>
+              <dt>Compétences</dt>
+              <dd><div class="chips"><span class="chip">Rédaction</span><span class="chip">Événementiel</span><span class="chip">Communauté</span></div></dd>
+              <dt>Anonymat</dt>
+              <dd>Nom du serveur et pseudo non communiqués</dd>
+            </dl>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== AUTRES PROJETS (contenu complet au sprint 4) ===================== -->
+      <section class="win" id="w-tva" data-app="tva" data-title="TVA_DASH.exe" data-path="C:/PROJETS/PERSO" aria-label="TVA Dashboard">
+        <div class="win__body">
+          <div class="scene"><span class="scene__todo">ANIMATION À VENIR</span><canvas class="px" width="192" height="64" aria-hidden="true"></canvas></div>
+          <div class="win__head">
+            <span class="code" aria-hidden="true">TVA</span>
+            <div>
+              <h2>TVA DASHBOARD</h2>
+              <p>Extension Firefox qui remplace le nouvel onglet : ligne de commande, timeline, journal de mission, 3 thèmes.</p>
+            </div>
+          </div>
+          <div class="pills">
+            <span class="pill pill--violet"><span>Mozilla</span><span>v1.22 soumise</span></span>
+            <span class="pill"><span>Code</span><span>~8 400 lignes</span></span>
+            <span class="pill"><span>Perf</span><span>~0,1 ms JS/s</span></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="win" id="w-rsmp" data-app="rsmp" data-title="CC_RADIO.exe" data-path="C:/PROJETS/PERSO" aria-label="CC Radio System">
+        <div class="win__body">
+          <div class="scene"><span class="scene__todo">ANIMATION À VENIR</span><canvas class="px" width="192" height="64" aria-hidden="true"></canvas></div>
+          <div class="win__head">
+            <span class="code" aria-hidden="true">RSMP</span>
+            <div>
+              <h2>CC RADIO SYSTEM</h2>
+              <p>Radio musicale in-game pour Minecraft : recherche, streaming, haut-parleurs et diffusion réseau.</p>
+            </div>
+          </div>
+          <div class="pills">
+            <span class="pill"><span>Langage</span><span>Lua</span></span>
+            <span class="pill"><span>Version</span><span>1.6 · MIT</span></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="win" id="w-unity" data-app="unity" data-title="UNITY.exe" data-path="C:/PROJETS/ÉCOLE" aria-label="Jeu Unity">
+        <div class="win__body">
+          <div class="scene"><span class="scene__todo">ANIMATION À VENIR</span><canvas class="px" width="192" height="64" aria-hidden="true"></canvas></div>
+          <div class="win__head">
+            <span class="code" aria-hidden="true">UNTY</span>
+            <div>
+              <h2>JEU UNITY</h2>
+              <p>Combat au tour par tour, dialogues et déplacement entre zones, en C#.</p>
+            </div>
+          </div>
+          <div class="pills">
+            <span class="pill"><span>Langage</span><span>C#</span></span>
+            <span class="pill"><span>Moteur</span><span>Unity</span></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="win" id="w-pygame" data-app="pygame" data-title="PYGAME.exe" data-path="C:/PROJETS/ÉCOLE" aria-label="Jeu Pygame">
+        <div class="win__body">
+          <div class="scene"><span class="scene__todo">ANIMATION À VENIR</span><canvas class="px" width="192" height="64" aria-hidden="true"></canvas></div>
+          <div class="win__head">
+            <span class="code" aria-hidden="true">PYG</span>
+            <div>
+              <h2>JEU PYGAME</h2>
+              <p>Tour par tour dans un monde semi-ouvert, architecture MVC.</p>
+            </div>
+          </div>
+          <div class="pills">
+            <span class="pill"><span>Langage</span><span>Python</span></span>
+            <span class="pill"><span>Architecture</span><span>MVC</span></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="win" id="w-recherche" data-app="recherche" data-title="RECHERCHE.exe" data-path="C:/PROJETS/ÉCOLE" aria-label="Recherche textuelle">
+        <div class="win__body">
+          <div class="scene"><span class="scene__todo">ANIMATION À VENIR</span><canvas class="px" width="192" height="64" aria-hidden="true"></canvas></div>
+          <div class="win__head">
+            <span class="code" aria-hidden="true">RECH</span>
+            <div>
+              <h2>RECHERCHE TEXTUELLE</h2>
+              <p>Algorithmes Naïf et Boyer-Moore-Horspool, interface Tkinter.</p>
+            </div>
+          </div>
+          <div class="pills">
+            <span class="pill"><span>Langage</span><span>Python</span></span>
+            <span class="pill"><span>Interface</span><span>Tkinter</span></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="win" id="w-folio" data-app="folio" data-title="PORTFOLIO.exe" data-path="C:/PROJETS/PERSO" aria-label="Ce portfolio">
+        <div class="win__body">
+          <div class="scene"><span class="scene__todo">ANIMATION À VENIR</span><canvas class="px" width="192" height="64" aria-hidden="true"></canvas></div>
+          <div class="win__head">
+            <span class="code" aria-hidden="true">FV</span>
+            <div>
+              <h2>CE PORTFOLIO</h2>
+              <p>HTML, CSS et JavaScript sans framework : bureau, fenêtres et pixel art dessinés en code.</p>
+            </div>
+          </div>
+          <div class="pills">
+            <span class="pill"><span>Stack</span><span>HTML · CSS · JS</span></span>
+            <span class="pill"><span>Hébergement</span><span>GitHub Pages</span></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== PROGRAMMES SYSTÈME (enrichis au sprint 3) ===================== -->
+      <section class="win" id="w-profil" data-app="profil" data-title="PROFIL.exe" data-path="C:/SYSTÈME" aria-label="Profil">
+        <div class="win__body">
+          <div class="profile">
+            <img src="assets/img/profile.jpg" alt="Portrait de Fabien Villedieu" />
+            <div class="txt">
+              <h2 class="txt__title">BONJOUR, MOI C'EST FABIEN.</h2>
+              <p>J'ai découvert la programmation au lycée avec la spécialité NSI, et je n'ai plus arrêté. Ce qui me plaît : <strong>comprendre un système en entier</strong>, puis construire l'outil qui manque.</p>
+              <p>Après mon <strong>BTS CIEL</strong>, je cherche une <strong>alternance pour la rentrée 2027</strong> en développement logiciel.</p>
+            </div>
+          </div>
+          <div class="cols cols--even">
+            <div class="txt">
+              <h3>Méthode de travail</h3>
+              <ul>
+                <li><strong>Découper</strong> : sprints courts, une fonctionnalité à la fois.</li>
+                <li><strong>Versionner</strong> : numéros de version, changelog, sauvegardes.</li>
+                <li><strong>Mesurer</strong> : audits de performance avant d'optimiser.</li>
+                <li><strong>Documenter</strong> : README, wiki, journal de développement.</li>
+              </ul>
+            </div>
+            <dl class="meta">
+              <dt>Contrat</dt>
+              <dd data-profile="contrat">Alternance</dd>
+              <dt>Début</dt>
+              <dd data-profile="debut">Rentrée 2027</dd>
+              <dt>Rythme</dt>
+              <dd data-profile="rythme">À préciser</dd>
+              <dt>Zone</dt>
+              <dd data-profile="zone">Lyon &amp; alentours</dd>
+              <dt>Diplôme</dt>
+              <dd data-profile="diplome">BTS CIEL (2026)</dd>
+            </dl>
+          </div>
+        </div>
+      </section>
+
+      <section class="win" id="w-parcours" data-app="parcours" data-title="PARCOURS.log" data-path="C:/SYSTÈME" aria-label="Parcours">
+        <div class="win__body">
+          <div class="log">
+            <div class="log__row log__row--next"><time>2027</time><span class="log__mark">▶</span><div><b>Alternance</b><span class="log__desc">Développement logiciel — recherche en cours.</span></div></div>
+            <div class="log__row log__row--key"><time>Oct. 2026</time><span class="log__mark">★</span><div><b>PyMoDAQ Days — Paris</b><span class="log__desc">Présentation en anglais du projet DAP. <button class="link-btn" type="button" data-open="dap">ouvrir</button></span></div></div>
+            <div class="log__row"><time>Sept. 2026</time><span class="log__mark">■</span><div><b>CPE Lyon</b><span class="log__desc">Sept. – nov. 2026.</span></div></div>
+            <div class="log__row log__row--key"><time>Juin 2026</time><span class="log__mark">★</span><div><b>BTS CIEL obtenu</b><span class="log__desc">Option Informatique &amp; Réseaux.</span></div></div>
+            <div class="log__row"><time>2025-2026</time><span class="log__mark">■</span><div><b>Projet d'examen — DAP</b><span class="log__desc">CETHIL, équipe de 4. <button class="link-btn" type="button" data-open="dap">ouvrir</button></span></div></div>
+            <div class="log__row"><time>Mai 2025</time><span class="log__mark">■</span><div><b>Stage — CETHIL</b><span class="log__desc">8 semaines, interface d'acquisition. <button class="link-btn" type="button" data-open="ihm">ouvrir</button></span></div></div>
+            <div class="log__row"><time>2024</time><span class="log__mark">■</span><div><b>BTS CIEL</b><span class="log__desc">Entrée en BTS, option IR.</span></div></div>
+            <div class="log__row"><time>2024</time><span class="log__mark">■</span><div><b>Bac général</b><span class="log__desc">Spécialités Mathématiques et NSI.</span></div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="win" id="w-cv" data-app="cv" data-title="CV.pdf" data-path="C:/SYSTÈME" aria-label="CV">
+        <div class="win__body">
+          <div class="pad">
+            <p class="txt__hint">L'aperçu du CV arrive au sprint 3. En attendant :</p>
+            <a class="btn btn--violet" href="assets/pdf/CV_VILLEDIEU_FABIEN.pdf" download>⤓ Télécharger le CV (PDF)</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="win" id="w-contact" data-app="contact" data-title="CONTACT.msg" data-path="C:/SYSTÈME" aria-label="Contact">
+        <div class="win__body">
+          <div class="coords">
+            <a href="mailto:fabien.villedieu.pro@gmail.com"><span>MAIL</span>fabien.villedieu.pro@gmail.com</a>
+            <a href="https://github.com/VIL-CIEL" rel="noopener"><span>GH</span>github.com/VIL-CIEL</a>
+            <a href="https://linkedin.com/in/fabien-villedieu/" rel="noopener"><span>IN</span>linkedin — fabien-villedieu</a>
+            <div><span>LOC</span>Lyon, France</div>
+          </div>
+          <p class="pad txt__hint">Le formulaire de contact arrive au sprint 3.</p>
+        </div>
+      </section>
+
+      <section class="win" id="w-terminal" data-app="terminal" data-title="TERMINAL" data-path="C:/SYSTÈME" aria-label="Terminal">
+        <div class="win__body">
+          <div class="term" id="term">
+            <div class="term__out" id="term-out">FV-SHELL v2.0 — tapez help
+</div>
+            <form class="term__in" id="term-form"><span>fv&gt;</span><input id="term-in" aria-label="Commande" autocomplete="off" spellcheck="false" /></form>
+          </div>
         </div>
       </section>
     </main>
 
-    <!-- Pied de page partagé (injecté par main.js) -->
-    <footer class="site-footer" data-shell="footer"></footer>
+    <!-- ============================ BARRE DES TÂCHES ============================ -->
+    <footer class="taskbar">
+      <button class="taskbar__start" id="start-btn" type="button" aria-expanded="false" aria-controls="start"><i></i><span>FV</span></button>
+      <div class="taskbar__tasks" id="tasks"></div>
+      <div class="taskbar__tray">
+        <a class="taskbar__cv" href="assets/pdf/CV_VILLEDIEU_FABIEN.pdf" download>⤓ CV</a>
+        <button class="taskbar__status" type="button" data-open="profil"><span class="led"></span><span data-profile="statut">Alternance 2027</span></button>
+        <span class="taskbar__clock" id="clock">--:--</span>
+      </div>
+    </footer>
 
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script defer src="assets/js/main.js"></script>
+    <div class="start" id="start" hidden>
+      <h2 class="start__title">FABIEN VILLEDIEU<small>SYSTÈME PERSONNEL // v2.0</small></h2>
+      <div id="start-list"></div>
+      <div class="start__section">Système</div>
+      <a href="assets/pdf/CV_VILLEDIEU_FABIEN.pdf" download>⤓ Télécharger le CV</a>
+      <button type="button" id="replay-boot">↻ Rejouer le démarrage</button>
+      <div class="start__section">Fond d'écran (test)</div>
+      <button type="button" data-fond="1">1 · Nébuleuse</button>
+      <button type="button" data-fond="2">2 · Circuit</button>
+      <button type="button" data-fond="3">3 · Signal + initiales</button>
+    </div>
+
+    <div class="crt-fx" aria-hidden="true"></div>
   </body>
 </html>
