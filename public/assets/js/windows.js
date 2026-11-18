@@ -22,15 +22,15 @@
     back.type = 'button';
     back.dataset.act = 'close';
     const btns = el('div', 'win__btns');
-    const min = el('button', null, '_');
-    min.type = 'button';
-    min.dataset.act = 'min';
-    min.setAttribute('aria-label', 'Réduire');
-    const close = el('button', null, 'X');
-    close.type = 'button';
-    close.dataset.act = 'close';
-    close.setAttribute('aria-label', 'Fermer');
-    btns.append(min, close);
+    const minBtn = el('button', null, '_');
+    minBtn.type = 'button';
+    minBtn.dataset.act = 'min';
+    minBtn.setAttribute('aria-label', 'Réduire');
+    const closeBtn = el('button', null, 'X');
+    closeBtn.type = 'button';
+    closeBtn.dataset.act = 'close';
+    closeBtn.setAttribute('aria-label', 'Fermer');
+    btns.append(minBtn, closeBtn);
     bar.append(back, FV.iconCanvas(app), el('span', 'win__title', win.dataset.title), el('span', 'win__path', win.dataset.path), btns);
     win.prepend(bar);
 
