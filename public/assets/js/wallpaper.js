@@ -1,20 +1,159 @@
 /* =====================================================================
    Fond d'écran ASCII : généré une fois (et au redimensionnement), statique.
-   Trois variantes en test : 1 nébuleuse, 2 circuit, 3 signal + initiales.
+   Variantes en test : 1 nébuleuse, 2 circuit, 3 signal + initiales,
+   4 bannière (image convertie en ASCII).
    ===================================================================== */
 'use strict';
 
 (function (FV) {
   // Niveaux de violet, du plus discret au plus visible (0 = vide).
-  const SHADES = [null, '#221932', '#2e2145', '#3f2c60', '#56398a'];
-  const LINE_H = 16;
+  const SHADES = [null, '#221932', '#2e2145', '#3f2c60', '#56398a', '#6f4cb5', '#8a63db'];
 
-  function measureChar(pre) {
+  // Taille d'une cellule de caractère, selon la police réellement appliquée.
+  function measureCell(pre) {
     const probe = FV.el('span', null, 'MMMMMMMMMM');
     pre.append(probe);
     const width = probe.getBoundingClientRect().width / 10 || 7.8;
     probe.remove();
-    return width;
+    const height = parseFloat(window.getComputedStyle(pre).lineHeight) || 16;
+    return { width, height };
+  }
+
+  /* ---------- 4. bannière : conversion d'une image en ASCII ---------- */
+  // L'image est réduite par le navigateur à 1 pixel = 1 caractère, puis lue une seule
+  // fois. Remplacer le fichier suffit : la zone des logos est détectée automatiquement.
+  const BANNER_SRC = 'assets/img/fond-banniere.png';
+  const LOGO_HEIGHT = 0.6; // hauteur max du bloc de logos, en part de l'écran
+  const LOGO_WIDTH = 0.72; // largeur max du bloc de logos
+  const LOGO_LUM = 30; // en dessous : trait sombre des logos (le dégradé ne descend pas sous ~35)
+  const SUB = 3; // sous-échantillons par axe et par caractère (3×3)
+  const BAYER = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5];
+  let bannerImg = null;
+  let logoBox = null;
+
+  const lumAt = (d, i) => 0.2126 * d[i] + 0.7152 * d[i + 1] + 0.0722 * d[i + 2];
+
+  // Cadre englobant les pixels sombres (les logos), avec une petite marge.
+  function findLogos(img) {
+    const w = img.naturalWidth;
+    const h = img.naturalHeight;
+    const c = document.createElement('canvas');
+    c.width = w;
+    c.height = h;
+    const ctx = c.getContext('2d', { willReadFrequently: true });
+    ctx.drawImage(img, 0, 0);
+    const d = ctx.getImageData(0, 0, w, h).data;
+    let x0 = w;
+    let y0 = h;
+    let x1 = 0;
+    let y1 = 0;
+    for (let y = 0; y < h; y += 2) {
+      for (let x = 0; x < w; x += 2) {
+        if (lumAt(d, (y * w + x) * 4) < LOGO_LUM) {
+          if (x < x0) x0 = x;
+          if (x > x1) x1 = x;
+          if (y < y0) y0 = y;
+          if (y > y1) y1 = y;
+        }
+      }
+    }
+    if (x1 <= x0) return { x: 0, y: 0, w, h };
+    const m = Math.round(Math.max(x1 - x0, y1 - y0) * 0.03);
+    x0 = Math.max(0, x0 - m);
+    y0 = Math.max(0, y0 - m);
+    return { x: x0, y: y0, w: Math.min(w, x1 + m) - x0, h: Math.min(h, y1 + m) - y0 };
+  }
+
+  function loadBanner() {
+    if (bannerImg) return Promise.resolve(bannerImg);
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => {
+        logoBox = findLogos(img);
+        resolve((bannerImg = img));
+      };
+      img.onerror = reject;
+      img.src = BANNER_SRC;
+    });
+  }
+
+  // Choix du caractère selon la forme du trait dans la cellule (masque 3×3).
+  function glyph(m) {
+    const n = m.reduce((a, b) => a + b, 0);
+    if (n >= 7) return '#';
+    const row = [0, 1, 2].map((r) => m[r * 3] + m[r * 3 + 1] + m[r * 3 + 2]);
+    const col = [0, 1, 2].map((c) => m[c] + m[3 + c] + m[6 + c]);
+    if (n <= 5 && col.includes(3)) return '|';
+    if (n <= 5 && row.includes(3)) return row[2] === 3 && !row[0] ? '_' : '-';
+    if (n <= 5 && m[0] && m[4] && m[8]) return '\\';
+    if (n <= 5 && m[2] && m[4] && m[6]) return '/';
+    if (n <= 2) return '.';
+    return n <= 4 ? '+' : '%';
+  }
+
+  function banner(cols, rows, rand, cell) {
+    if (!bannerImg) return Array.from({ length: cols * rows }, () => [' ', 0]);
+    const iw = bannerImg.naturalWidth;
+    const box = logoBox;
+
+    // fond : la ligne du haut de l'image (pur dégradé) étirée sur tout l'écran
+    const bg = document.createElement('canvas');
+    bg.width = cols;
+    bg.height = 1;
+    const bctx = bg.getContext('2d', { willReadFrequently: true });
+    bctx.drawImage(bannerImg, 0, 0, iw, 1, 0, 0, cols, 1);
+    const bgd = bctx.getImageData(0, 0, cols, 1).data;
+
+    // bloc de logos, à la bonne proportion (cellules plus hautes que larges)
+    let hCells = Math.round(rows * LOGO_HEIGHT);
+    let wCells = Math.round((hCells * cell.height * box.w) / box.h / cell.width);
+    // sur écran étroit (mobile), le bloc peut occuper presque toute la largeur
+    const maxW = cols < 120 ? cols - 4 : cols * LOGO_WIDTH;
+    if (wCells > maxW) {
+      wCells = Math.round(maxW);
+      hCells = Math.round((wCells * cell.width * box.h) / box.w / cell.height);
+    }
+    const ox = cols - wCells - 2;
+    const oy = rows - hCells - 1;
+    const lc = document.createElement('canvas');
+    lc.width = wCells * SUB;
+    lc.height = hCells * SUB;
+    const lctx = lc.getContext('2d', { willReadFrequently: true });
+    lctx.drawImage(bannerImg, box.x, box.y, box.w, box.h, 0, 0, lc.width, lc.height);
+    const ld = lctx.getImageData(0, 0, lc.width, lc.height).data;
+
+    const grid = [];
+    const mask = new Array(9);
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        const lx = x - ox;
+        const ly = y - oy;
+        if (lx >= 0 && ly >= 0 && lx < wCells && ly < hCells) {
+          let n = 0;
+          for (let sy = 0; sy < SUB; sy++) {
+            for (let sx = 0; sx < SUB; sx++) {
+              const i = ((ly * SUB + sy) * lc.width + lx * SUB + sx) * 4;
+              const dark = lumAt(ld, i) < LOGO_LUM ? 1 : 0;
+              mask[sy * SUB + sx] = dark;
+              n += dark;
+            }
+          }
+          if (n) {
+            // trait des logos : ressort en violet clair
+            grid.push([glyph(mask), n >= 5 ? 6 : 5]);
+            continue;
+          }
+        }
+        // dégradé : texture tramée très discrète, densité selon la luminosité
+        const t = Math.min(1, Math.max(0, (lumAt(bgd, x * 4) - 34) / 60));
+        if (t * 16 <= BAYER[(y % 4) * 4 + (x % 4)] + 3) {
+          grid.push([' ', 0]);
+          continue;
+        }
+        grid.push([t > 0.6 ? ':' : '.', t > 0.55 ? 2 : 1]);
+      }
+    }
+    return grid;
   }
 
   /* ---------- 1. nébuleuse : bruit de valeur sur 2 octaves ---------- */
@@ -142,7 +281,7 @@
     return grid;
   }
 
-  const VARIANTS = { 1: nebula, 2: circuit, 3: signal };
+  const VARIANTS = { 1: nebula, 2: circuit, 3: signal, 4: banner };
 
   function variant() {
     const fromUrl = new URLSearchParams(window.location.search).get('fond');
@@ -155,13 +294,26 @@
   FV.drawWallpaper = (force) => {
     const pre = FV.$('#wallpaper');
     if (!pre) return;
-    const charW = measureChar(pre);
-    const cols = Math.ceil(pre.clientWidth / charW) + 1;
-    const rows = Math.ceil(pre.clientHeight / LINE_H) + 1;
-    const size = cols + 'x' + rows + ':' + variant();
+    const current = variant();
+    // la bannière demande une police plus fine pour garder le détail des logos
+    pre.classList.toggle('wallpaper--fine', current === '4');
+    if (current === '4' && !bannerImg) {
+      loadBanner()
+        .then(() => FV.drawWallpaper(true))
+        .catch(() => {
+          /* image absente : on retombe sur la première variante */
+          FV.store.set('fv-fond', '1');
+          FV.drawWallpaper(true);
+        });
+      return;
+    }
+    const cell = measureCell(pre);
+    const cols = Math.ceil(pre.clientWidth / cell.width) + 1;
+    const rows = Math.ceil(pre.clientHeight / cell.height) + 1;
+    const size = cols + 'x' + rows + ':' + current;
     if (!force && size === lastSize) return;
     lastSize = size;
-    const grid = VARIANTS[variant()](cols, rows, FV.rng(2026));
+    const grid = VARIANTS[current](cols, rows, FV.rng(2026), cell);
     // regroupe les caractères de même teinte : peu de nœuds DOM
     const frag = document.createDocumentFragment();
     let run = '';

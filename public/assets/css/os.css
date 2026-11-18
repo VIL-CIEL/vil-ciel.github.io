@@ -326,6 +326,11 @@ canvas.px {
   user-select: none;
 }
 
+.wallpaper--fine {
+  font-size: 9px;
+  line-height: 10px;
+}
+
 /* repères "plan technique" aux coins du bureau */
 .desk::before,
 .desk::after {

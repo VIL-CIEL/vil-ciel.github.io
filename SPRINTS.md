@@ -23,8 +23,10 @@ Légende : ✅ terminé · 🚧 en cours · ⬜ à faire
 
 ## Prochaines étapes
 
-- [ ] Tester le sprint v2-1 dans Firefox et choisir le fond d'écran (1 nébuleuse,
-      2 circuit, 3 signal + initiales), puis retirer le sélecteur de test du menu.
+- [ ] Fond d'écran : piste retenue = bannière LinkedIn convertie en ASCII (variante 4).
+      Décider si le logo du serveur communautaire reste visible (anonymat), récupérer
+      l'image définitive (`public/assets/img/fond-banniere.png`, pas encore versionnée),
+      puis retirer les variantes 1-3 et le sélecteur de test du menu.
 - [ ] Sprint v2-2 : moteur pixel art + scènes DAP (capteurs → Raspberry → un lien ZMQ
       → PC), stage (banc vapeur, bain thermostaté, ventilateur, NI-DAQmx → PC), plaine.
 - [ ] Sprint v2-3 : Profil (méthode de travail + aparté sur l'usage de l'IA), Parcours
@@ -39,6 +41,12 @@ Légende : ✅ terminé · 🚧 en cours · ⬜ à faire
 
 ## Journal
 
+- 2026-11-18 : correction du bouton de fermeture des fenêtres (une variable locale
+  masquait la fonction de fermeture ; Échap fonctionnait). Fond d'écran : ajout d'un
+  convertisseur image → ASCII dans le navigateur (variante 4) — détection automatique
+  de la zone des logos, bloc ancré en bas à droite, caractère choisi selon la forme du
+  trait (`|` `-` `/` `\` `#`), dégradé prolongé sur tout l'écran. Calcul unique au
+  chargement et au redimensionnement.
 - 2026-11-18 : sprint v2-1 (fondations) sur la branche `refonte-v2`. Nouvelle page
   unique en forme de bureau : boot de première visite (passable, non rejoué), encadré
   Profil, icônes dessinées en code, fond d'écran ASCII (3 variantes en test), barre des
