@@ -97,6 +97,7 @@ window.FV = window.FV || {};
     domaine: 'Développement logiciel',
     zone: 'Lyon & alentours',
     rythme: 'À préciser',
+    ecole: 'À trouver',
     diplome: 'BTS CIEL (2026)',
     maj: '',
   };

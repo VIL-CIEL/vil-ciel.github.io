@@ -42,6 +42,16 @@ Légende : ✅ terminé · 🚧 en cours · ⬜ à faire
 
 ## Journal
 
+- 2026-11-19 : Parcours refait en frise chronologique sur une seule ligne de vie (les
+  branches donnaient l'idée de timelines parallèles). Périodes en encadrés imbriqués
+  (lycée ⊃ première / terminale, BTS ⊃ stage, CPE ⊃ PyMoDAQ Days relié au projet DAP),
+  projets et diplômes en nœuds légendés sur la ligne, branche « Alternance · sept.
+  2027 » en pointillés qui s'estompent, avec école et rythme lus depuis
+  `profile.json` (nouveau champ `ecole`). Tout le contenu vient de
+  `public/data/parcours.json` (périodes, événements, futur) : graphique et version
+  texte (encadrés imbriqués, du plus récent au plus ancien) se reconstruisent à partir
+  de ce fichier. Échelle automatique qui élargit les mois chargés ; étiquettes placées
+  par étages sans chevauchement (contrôle automatique : aucun chevauchement).
 - 2026-11-19 : ajout du projet `devis-api` (API REST de devis en TypeScript, Express 5,
   PostgreSQL), livrable technique d'une candidature d'alternance réalisé en 4-5 jours
   sur une stack nouvelle. Décisions : l'entreprise n'est pas nommée ; une section

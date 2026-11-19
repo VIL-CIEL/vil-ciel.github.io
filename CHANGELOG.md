@@ -23,8 +23,9 @@ et le projet respecte le [versionnage sémantique](https://semver.org/lang/fr/) 
 - Scènes pixel art animées dans les fenêtres DAP (capteurs → Raspberry Pi → ZeroMQ →
   PyMoDAQ), stage (banc thermique relié par NI-DAQmx) et bénévolat (plaine, cycle
   jour/nuit), avec un moteur d'animation unique qui s'arrête hors écran.
-- Parcours en timeline façon *Loki* : projets en branches cliquables, branche élaguée
-  pour CPE Lyon, futur « à écrire ».
+- Parcours en frise chronologique sur une ligne de vie : périodes en encadrés
+  imbriqués, projets en nœuds cliquables, suite possible en pointillés (alternance,
+  école et rythme configurables), le tout piloté par `data/parcours.json`.
 - Profil : méthode de travail et aparté sur l'usage de l'IA.
 - CV : aperçu de la première page généré au déploiement, téléchargement direct.
 - Formulaire de contact fonctionnel (Formspree) : validation, anti-robots, retour

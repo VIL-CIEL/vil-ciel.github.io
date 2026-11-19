@@ -24,9 +24,10 @@ Chaque fenêtre a sa propre adresse (`/#dap`, `/#ihm`…) pour partager un proje
 directement. Sur mobile, le bureau devient un écran d'accueil et les fenêtres
 s'ouvrent en plein écran.
 
-Le statut affiché (recherche d'alternance, date de début, zone…) est lu depuis
-[`public/data/profile.json`](public/data/profile.json) : il suffit de modifier ce
-fichier sur GitHub pour mettre le site à jour.
+Le statut affiché (recherche d'alternance, date de début, école, rythme, zone…) est
+lu depuis [`public/data/profile.json`](public/data/profile.json), et la frise du
+parcours depuis [`public/data/parcours.json`](public/data/parcours.json) : il suffit
+de modifier ces fichiers sur GitHub pour mettre le site à jour.
 
 ## Stack technique
 

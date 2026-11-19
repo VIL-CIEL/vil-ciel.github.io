@@ -1,0 +1,83 @@
+{
+  "_aide": "Parcours affiché dans PARCOURS.log. Dates au format AAAA-MM ou AAAA-MM-JJ. periodes = encadrés (études, stage, événements de plusieurs jours) ; 'dans' = id de l'encadré parent pour les imbriquer. evenements = nœuds sur la ligne (projets, diplômes) ; 'cle': true pour les étapes clés ; 'programme' = fenêtre à ouvrir au clic (dap, ihm, tva, devis, rsmp, unity, pygame, recherche, folio, arcadia). futur = branches potentielles après aujourd'hui ; dans 'lignes', {ecole}, {rythme}, {debut}, {zone}... sont remplacés par les valeurs de profile.json.",
+  "periodes": [
+    {
+      "id": "lycee",
+      "titre": "Lycée — bac général",
+      "sous_titre": "Spécialités maths + NSI",
+      "debut": "2022-09",
+      "fin": "2024-07",
+      "description": "Découverte de la programmation avec la spécialité NSI."
+    },
+    {
+      "id": "premiere",
+      "dans": "lycee",
+      "titre": "Première",
+      "debut": "2022-09",
+      "fin": "2023-06"
+    },
+    {
+      "id": "terminale",
+      "dans": "lycee",
+      "titre": "Terminale",
+      "debut": "2023-09",
+      "fin": "2024-06",
+      "description": "Premiers projets en Python : recherche textuelle et jeu Pygame."
+    },
+    {
+      "id": "bts",
+      "titre": "BTS CIEL",
+      "sous_titre": "Option informatique & réseaux",
+      "debut": "2024-09",
+      "fin": "2026-06-20",
+      "description": "Informatique et réseaux, projet d'examen DAP mené avec le CETHIL."
+    },
+    {
+      "id": "stage",
+      "dans": "bts",
+      "titre": "Stage — CETHIL",
+      "sous_titre": "8 semaines",
+      "debut": "2025-05-19",
+      "fin": "2025-07-11",
+      "programme": "ihm",
+      "description": "Interface d'acquisition PyMoDAQ pour un banc thermique et plugin Cellkraft."
+    },
+    {
+      "id": "cpe",
+      "titre": "CPE Lyon",
+      "sous_titre": "Informatique & réseaux de communication",
+      "debut": "2026-09",
+      "fin": "2026-11",
+      "description": "Trois mois de cursus, arrêtés faute d'alternance."
+    },
+    {
+      "id": "pymodaq-days",
+      "dans": "cpe",
+      "titre": "PyMoDAQ Days",
+      "sous_titre": "Paris",
+      "debut": "2026-10-07",
+      "fin": "2026-10-09",
+      "programme": "dap",
+      "description": "Présentation en anglais de mon projet de fin de BTS (DAP)."
+    }
+  ],
+  "evenements": [
+    { "date": "2024-03", "code": "RECH", "titre": "Recherche textuelle", "programme": "recherche" },
+    { "date": "2024-05", "code": "PYG", "titre": "Jeu Pygame", "programme": "pygame" },
+    { "date": "2024-07", "code": "BAC", "titre": "Bac général obtenu", "cle": true },
+    { "date": "2025-04", "code": "UNTY", "titre": "Jeu Unity", "programme": "unity" },
+    { "date": "2026-05", "code": "DAP", "titre": "Plugins DAP Pymodaq", "programme": "dap" },
+    { "date": "2026-06-15", "code": "BTS", "titre": "BTS CIEL obtenu", "cle": true },
+    { "date": "2026-06-28", "code": "RSMP", "titre": "CC Radio System", "programme": "rsmp" },
+    { "date": "2026-10-25", "code": "API", "titre": "API REST de devis", "programme": "devis" },
+    { "date": "2026-11-03", "code": "TVA", "titre": "TVA Dashboard", "programme": "tva" }
+  ],
+  "futur": [
+    {
+      "titre": "Alternance",
+      "debut": "2027-09",
+      "lignes": ["École : {ecole}", "Rythme : {rythme}"],
+      "decalage": -30
+    }
+  ]
+}

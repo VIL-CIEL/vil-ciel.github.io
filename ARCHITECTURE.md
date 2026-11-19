@@ -49,6 +49,7 @@ public/                          # Racine web (seul dossier publié)
 ├── version.json                 # Version publiée
 ├── .nojekyll
 ├── data/profile.json            # Statut affiché (modifiable depuis GitHub)
+├── data/parcours.json           # Frise du parcours : périodes, événements, futur
 └── assets/
     ├── css/os.css               # Styles de l'interface
     ├── js/
@@ -132,6 +133,26 @@ Le site ne dépose aucun cookie. Le formulaire de contact passe par un service t
 e-mail ; une mention l'indique sous le formulaire. Envoi en `fetch` (JSON) quand
 JavaScript est actif, envoi HTML classique sinon ; champ piège `_gotcha` contre les
 robots.
+
+## Parcours : `data/parcours.json`
+
+La fenêtre Parcours est entièrement construite à partir de ce fichier (clé `_aide` en
+tête pour le rappel du format) :
+
+- `periodes` : encadrés (études, stage, événement de plusieurs jours), imbriqués via
+  `dans` (id du parent), avec titre, sous-titre, description et `programme` optionnel
+  (fenêtre ouverte au clic) ;
+- `evenements` : nœuds sur la ligne (projets, diplômes), `cle: true` pour une étape
+  clé ;
+- `futur` : branches possibles après aujourd'hui, en pointillés qui s'estompent ; dans
+  `lignes`, `{ecole}`, `{rythme}`… sont remplacés par les valeurs de `profile.json`.
+
+Dates au format `AAAA-MM` ou `AAAA-MM-JJ` ; une fin au mois près couvre tout le mois.
+Les entrées invalides sont ignorées (avertissement dans la console). L'échelle donne
+plus de place aux mois chargés (périodes courtes, nœuds) et les étiquettes sont
+placées par étages pour ne pas se chevaucher. La version texte (encadrés imbriqués,
+du plus récent au plus ancien) est générée depuis le même fichier ; une liste écrite
+dans le HTML sert de repli sans JavaScript ou hors serveur.
 
 ## Aperçu du CV
 
