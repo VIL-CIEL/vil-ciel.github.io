@@ -1023,19 +1023,6 @@ canvas.px {
   letter-spacing: 0.14em;
 }
 
-.scene__todo {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  display: grid;
-  place-items: center;
-  color: var(--dim);
-  font-family: var(--crt);
-  font-size: 24px;
-  letter-spacing: 0.12em;
-  text-align: center;
-}
-
 .win__head {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -1064,6 +1051,14 @@ canvas.px {
   font-weight: 400;
   line-height: 1;
   letter-spacing: 0.03em;
+}
+
+/* technologie après le nom du projet : UNDERCORE // UNITY */
+.win__tech {
+  color: var(--violet);
+  font-size: 0.62em;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
 }
 
 .win__head p {

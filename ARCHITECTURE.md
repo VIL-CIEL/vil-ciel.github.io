@@ -93,7 +93,12 @@ exposé dans le site.
   la prochaine image utile) et s'arrête complètement quand rien n'est visible. Décors
   fixes pré-rendus sur des calques ; courbes sur de petits calques qui défilent d'un
   pixel. Les images/s s'affichent dans la barre d'état de chaque fenêtre et
-  `FV.scenes.stats` donne le coût (ms de JS par seconde).
+  `FV.scenes.stats` donne le coût (ms de JS par seconde). Une scène par fenêtre de
+  projet : `dap`, `lab` (stage), `plain` (bénévolat), `tva`, `rsmp`, `unity`, `pygame`,
+  `recherche`, `devis`, `folio` (le bureau en miniature, redessiné dans sa propre fenêtre
+  à partir de l'image précédente). Les textes des scènes utilisent la police 3×5 de
+  `core.js` (majuscules, chiffres, quelques signes) ; le coin haut gauche est laissé libre
+  pour l'étiquette « SIM // … ».
 - `prefers-reduced-motion` : pas de boot, pas de glitch, scènes figées.
 
 ## Conventions

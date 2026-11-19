@@ -17,8 +17,8 @@ Légende : ✅ terminé · 🚧 en cours · ⬜ à faire
   d'exploitation fictif, chaque projet est un programme avec une animation pixel art
   dessinée en code. Style rétro / terminal, base sombre, violet en minorité, glitch
   ponctuel. Maquette de référence hors dépôt : `Portofolio_Project/maquette-os.html`.
-- Sprints v2-1 (fondations), v2-2 (pixel art) et **v2-3 (programmes système)**
-  terminés côté code, en attente du test dans Firefox. Fond d'écran : bannière convertie en ASCII (variante 4), image
+- Sprints v2-1 (fondations), v2-2 (pixel art), v2-3 (programmes système) et
+  **v2-4 (autres projets)** terminés côté code, en attente du test dans Firefox. Fond d'écran : bannière convertie en ASCII (variante 4), image
   définitive à récupérer.
 - Le statut affiché vient de `public/data/profile.json`.
 
@@ -32,20 +32,33 @@ Légende : ✅ terminé · 🚧 en cours · ⬜ à faire
       Le logo du serveur communautaire reste visible (décision du 2026-11-18). Récupérer
       l'image définitive en haute résolution (`public/assets/img/fond-banniere.png`, pas encore versionnée),
       puis retirer les variantes 1-3 et le sélecteur de test du menu.
-- [ ] Tester dans Firefox les scènes DAP, stage et plaine (rendu, fluidité, consommation).
+- [ ] Tester dans Firefox les dix scènes (rendu, fluidité, consommation).
 - [ ] Tester le formulaire de contact en conditions réelles (un vrai envoi depuis le
       site en ligne ou en local) et vérifier la réception du mail.
 - [ ] Vérifier au premier déploiement de la v2 que l'aperçu du CV est bien généré par
       GitHub Actions (`public/assets/img/cv-apercu.png`).
-- [ ] Sprint v2-4 : fenêtres complètes des autres projets + animations (s'appuie sur
-      les fiches projet en Markdown à rassembler).
 - [ ] Sprint v2-5 : accessibilité, audit de performance, polices hébergées sur le site,
       SEO, docs, `version.json` 2.0.0, fusion dans `main`, tag `v2.0.0`.
 - [ ] Photos des PyMoDAQ Days à intégrer dans la fenêtre DAP.
-- [ ] Sprint v2-4 : animation de la fenêtre `devis-api` (contenu déjà en place).
 
 ## Journal
 
+- 2026-11-19 : sprint v2-4 (autres projets). Fenêtres complètes (contexte, ce que fait
+  le projet, choix ou difficultés, ce que j'en retiens, stack, lien) pour TVA Dashboard
+  (lien vers la page Mozilla), CC Radio System (projet rapide pour une construction du
+  serveur communautaire, à refaire pour être viable), UnderCore // Unity, TaleUnder //
+  Pygame, recherche textuelle (terminale) et ce portfolio, avec les captures de la v1.
+  Les jeux prennent leur vrai nom (icônes, frise, liste texte), la techno après « // ».
+  Sept nouvelles scènes : ligne de commande qui crée une branche sur la timeline (TVA),
+  ondes rednet vers des clients qui jouent la musique (CC Radio), zone → porte → combat
+  au tour par tour (UnderCore), exploration avec la chaîne contrôleur → modèle → vue
+  (TaleUnder), course naïf contre Boyer-Moore-Horspool (48 comparaisons contre 14),
+  requêtes vers Express et PostgreSQL avec le cycle de vie du devis et un refus 409
+  (devis-api), bureau en miniature dans sa propre fenêtre (portfolio). Sprites originaux.
+  Police 3×5 complétée (B, F, G, J, K, V, W et quelques signes). Mesuré dans le
+  navigateur interne : ≈13,5 ms de JS par seconde avec les dix scènes ouvertes en même
+  temps, arrêt complet quand tout est fermé ; frise sans chevauchement avec les nouveaux
+  noms ; affichage mobile vérifié.
 - 2026-11-19 : frise du parcours, clé `prioritaire` (1 = oui, 0 = non) sur les grands
   encadrés : l'encadré prioritaire reste sur la ligne de vie, l'autre passe sur la voie
   parallèle. CPE est prioritaire par défaut. Vérifié dans les deux sens (CPE prolongé
@@ -187,8 +200,10 @@ Code terminé, en attente du test Firefox.
 Profil, Parcours en timeline façon *Loki*, CV avec aperçu, contact Formspree, terminal.
 Code terminé, en attente du test Firefox et d'un vrai envoi de formulaire.
 
-### ⬜ Sprint v2-4 — Autres projets
-TVA Dashboard, CC Radio System, Unity, Pygame, recherche textuelle, portfolio.
+### 🚧 Sprint v2-4 — Autres projets
+Fenêtres complètes et scènes de TVA Dashboard, CC Radio System, UnderCore (Unity),
+TaleUnder (Pygame), recherche textuelle, ce portfolio, et scène de devis-api.
+Code terminé, en attente du test Firefox.
 
 ### ⬜ Sprint v2-5 — Finitions et sortie
 Accessibilité, performance, polices locales, SEO, documentation, v2.0.0.

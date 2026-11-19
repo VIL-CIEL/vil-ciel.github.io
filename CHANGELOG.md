@@ -35,11 +35,15 @@ et le projet respecte le [versionnage sémantique](https://semver.org/lang/fr/) 
   CPE), éléments prévus en pointillés (CDD chez PMA). Clé `prioritaire` (1 ou 0) pour
   choisir l'activité qui reste sur la ligne de vie (CPE par défaut).
 - Fenêtre du stage : plugin PyMoDAQ Cellkraft (publié sur PyPI).
+- Fenêtres complètes et scènes animées pour TVA Dashboard (lien vers Mozilla), CC Radio
+  System, UnderCore (Unity), TaleUnder (Pygame), la recherche textuelle et ce portfolio ;
+  scène animée pour l'API de devis.
 
 ### Modifié
 - Contenus mis à jour : BTS CIEL obtenu (2026), recherche d'alternance pour la rentrée
   2027, présentation en anglais aux PyMoDAQ Days, piste V2 du projet DAP (LECO),
   description du banc de test du stage.
+- Les jeux prennent leur vrai nom : UnderCore // Unity et TaleUnder // Pygame.
 - Page 404 refaite au style de l'interface (chemins absolus).
 - `sitemap.xml` réduit à la page unique.
 

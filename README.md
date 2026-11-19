@@ -17,7 +17,8 @@ Programmes :
 
 - **Système** — LISEZ-MOI (par où commencer), Profil, Parcours, CV, Contact, Terminal.
 - **Projets** — Plugins DAP Pymodaq, stage IHM Pymodaq, TVA Dashboard, CC Radio System,
-  jeu Unity, jeu Pygame, recherche textuelle, ce portfolio.
+  jeu UnderCore (Unity), jeu TaleUnder (Pygame), recherche textuelle, API REST de devis,
+  ce portfolio.
 - **Bénévolat** — serveur Minecraft communautaire.
 
 Chaque fenêtre a sa propre adresse (`/#dap`, `/#ihm`…) pour partager un projet
