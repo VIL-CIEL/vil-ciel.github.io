@@ -163,7 +163,8 @@ l'encadré, sinon description sous le titre dans l'encadré, sinon dehors align�
 bord gauche, sinon dehors centré, sinon retours à la ligne (dedans = en haut pour un
 grand encadré, en bas pour un imbriqué ; dehors = au-dessus / en dessous). Deux grands
 encadrés qui se chevauchent dans le temps vont sur des voies parallèles, reliées à la
-ligne de vie par une piste. Ce qui commence après aujourd'hui est en pointillés ; les
+ligne de vie par une piste ; celui marqué `"prioritaire": 1` reste sur la ligne de vie
+(à défaut, celui qui commence en premier). Ce qui commence après aujourd'hui est en pointillés ; les
 branches du futur partent du dernier élément prévu. Les légendes des nœuds sont placées
 par étages, en haut puis en bas. Un clic ouvre le programme associé ; sans programme, il fait défiler jusqu'à
 l'entrée correspondante de la version texte (et inversement, avec surbrillance). La version texte (encadrés imbriqués,

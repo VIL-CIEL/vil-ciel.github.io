@@ -67,6 +67,7 @@
         id, title, start, end,
         sub: text(p.sous_titre, 80), desc: text(p.description, 280),
         parent: text(p.dans, 40), app: text(p.programme, 20),
+        priority: p.prioritaire === 1 || p.prioritaire === true,
       });
     });
     data.periods.forEach((p) => {
@@ -364,9 +365,10 @@
     roots.forEach((p) => layoutBox(p, kids, cont));
 
     // 3. voies : deux grands encadrés qui se chevauchent dans le temps vont sur
-    //    des voies différentes (activités en parallèle)
+    //    des voies différentes (activités en parallèle). Les encadrés
+    //    « prioritaire » sont placés en premier : ils prennent la ligne principale.
     const lanes = [];
-    [...roots].sort((a, b) => keyOf(a.start) - keyOf(b.start)).forEach((p) => {
+    [...roots].sort((a, b) => (b.priority - a.priority) || (keyOf(a.start) - keyOf(b.start))).forEach((p) => {
       let l = lanes.findIndex((lane) => lane.every((q) => keyOf(q.end) < keyOf(p.start) || keyOf(p.end) < keyOf(q.start)));
       if (l < 0) {
         lanes.push([]);

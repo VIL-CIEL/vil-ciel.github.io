@@ -32,7 +32,8 @@ et le projet respecte le [versionnage sémantique](https://semver.org/lang/fr/) 
   d'envoi dans la page.
 - Nouveau projet : API REST de devis (TypeScript, Express, PostgreSQL).
 - Parcours : activités en parallèle sur une voie à part (temps partiel chez PMA pendant
-  CPE), éléments prévus en pointillés (CDD chez PMA).
+  CPE), éléments prévus en pointillés (CDD chez PMA). Clé `prioritaire` (1 ou 0) pour
+  choisir l'activité qui reste sur la ligne de vie (CPE par défaut).
 - Fenêtre du stage : plugin PyMoDAQ Cellkraft (publié sur PyPI).
 
 ### Modifié

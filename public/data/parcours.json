@@ -1,5 +1,5 @@
 {
-  "_aide": "Parcours affiché dans PARCOURS.log. Dates au format AAAA-MM ou AAAA-MM-JJ (une fin au mois près couvre tout le mois). debut_affichage = début de la frise, à gauche : ce qui commence avant reste ouvert sur la gauche. periodes = encadrés (études, stage, projet long, emploi, événement de plusieurs jours) ; 'dans' = id de l'encadré parent pour les imbriquer ; deux grands encadrés qui se chevauchent dans le temps passent automatiquement sur une voie parallèle (ex. emploi à temps partiel pendant une formation) ; ce qui commence après aujourd'hui est dessiné en pointillés (prévu). Dans le graphique, le titre est suivi du sous_titre (ou, à défaut, de la description). evenements = nœuds sur la ligne (projets courts, diplômes) ; 'cle': true pour les étapes clés ; 'programme' = fenêtre à ouvrir au clic (dap, ihm, tva, devis, rsmp, unity, pygame, recherche, folio, arcadia). futur = branches possibles, à partir du dernier élément prévu ; dans 'lignes', {ecole}, {rythme}, {debut}, {zone}... sont remplacés par les valeurs de profile.json.",
+  "_aide": "Parcours affiché dans PARCOURS.log. Dates au format AAAA-MM ou AAAA-MM-JJ (une fin au mois près couvre tout le mois). debut_affichage = début de la frise, à gauche : ce qui commence avant reste ouvert sur la gauche. periodes = encadrés (études, stage, projet long, emploi, événement de plusieurs jours) ; 'dans' = id de l'encadré parent pour les imbriquer ; deux grands encadrés qui se chevauchent dans le temps passent automatiquement sur une voie parallèle (ex. emploi à temps partiel pendant une formation) ; 'prioritaire': 1 (oui) ou 0 (non, par défaut) choisit lequel reste sur la ligne principale (sinon, celui qui commence en premier) ; ce qui commence après aujourd'hui est dessiné en pointillés (prévu). Dans le graphique, le titre est suivi du sous_titre (ou, à défaut, de la description). evenements = nœuds sur la ligne (projets courts, diplômes) ; 'cle': true pour les étapes clés ; 'programme' = fenêtre à ouvrir au clic (dap, ihm, tva, devis, rsmp, unity, pygame, recherche, folio, arcadia). futur = branches possibles, à partir du dernier élément prévu ; dans 'lignes', {ecole}, {rythme}, {debut}, {zone}... sont remplacés par les valeurs de profile.json.",
   "debut_affichage": "2022-12",
   "periodes": [
     {
@@ -73,6 +73,7 @@
       "sous_titre": "Stagiaire de la formation professionnelle",
       "debut": "2026-09",
       "fin": "2026-11",
+      "prioritaire": 1,
       "description": "Cursus informatique et réseaux de communication, en tant que stagiaire de la formation professionnelle. Je n'ai pas trouvé d'alternance pour continuer, mais j'ai suivi les cours pendant ces trois mois."
     },
     {
@@ -91,6 +92,7 @@
       "sous_titre": "Temps partiel",
       "debut": "2026-11",
       "fin": "2026-11",
+      "prioritaire": 0,
       "description": "Emploi à temps partiel, en parallèle des cours à CPE."
     },
     {
@@ -99,6 +101,7 @@
       "sous_titre": "CDD",
       "debut": "2026-12",
       "fin": "2027-07",
+      "prioritaire": 0,
       "description": "CDD de décembre 2026 à juillet 2027."
     }
   ],

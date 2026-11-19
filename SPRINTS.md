@@ -26,7 +26,8 @@ Légende : ✅ terminé · 🚧 en cours · ⬜ à faire
 
 - [ ] Suite de la frise selon les événements : une piste d'alternance dès 2026 reste
       possible. Selon l'issue, PMA ou CPE deviendra la voie principale (l'autre passant
-      en parallèle) ; à refléter dans `public/data/parcours.json` (et `profile.json`).
+      en parallèle) : clé `prioritaire` à basculer dans `public/data/parcours.json`
+      (CPE = 1 aujourd'hui), dates et descriptions à ajuster, et `profile.json`.
 - [ ] Fond d'écran : piste retenue = bannière LinkedIn convertie en ASCII (variante 4).
       Le logo du serveur communautaire reste visible (décision du 2026-11-18). Récupérer
       l'image définitive en haute résolution (`public/assets/img/fond-banniere.png`, pas encore versionnée),
@@ -45,6 +46,10 @@ Légende : ✅ terminé · 🚧 en cours · ⬜ à faire
 
 ## Journal
 
+- 2026-11-19 : frise du parcours, clé `prioritaire` (1 = oui, 0 = non) sur les grands
+  encadrés : l'encadré prioritaire reste sur la ligne de vie, l'autre passe sur la voie
+  parallèle. CPE est prioritaire par défaut. Vérifié dans les deux sens (CPE prolongé
+  et non prioritaire → passe en parallèle, PMA sur la ligne de vie), sans chevauchement.
 - 2026-11-19 : frise du parcours. Règle unique de placement des titres et descriptions
   (une ligne dedans → description sous le titre dedans → dehors aligné à gauche → dehors
   centré → retours à la ligne), dedans en haut / dehors au-dessus pour les grands
