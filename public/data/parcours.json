@@ -1,11 +1,12 @@
 {
-  "_aide": "Parcours affiché dans PARCOURS.log. Dates au format AAAA-MM ou AAAA-MM-JJ. periodes = encadrés (études, stage, événements de plusieurs jours) ; 'dans' = id de l'encadré parent pour les imbriquer. evenements = nœuds sur la ligne (projets, diplômes) ; 'cle': true pour les étapes clés ; 'programme' = fenêtre à ouvrir au clic (dap, ihm, tva, devis, rsmp, unity, pygame, recherche, folio, arcadia). futur = branches potentielles après aujourd'hui ; dans 'lignes', {ecole}, {rythme}, {debut}, {zone}... sont remplacés par les valeurs de profile.json.",
+  "_aide": "Parcours affiché dans PARCOURS.log. Dates au format AAAA-MM ou AAAA-MM-JJ (une fin au mois près couvre tout le mois). debut_affichage = début de la partie visible : ce qui commence avant déborde à gauche, hors champ. periodes = encadrés (études, stage, projet long, événement de plusieurs jours) ; 'dans' = id de l'encadré parent pour les imbriquer ; dans le graphique, le titre est suivi du sous_titre (ou, à défaut, de la description). evenements = nœuds sur la ligne (projets courts, diplômes) ; 'cle': true pour les étapes clés ; 'programme' = fenêtre à ouvrir au clic (dap, ihm, tva, devis, rsmp, unity, pygame, recherche, folio, arcadia). futur = branches possibles après aujourd'hui ; dans 'lignes', {ecole}, {rythme}, {debut}, {zone}... sont remplacés par les valeurs de profile.json.",
+  "debut_affichage": "2022-06",
   "periodes": [
     {
       "id": "lycee",
       "titre": "Lycée — bac général",
       "sous_titre": "Spécialités maths + NSI",
-      "debut": "2022-09",
+      "debut": "2021-09",
       "fin": "2024-07",
       "description": "Découverte de la programmation avec la spécialité NSI."
     },
@@ -33,8 +34,15 @@
       "description": "Informatique et réseaux, projet d'examen DAP mené avec le CETHIL."
     },
     {
-      "id": "stage",
+      "id": "bts1",
       "dans": "bts",
+      "titre": "1re année",
+      "debut": "2024-09",
+      "fin": "2025-07-11"
+    },
+    {
+      "id": "stage",
+      "dans": "bts1",
       "titre": "Stage — CETHIL",
       "sous_titre": "8 semaines",
       "debut": "2025-05-19",
@@ -43,18 +51,35 @@
       "description": "Interface d'acquisition PyMoDAQ pour un banc thermique et plugin Cellkraft."
     },
     {
+      "id": "bts2",
+      "dans": "bts",
+      "titre": "2e année",
+      "debut": "2025-09",
+      "fin": "2026-06-20"
+    },
+    {
+      "id": "dap",
+      "dans": "bts2",
+      "titre": "Projet DAP",
+      "sous_titre": "Projet d'examen E6",
+      "debut": "2026-02",
+      "fin": "2026-06-20",
+      "programme": "dap",
+      "description": "Plugins PyMoDAQ pour cartes low-cost, en équipe de 4, avec le CETHIL."
+    },
+    {
       "id": "cpe",
       "titre": "CPE Lyon",
-      "sous_titre": "Informatique & réseaux de communication",
+      "sous_titre": "Stagiaire de la formation professionnelle",
       "debut": "2026-09",
       "fin": "2026-11",
-      "description": "Trois mois de cursus, arrêtés faute d'alternance."
+      "description": "Cursus informatique et réseaux de communication, en tant que stagiaire de la formation professionnelle. Je n'ai pas trouvé d'alternance pour continuer, mais j'ai suivi les cours pendant ces trois mois."
     },
     {
       "id": "pymodaq-days",
       "dans": "cpe",
       "titre": "PyMoDAQ Days",
-      "sous_titre": "Paris",
+      "sous_titre": "Paris · projet DAP",
       "debut": "2026-10-07",
       "fin": "2026-10-09",
       "programme": "dap",
@@ -66,7 +91,6 @@
     { "date": "2024-05", "code": "PYG", "titre": "Jeu Pygame", "programme": "pygame" },
     { "date": "2024-07", "code": "BAC", "titre": "Bac général obtenu", "cle": true },
     { "date": "2025-04", "code": "UNTY", "titre": "Jeu Unity", "programme": "unity" },
-    { "date": "2026-05", "code": "DAP", "titre": "Plugins DAP Pymodaq", "programme": "dap" },
     { "date": "2026-06-15", "code": "BTS", "titre": "BTS CIEL obtenu", "cle": true },
     { "date": "2026-06-28", "code": "RSMP", "titre": "CC Radio System", "programme": "rsmp" },
     { "date": "2026-10-25", "code": "API", "titre": "API REST de devis", "programme": "devis" },

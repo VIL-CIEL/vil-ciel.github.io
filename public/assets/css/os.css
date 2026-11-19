@@ -1573,6 +1573,40 @@ canvas.px {
   letter-spacing: 0.08em;
 }
 
+/* halo sombre derrière les textes : les traits qui passent dessous s'effacent */
+.tl text {
+  paint-order: stroke;
+  stroke: #131217;
+  stroke-width: 3px;
+  stroke-linejoin: round;
+}
+
+.tl .is-link {
+  cursor: pointer;
+}
+
+.tl .is-flash rect {
+  animation: tl-flash 0.4s steps(1) 4;
+}
+
+@keyframes tl-flash {
+  50% {
+    stroke: var(--ok);
+    stroke-width: 3;
+  }
+}
+
+.frise .is-flash {
+  animation: frise-flash 0.4s steps(1) 4;
+}
+
+@keyframes frise-flash {
+  50% {
+    border-color: var(--ok);
+    box-shadow: 0 0 0 2px var(--ok);
+  }
+}
+
 .tl__bound {
   stroke: var(--alert);
   stroke-width: 1.2;
@@ -1612,7 +1646,8 @@ canvas.px {
 }
 
 .tl__box-sub {
-  fill: var(--dim);
+  fill: var(--text-2);
+  font-size: 11.5px;
   font-weight: 400;
   letter-spacing: 0;
 }

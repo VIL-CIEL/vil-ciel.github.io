@@ -42,6 +42,18 @@ Légende : ✅ terminé · 🚧 en cours · ⬜ à faire
 
 ## Journal
 
+- 2026-11-19 : frise du parcours, mise en page reprise. Ligne de vie et encadré du
+  lycée prolongés hors champ à gauche (`debut_affichage`, la seconde n'est pas
+  présentée). Grands encadrés titrés en haut, encadrés imbriqués titrés en bas, ou
+  juste dessous s'ils sont trop étroits, toujours dans leur parent ; les encadrés
+  grandissent selon le texte (description sur la même ligne, puis sous le titre,
+  puis retours à la ligne). Textes mesurés avec la vraie police. Nœuds légendés en
+  haut puis en bas quand le haut est plein. BTS découpé en 1re / 2e année (cassure de
+  l'été 2025), projet DAP en encadré dans la 2e année (février → juin 2026). CPE :
+  stagiaire de la formation professionnelle, pas d'alternance trouvée pour continuer
+  mais cours suivis. Liens croisés frise ↔ version texte pour les éléments sans
+  programme (clic = défilement + surbrillance). « Sacred timeline » → « Timeline ».
+  Contrôle automatique : aucun chevauchement de textes.
 - 2026-11-19 : Parcours refait en frise chronologique sur une seule ligne de vie (les
   branches donnaient l'idée de timelines parallèles). Périodes en encadrés imbriqués
   (lycée ⊃ première / terminale, BTS ⊃ stage, CPE ⊃ PyMoDAQ Days relié au projet DAP),

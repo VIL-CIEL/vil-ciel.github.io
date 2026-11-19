@@ -148,9 +148,18 @@ tête pour le rappel du format) :
   `lignes`, `{ecole}`, `{rythme}`… sont remplacés par les valeurs de `profile.json`.
 
 Dates au format `AAAA-MM` ou `AAAA-MM-JJ` ; une fin au mois près couvre tout le mois.
-Les entrées invalides sont ignorées (avertissement dans la console). L'échelle donne
-plus de place aux mois chargés (périodes courtes, nœuds) et les étiquettes sont
-placées par étages pour ne pas se chevaucher. La version texte (encadrés imbriqués,
+`debut_affichage` fixe le début de la partie visible : ce qui commence avant déborde
+à gauche, hors champ. Les entrées invalides sont ignorées (avertissement dans la
+console).
+
+Mise en page, calculée à partir des textes mesurés avec la vraie police : l'échelle
+donne plus de place aux mois chargés ; chaque encadré est dimensionné de l'intérieur
+vers l'extérieur — grands encadrés titrés en haut, encadrés imbriqués titrés en bas
+(ou juste dessous s'ils sont trop étroits, sans jamais sortir de leur parent) ; un
+texte trop long passe d'abord sous le titre, puis revient à la ligne, et l'encadré
+grandit en conséquence. Les légendes des nœuds sont placées par étages, en haut puis
+en bas. Un clic ouvre le programme associé ; sans programme, il fait défiler jusqu'à
+l'entrée correspondante de la version texte (et inversement, avec surbrillance). La version texte (encadrés imbriqués,
 du plus récent au plus ancien) est générée depuis le même fichier ; une liste écrite
 dans le HTML sert de repli sans JavaScript ou hors serveur.
 
