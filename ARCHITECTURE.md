@@ -153,7 +153,8 @@ Dates au format `AAAA-MM` ou `AAAA-MM-JJ` ; une fin au mois près couvre tout le
 console).
 
 Mise en page, calculée à partir des textes mesurés avec la vraie police : l'échelle
-donne plus de place aux mois chargés ; chaque encadré est dimensionné de l'intérieur
+de temps est constante (42 px par mois, la frise défile horizontalement, s'ouvre
+centrée sur aujourd'hui et se déplace en glissant à la souris) ; chaque encadré est dimensionné de l'intérieur
 vers l'extérieur — grands encadrés titrés en haut, encadrés imbriqués titrés en bas
 (ou juste dessous s'ils sont trop étroits, sans jamais sortir de leur parent) ; un
 texte trop long passe d'abord sous le titre, puis revient à la ligne, et l'encadré

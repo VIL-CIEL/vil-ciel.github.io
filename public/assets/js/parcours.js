@@ -13,9 +13,8 @@
 
 (function (FV) {
   const NS = 'http://www.w3.org/2000/svg';
-  const W = 1200;
   const X0 = 30;
-  const X1 = 1150;
+  const MONTH_PX = 42; // largeur d'un mois : constante sur toute la frise
   const MONTHS = ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
   const FONT_TITLE = '600 12px "IBM Plex Mono", consolas, monospace';
   const FONT_SUB = '400 11.5px "IBM Plex Mono", consolas, monospace';
@@ -99,34 +98,17 @@
     return data;
   }
 
-  /* ---------- échelle : plus de place aux mois chargés ---------- */
+  /* ---------- échelle : constante, un mois = MONTH_PX pixels ---------- */
+  // Les durées restent comparables d'un bout à l'autre ; la frise est plus longue
+  // que la fenêtre et défile horizontalement.
   function buildScale(data, now) {
     const firstContent = Math.min(...[...data.periods.map((p) => p.start), ...data.events.map((e) => e.date)].map(monthIndex));
     const startM = data.viewStart ? monthIndex(data.viewStart) : firstContent;
-    const lastM = Math.max(monthIndex(now) + 8, ...data.future.map((f) => monthIndex(f.start) + 18));
+    const lastM = Math.max(monthIndex(now) + 6, ...data.future.map((f) => monthIndex(f.start) + 7));
     const n = lastM - startM + 1;
-    const weight = new Array(n).fill(1);
-    data.periods.forEach((p) => {
-      const a = monthIndex(p.start) - startM;
-      const b = monthIndex(p.end) - startM;
-      if (b - a <= 3) for (let m = Math.max(0, a); m <= Math.min(n - 1, b); m++) weight[m] = Math.max(weight[m], 4.5);
-    });
-    data.events.forEach((e) => {
-      const m = monthIndex(e.date) - startM;
-      if (m >= 0 && m < n) weight[m] += 0.6;
-    });
-    const cum = [0];
-    weight.forEach((w, i) => cum.push(cum[i] + w));
-    const unit = (X1 - X0) / cum[n];
-    // avant le début visible : on prolonge vers la gauche, hors champ
-    const x = (p) => {
-      const m = monthIndex(p) - startM;
-      const frac = (Math.min(p.d, daysIn(p)) - 1) / daysIn(p);
-      if (m < 0) return X0 + (m + frac) * unit;
-      if (m >= n) return X1 + (m - n + frac) * unit;
-      return X0 + (cum[m] + frac * weight[m]) * unit;
-    };
-    return { x, startM, n, weight };
+    // avant le début visible, x devient négatif : hors champ, à gauche
+    const x = (p) => X0 + (monthIndex(p) - startM + (Math.min(p.d, daysIn(p)) - 1) / daysIn(p)) * MONTH_PX;
+    return { x, startM, n, width: Math.round(X0 + n * MONTH_PX + 20) };
   }
 
   /* ---------- mesure et découpage des textes ---------- */
@@ -171,8 +153,8 @@
   }
 
   /* ---------- mise en page des encadrés (de l'intérieur vers l'extérieur) ---------- */
-  // Chaque encadré reçoit : xa/xb (bords), top/bottom (distances à la ligne),
-  // label (texte), labelPos ('top' | 'inside' | 'below'), labelY (relatif à la ligne).
+  // Chaque encadré reçoit : xa/xb (bords), va/vb (partie visible), top/bottom
+  // (distances à la ligne), label, labelPos ('top' | 'inside' | 'below').
   function layoutBox(p, kids, S) {
     p.xa = S.x(p.start);
     p.xb = S.x(p.end);
@@ -181,46 +163,16 @@
       p.xa = c - 8;
       p.xb = c + 8;
     }
-    p.va = Math.max(p.xa, 4); // partie visible
-    p.vb = Math.min(p.xb, W - 4);
+    p.va = Math.max(p.xa, 4);
+    p.vb = Math.min(p.xb, S.width - 4);
     const children = kids.get(p.id) || [];
     children.forEach((c) => layoutBox(c, kids, S));
-
-    // étiquettes des enfants trop étroits : sous l'enfant, dans cet encadré, empilées.
-    // Les encadrés enfants sont des obstacles : une étiquette ne passe jamais dessus.
-    let ct = 0;
-    let cb = 0;
-    const room = p.vb - p.va - PAD * 2;
-    const placed = children.map((c) => ({ x0: c.va, x1: c.vb, y0: -c.top, y1: c.bottom }));
-    children.forEach((c) => {
-      ct = Math.max(ct, c.top);
-      let bottom = c.bottom;
-      if (c.labelPos === 'below') {
-        // découpé à la largeur de cet encadré, pour ne jamais en sortir
-        c.label = layoutText(c.title, c.sub || c.desc, Math.max(40, room));
-        const w = c.label.width;
-        const x = Math.max(p.va + PAD, Math.min(p.vb - PAD - w, c.va));
-        let y = c.bottom + 5;
-        let moved = true;
-        while (moved) {
-          moved = false;
-          for (const r of placed) {
-            if (x < r.x1 + 8 && r.x0 < x + w + 8 && y < r.y1 + 3 && r.y0 < y + c.label.height + 3) {
-              y = r.y1 + 4;
-              moved = true;
-            }
-          }
-        }
-        placed.push({ x0: x, x1: x + w, y0: y, y1: y + c.label.height });
-        c.labelX = x;
-        c.labelY = y;
-        bottom = y + c.label.height;
-      }
-      cb = Math.max(cb, bottom);
-    });
+    const ct = Math.max(0, ...children.map((c) => c.top));
+    const cb = Math.max(0, ...children.map((c) => c.bottom));
 
     const base = BASE[p.depth];
     const desc = p.sub || p.desc;
+    const room = p.vb - p.va - PAD * 2;
     if (p.depth === 0) {
       // grand encadré : titre et description en haut, à l'intérieur
       p.label = layoutText(p.title, desc, Math.max(60, room));
@@ -228,15 +180,58 @@
       p.bottom = Math.max(base, cb) + PAD;
       p.top = Math.max(base, ct) + PAD + p.label.height + 4;
     } else {
-      // encadré imbriqué : en bas, à l'intérieur s'il tient (2 lignes max), sinon dessous
+      // encadré imbriqué : en bas, à l'intérieur s'il tient (2 lignes max),
+      // sinon sous l'encadré (placé ensuite par placeBelow)
       const inside = layoutText(p.title, desc, Math.max(10, room));
       const fits = inside.lines.length <= 2 && inside.width <= room;
-      p.label = inside; // si ça ne tient pas, le parent le redécoupe à sa propre largeur
+      p.label = inside;
       p.labelPos = fits ? 'inside' : 'below';
       p.top = Math.max(base, ct) + PAD;
       p.bottom = Math.max(base, cb) + PAD + (fits ? p.label.height + 2 : 0);
       if (fits) p.labelY = p.bottom - PAD - p.label.height;
     }
+  }
+
+  // Étiquettes « sous l'encadré » : alignées sur le bord gauche de leur encadré,
+  // elles peuvent en déborder vers la droite mais restent dans le grand encadré,
+  // sans jamais passer sur un autre encadré ni sur une autre étiquette.
+  function placeBelow(root, kids) {
+    const all = [];
+    const walk = (p) => (kids.get(p.id) || []).forEach((c) => {
+      all.push(c);
+      walk(c);
+    });
+    walk(root);
+    const obstacles = all.map((d) => ({ x0: d.va, x1: d.vb, y0: -d.top, y1: d.bottom }));
+    let bottom = root.bottom - PAD;
+    all.filter((c) => c.labelPos === 'below').sort((a, b) => a.va - b.va).forEach((c) => {
+      const left = Math.max(c.va, root.va + PAD);
+      const room = root.vb - PAD - left;
+      // trop près du bord droit du grand encadré : toute sa largeur intérieure,
+      // en restant le plus près possible de l'encadré
+      const alignRight = room < 150;
+      const maxW = alignRight ? root.vb - root.va - PAD * 2 : Math.min(room, 300);
+      c.label = layoutText(c.title, c.sub || c.desc, Math.max(40, maxW));
+      const w = c.label.width;
+      const x = alignRight ? Math.max(root.va + PAD, Math.min(c.va, root.vb - PAD - w)) : left;
+      let y = c.bottom + 6;
+      let moved = true;
+      while (moved) {
+        moved = false;
+        for (const r of obstacles) {
+          if (x < r.x1 + 6 && r.x0 < x + w + 6 && y < r.y1 + 4 && r.y0 < y + c.label.height + 2) {
+            y = r.y1 + 5;
+            moved = true;
+          }
+        }
+      }
+      obstacles.push({ x0: x, x1: x + w, y0: y, y1: y + c.label.height });
+      c.labelX = x;
+      c.labelY = y;
+      c.leadX = alignRight ? (c.va + c.vb) / 2 : x + 4;
+      bottom = Math.max(bottom, y + c.label.height);
+    });
+    root.bottom = bottom + PAD;
   }
 
   /* ---------- dessin ---------- */
@@ -320,7 +315,11 @@
         kids.get(p.parent).push(p);
       } else roots.push(p);
     });
-    roots.forEach((p) => layoutBox(p, kids, S));
+    const W = S.width;
+    roots.forEach((p) => {
+      layoutBox(p, kids, S);
+      placeBelow(p, kids);
+    });
     // tous les grands encadrés ont la même hauteur : frise plus lisible
     const TOP = Math.max(BASE[0], ...roots.map((p) => p.top));
     const BOT = Math.max(BASE[0], ...roots.map((p) => p.bottom));
@@ -354,6 +353,8 @@
     const svg = el('svg', {
       class: 'tl',
       viewBox: `0 0 ${W} ${H}`,
+      width: W,
+      height: H,
       role: 'img',
       'aria-label': 'Frise du parcours : périodes d\'études, de stage et de projet en encadrés, projets courts en points sur la ligne, et suite possible.',
     });
@@ -369,11 +370,12 @@
       const p = { y: Math.floor(abs / 12), m: abs % 12, d: 1 };
       const x = S.x(p);
       if (p.m === 0) {
-        svg.append(el('line', { x1: x, x2: x, y1: 30, y2: H - 14, class: 'tl__tick' }));
-        svg.append(el('text', { x: x + 5, y: 26, class: 'tl__year' }, String(p.y)));
-      } else if (S.weight[m] >= 4.5) {
-        svg.append(el('text', { x: x + 3, y: 26, class: 'tl__month' }, MONTHS[p.m].toUpperCase()));
+        svg.append(el('line', { x1: x, x2: x, y1: 4, y2: H - 14, class: 'tl__tick' }));
+        svg.append(el('text', { x: x + 5, y: 16, class: 'tl__year' }, String(p.y)));
+      } else {
+        svg.append(el('line', { x1: x, x2: x, y1: 22, y2: 36, class: 'tl__tick' }));
       }
+      svg.append(el('text', { x: x + 4, y: 32, class: 'tl__month' }, MONTHS[p.m].toUpperCase()));
     }
     svg.append(el('line', { x1: 0, x2: W, y1: 36, y2: 36, class: 'tl__bound' }));
     svg.append(el('line', { x1: 0, x2: W, y1: H - 14, y2: H - 14, class: 'tl__bound' }));
@@ -391,8 +393,7 @@
       else if (p.labelPos === 'inside') label = textBlock(p.va + PAD, Y0 + p.labelY, p.label);
       else {
         label = textBlock(p.labelX, Y0 + p.labelY, p.label);
-        const cx = Math.max(p.va, Math.min(p.vb, p.labelX + 4));
-        layerLines.append(el('line', { x1: cx, x2: cx, y1: Y0 + p.bottom, y2: Y0 + p.labelY + 1, class: 'tl__lead' }));
+        layerLines.append(el('line', { x1: p.leadX, x2: p.leadX, y1: Y0 + p.bottom, y2: Y0 + p.labelY + 1, class: 'tl__lead' }));
       }
       linkable(label, p, p.title);
       layerText.append(label);
@@ -462,6 +463,50 @@
 
     svg.append(layerBoxes, layerLines, layerText);
     root.replaceChildren(svg);
+    nowX = xn;
+    centerOnNow(root);
+  }
+
+  /* ---------- défilement horizontal ---------- */
+  let nowX = 0;
+  // aujourd'hui aux deux tiers de la largeur visible : le passé récent et la suite
+  function centerOnNow(box) {
+    if (box.clientWidth > 0) box.scrollLeft = Math.max(0, nowX - box.clientWidth * 0.66);
+  }
+
+  function setupScroll(box) {
+    // à chaque ouverture de la fenêtre (largeur 0 → visible), on se recentre
+    let wasHidden = true;
+    new ResizeObserver(() => {
+      const hidden = box.clientWidth === 0;
+      if (wasHidden && !hidden) centerOnNow(box);
+      wasHidden = hidden;
+    }).observe(box);
+    // glisser à la souris pour se déplacer dans la frise (le clic reste possible)
+    let drag = null;
+    box.addEventListener('pointerdown', (e) => {
+      if (e.pointerType !== 'mouse' || e.button !== 0) return;
+      drag = { x: e.clientX, left: box.scrollLeft, moved: false };
+    });
+    box.addEventListener('pointermove', (e) => {
+      if (!drag) return;
+      const dx = e.clientX - drag.x;
+      if (!drag.moved && Math.abs(dx) < 5) return;
+      if (!drag.moved) box.setPointerCapture(e.pointerId);
+      drag.moved = true;
+      box.classList.add('is-dragging');
+      box.scrollLeft = drag.left - dx;
+    });
+    const end = () => {
+      if (drag && drag.moved) {
+        // le relâchement d'un glisser ne doit pas déclencher de clic
+        box.addEventListener('click', (ev) => ev.stopPropagation(), { capture: true, once: true });
+      }
+      drag = null;
+      box.classList.remove('is-dragging');
+    };
+    box.addEventListener('pointerup', end);
+    box.addEventListener('pointercancel', end);
   }
 
   /* ---------- version texte : encadrés imbriqués, du plus récent au plus ancien ---------- */
@@ -555,6 +600,10 @@
       const today = new Date();
       const now = { y: today.getFullYear(), m: today.getMonth(), d: today.getDate(), exact: true };
       draw(graph, data, now);
+      if (!graph.dataset.scroll) {
+        graph.dataset.scroll = '1';
+        setupScroll(graph);
+      }
       if (textRoot) drawText(textRoot, data);
     },
   };

@@ -42,6 +42,14 @@ Légende : ✅ terminé · 🚧 en cours · ⬜ à faire
 
 ## Journal
 
+- 2026-11-19 : frise du parcours à échelle de temps constante (42 px par mois) : les
+  durées redeviennent comparables (les deux années de BTS ont la même largeur). La
+  frise, plus longue que la fenêtre, défile horizontalement, s'ouvre centrée sur
+  aujourd'hui et se déplace aussi en glissant à la souris ; tous les mois sont repérés.
+  Étiquettes des encadrés imbriqués trop étroits alignées sur le bord gauche de leur
+  encadré, débordant vers la droite si besoin mais toujours dans le grand encadré et
+  sans passer sur un autre encadré. Contrôle automatique : aucun chevauchement, aucune
+  étiquette hors de son grand encadré.
 - 2026-11-19 : frise du parcours, mise en page reprise. Ligne de vie et encadré du
   lycée prolongés hors champ à gauche (`debut_affichage`, la seconde n'est pas
   présentée). Grands encadrés titrés en haut, encadrés imbriqués titrés en bas, ou

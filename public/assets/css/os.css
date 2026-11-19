@@ -1548,11 +1548,19 @@ canvas.px {
   background-size: 40px 40px;
 }
 
+.timeline {
+  cursor: grab;
+}
+
+.timeline.is-dragging {
+  cursor: grabbing;
+  user-select: none;
+}
+
+/* taille réelle (échelle de temps constante) : la frise défile horizontalement */
 .tl {
   display: block;
-  width: 100%;
-  min-width: 900px;
-  height: auto;
+  max-width: none;
   font-family: var(--mono);
 }
 
