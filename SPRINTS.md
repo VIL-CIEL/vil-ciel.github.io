@@ -24,6 +24,9 @@ Légende : ✅ terminé · 🚧 en cours · ⬜ à faire
 
 ## Prochaines étapes
 
+- [ ] Suite de la frise selon les événements : une piste d'alternance dès 2026 reste
+      possible. Selon l'issue, PMA ou CPE deviendra la voie principale (l'autre passant
+      en parallèle) ; à refléter dans `public/data/parcours.json` (et `profile.json`).
 - [ ] Fond d'écran : piste retenue = bannière LinkedIn convertie en ASCII (variante 4).
       Le logo du serveur communautaire reste visible (décision du 2026-11-18). Récupérer
       l'image définitive en haute résolution (`public/assets/img/fond-banniere.png`, pas encore versionnée),
