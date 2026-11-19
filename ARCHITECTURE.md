@@ -158,8 +158,14 @@ centrée sur aujourd'hui et se déplace en glissant à la souris) ; chaque encad
 vers l'extérieur — grands encadrés titrés en haut, encadrés imbriqués titrés en bas
 (ou juste dessous s'ils sont trop étroits, sans jamais sortir de leur parent) ; un
 texte trop long passe d'abord sous le titre, puis revient à la ligne, et l'encadré
-grandit en conséquence. Les légendes des nœuds sont placées par étages, en haut puis
-en bas. Un clic ouvre le programme associé ; sans programme, il fait défiler jusqu'à
+grandit en conséquence. Règle de placement d'un titre + description : une ligne dans
+l'encadré, sinon description sous le titre dans l'encadré, sinon dehors aligné sur le
+bord gauche, sinon dehors centré, sinon retours à la ligne (dedans = en haut pour un
+grand encadré, en bas pour un imbriqué ; dehors = au-dessus / en dessous). Deux grands
+encadrés qui se chevauchent dans le temps vont sur des voies parallèles, reliées à la
+ligne de vie par une piste. Ce qui commence après aujourd'hui est en pointillés ; les
+branches du futur partent du dernier élément prévu. Les légendes des nœuds sont placées
+par étages, en haut puis en bas. Un clic ouvre le programme associé ; sans programme, il fait défiler jusqu'à
 l'entrée correspondante de la version texte (et inversement, avec surbrillance). La version texte (encadrés imbriqués,
 du plus récent au plus ancien) est générée depuis le même fichier ; une liste écrite
 dans le HTML sert de repli sans JavaScript ou hors serveur.

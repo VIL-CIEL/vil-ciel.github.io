@@ -1,13 +1,13 @@
 {
-  "_aide": "Parcours affiché dans PARCOURS.log. Dates au format AAAA-MM ou AAAA-MM-JJ (une fin au mois près couvre tout le mois). debut_affichage = début de la partie visible : ce qui commence avant déborde à gauche, hors champ. periodes = encadrés (études, stage, projet long, événement de plusieurs jours) ; 'dans' = id de l'encadré parent pour les imbriquer ; dans le graphique, le titre est suivi du sous_titre (ou, à défaut, de la description). evenements = nœuds sur la ligne (projets courts, diplômes) ; 'cle': true pour les étapes clés ; 'programme' = fenêtre à ouvrir au clic (dap, ihm, tva, devis, rsmp, unity, pygame, recherche, folio, arcadia). futur = branches possibles après aujourd'hui ; dans 'lignes', {ecole}, {rythme}, {debut}, {zone}... sont remplacés par les valeurs de profile.json.",
-  "debut_affichage": "2022-06",
+  "_aide": "Parcours affiché dans PARCOURS.log. Dates au format AAAA-MM ou AAAA-MM-JJ (une fin au mois près couvre tout le mois). debut_affichage = début de la frise, à gauche : ce qui commence avant reste ouvert sur la gauche. periodes = encadrés (études, stage, projet long, emploi, événement de plusieurs jours) ; 'dans' = id de l'encadré parent pour les imbriquer ; deux grands encadrés qui se chevauchent dans le temps passent automatiquement sur une voie parallèle (ex. emploi à temps partiel pendant une formation) ; ce qui commence après aujourd'hui est dessiné en pointillés (prévu). Dans le graphique, le titre est suivi du sous_titre (ou, à défaut, de la description). evenements = nœuds sur la ligne (projets courts, diplômes) ; 'cle': true pour les étapes clés ; 'programme' = fenêtre à ouvrir au clic (dap, ihm, tva, devis, rsmp, unity, pygame, recherche, folio, arcadia). futur = branches possibles, à partir du dernier élément prévu ; dans 'lignes', {ecole}, {rythme}, {debut}, {zone}... sont remplacés par les valeurs de profile.json.",
+  "debut_affichage": "2022-12",
   "periodes": [
     {
       "id": "lycee",
       "titre": "Lycée — bac général",
       "sous_titre": "Spécialités maths + NSI",
       "debut": "2021-09",
-      "fin": "2024-07",
+      "fin": "2024-06",
       "description": "Découverte de la programmation avec la spécialité NSI."
     },
     {
@@ -84,23 +84,82 @@
       "fin": "2026-10-09",
       "programme": "dap",
       "description": "Présentation en anglais de mon projet de fin de BTS (DAP)."
+    },
+    {
+      "id": "pma-partiel",
+      "titre": "PMA",
+      "sous_titre": "Temps partiel",
+      "debut": "2026-11",
+      "fin": "2026-11",
+      "description": "Emploi à temps partiel, en parallèle des cours à CPE."
+    },
+    {
+      "id": "pma-cdd",
+      "titre": "PMA",
+      "sous_titre": "CDD",
+      "debut": "2026-12",
+      "fin": "2027-07",
+      "description": "CDD de décembre 2026 à juillet 2027."
     }
   ],
   "evenements": [
-    { "date": "2024-03", "code": "RECH", "titre": "Recherche textuelle", "programme": "recherche" },
-    { "date": "2024-05", "code": "PYG", "titre": "Jeu Pygame", "programme": "pygame" },
-    { "date": "2024-07", "code": "BAC", "titre": "Bac général obtenu", "cle": true },
-    { "date": "2025-04", "code": "UNTY", "titre": "Jeu Unity", "programme": "unity" },
-    { "date": "2026-06-15", "code": "BTS", "titre": "BTS CIEL obtenu", "cle": true },
-    { "date": "2026-06-28", "code": "RSMP", "titre": "CC Radio System", "programme": "rsmp" },
-    { "date": "2026-10-25", "code": "API", "titre": "API REST de devis", "programme": "devis" },
-    { "date": "2026-11-03", "code": "TVA", "titre": "TVA Dashboard", "programme": "tva" }
+    {
+      "date": "2024-03",
+      "code": "RECH",
+      "titre": "Recherche textuelle",
+      "programme": "recherche"
+    },
+    {
+      "date": "2024-05",
+      "code": "PYG",
+      "titre": "Jeu Pygame",
+      "programme": "pygame"
+    },
+    {
+      "date": "2024-07",
+      "code": "BAC",
+      "titre": "Bac général obtenu",
+      "cle": true
+    },
+    {
+      "date": "2025-04",
+      "code": "UNTY",
+      "titre": "Jeu Unity",
+      "programme": "unity"
+    },
+    {
+      "date": "2026-06-15",
+      "code": "BTS",
+      "titre": "BTS CIEL obtenu",
+      "cle": true
+    },
+    {
+      "date": "2026-06-28",
+      "code": "RSMP",
+      "titre": "CC Radio System",
+      "programme": "rsmp"
+    },
+    {
+      "date": "2026-10-25",
+      "code": "API",
+      "titre": "API REST de devis",
+      "programme": "devis"
+    },
+    {
+      "date": "2026-11-03",
+      "code": "TVA",
+      "titre": "TVA Dashboard",
+      "programme": "tva"
+    }
   ],
   "futur": [
     {
       "titre": "Alternance",
       "debut": "2027-09",
-      "lignes": ["École : {ecole}", "Rythme : {rythme}"],
+      "lignes": [
+        "École : {ecole}",
+        "Rythme : {rythme}"
+      ],
       "decalage": -30
     }
   ]

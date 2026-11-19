@@ -42,6 +42,17 @@ Légende : ✅ terminé · 🚧 en cours · ⬜ à faire
 
 ## Journal
 
+- 2026-11-19 : frise du parcours. Règle unique de placement des titres et descriptions
+  (une ligne dedans → description sous le titre dedans → dehors aligné à gauche → dehors
+  centré → retours à la ligne), dedans en haut / dehors au-dessus pour les grands
+  encadrés, dedans en bas / dehors juste dessous pour les encadrés imbriqués. Frise qui
+  commence en décembre 2022 (`debut_affichage`), encadrés antérieurs ouverts à gauche ;
+  lycée terminé avec la terminale. Activités en parallèle : deux grands encadrés qui se
+  chevauchent passent sur une voie à part, reliée à la ligne de vie par une piste.
+  Ajout de PMA : temps partiel en novembre 2026 (en parallèle de CPE) et CDD de
+  décembre 2026 à juillet 2027 ; ce qui est à venir est en pointillés, et la branche
+  « Alternance » part de la fin du CDD. Contrôle automatique : aucun chevauchement,
+  aucune étiquette sur le bord d'un encadré.
 - 2026-11-19 : frise du parcours à échelle de temps constante (42 px par mois) : les
   durées redeviennent comparables (les deux années de BTS ont la même largeur). La
   frise, plus longue que la fenêtre, défile horizontalement, s'ouvre centrée sur

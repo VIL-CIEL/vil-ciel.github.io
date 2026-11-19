@@ -1,19 +1,21 @@
 /* =====================================================================
    Parcours : une seule ligne de vie mêlée à une frise chronologique.
-   - périodes (études, stage, projet long, événement) = encadrés imbriqués :
-     grands encadrés titrés en haut, encadrés imbriqués titrés en bas ;
-   - projets courts et étapes clés = nœuds sur la ligne, légendés en haut
-     ou en bas du graphique selon la place ;
-   - futur = branches possibles en pointillés qui s'estompent.
-   Tout vient de data/parcours.json ; le graphique et la version texte se
-   reconstruisent à partir de ce fichier. Les tailles sont calculées à
-   partir des textes réellement mesurés : rien ne se chevauche.
+   - périodes (études, stage, projet long, emploi, événement) = encadrés,
+     imbriqués les uns dans les autres ;
+   - deux grandes périodes qui se chevauchent (ex. un emploi à temps partiel
+     pendant une formation) = voie parallèle : une piste part de la ligne de
+     vie, la longe puis la rejoint ;
+   - projets courts et étapes clés = nœuds sur la ligne ;
+   - ce qui est encore à venir est en pointillés ; après le dernier élément
+     prévu, des branches possibles s'estompent vers la droite.
+   Tout vient de data/parcours.json. Échelle de temps constante ; les tailles
+   sont calculées à partir des textes réellement mesurés.
    ===================================================================== */
 'use strict';
 
 (function (FV) {
   const NS = 'http://www.w3.org/2000/svg';
-  const X0 = 30;
+  const X0 = 6; // la frise commence au bord gauche (debut_affichage)
   const MONTH_PX = 42; // largeur d'un mois : constante sur toute la frise
   const MONTHS = ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
   const FONT_TITLE = '600 12px "IBM Plex Mono", consolas, monospace';
@@ -23,7 +25,8 @@
   const PAD = 7; // marge intérieure des encadrés
   const BASE = [26, 16, 12, 10]; // demi-hauteur minimale autour de la ligne, selon la profondeur
   const NODE_ROW = 34; // hauteur d'un étage de légendes de nœuds
-  const RULER = 44; // bande des années, en haut
+  const RULER = 44; // bande des années et des mois, en haut
+  const LANE_GAP = 18; // écart entre la voie principale et une voie parallèle
 
   /* ---------- dates ---------- */
   function parseDate(value, end) {
@@ -62,7 +65,7 @@
       ids.add(id);
       data.periods.push({
         id, title, start, end,
-        sub: text(p.sous_titre, 80), desc: text(p.description, 240),
+        sub: text(p.sous_titre, 80), desc: text(p.description, 280),
         parent: text(p.dans, 40), app: text(p.programme, 20),
       });
     });
@@ -99,19 +102,21 @@
   }
 
   /* ---------- échelle : constante, un mois = MONTH_PX pixels ---------- */
-  // Les durées restent comparables d'un bout à l'autre ; la frise est plus longue
-  // que la fenêtre et défile horizontalement.
   function buildScale(data, now) {
     const firstContent = Math.min(...[...data.periods.map((p) => p.start), ...data.events.map((e) => e.date)].map(monthIndex));
     const startM = data.viewStart ? monthIndex(data.viewStart) : firstContent;
-    const lastM = Math.max(monthIndex(now) + 6, ...data.future.map((f) => monthIndex(f.start) + 7));
+    const lastM = Math.max(
+      monthIndex(now) + 6,
+      ...data.future.map((f) => monthIndex(f.start) + 7),
+      ...data.periods.map((p) => monthIndex(p.end) + 3)
+    );
     const n = lastM - startM + 1;
-    // avant le début visible, x devient négatif : hors champ, à gauche
+    // avant le début de la frise, x devient négatif : hors champ, à gauche
     const x = (p) => X0 + (monthIndex(p) - startM + (Math.min(p.d, daysIn(p)) - 1) / daysIn(p)) * MONTH_PX;
     return { x, startM, n, width: Math.round(X0 + n * MONTH_PX + 20) };
   }
 
-  /* ---------- mesure et découpage des textes ---------- */
+  /* ---------- mesure des textes ---------- */
   let measurer = null;
   function measure(str, font) {
     if (!measurer) measurer = document.createElement('canvas').getContext('2d');
@@ -135,103 +140,86 @@
     return lines;
   }
 
-  // Titre + description : sur une ligne si possible, sinon description sous le
-  // titre, et seulement en dernier recours retours à la ligne.
-  function layoutText(title, desc, maxW) {
-    const T = title.toUpperCase();
-    const lines = [];
-    if (desc && measure(T, FONT_TITLE) + measure(' · ' + desc, FONT_SUB) <= maxW) {
-      lines.push({ title: T, sub: ' · ' + desc });
-    } else {
-      (measure(T, FONT_TITLE) <= maxW ? [T] : wrap(T, FONT_TITLE, maxW)).forEach((t) => lines.push({ title: t }));
-      if (desc) (measure(desc, FONT_SUB) <= maxW ? [desc] : wrap(desc, FONT_SUB, maxW)).forEach((s) => lines.push({ sub: s }));
-    }
-    const width = Math.max(
-      ...lines.map((l) => (l.title ? measure(l.title, FONT_TITLE) : 0) + (l.sub ? measure(l.sub, FONT_SUB) : 0))
-    );
+  function finish(lines) {
+    const width = Math.max(...lines.map((l) => (l.title ? measure(l.title, FONT_TITLE) : 0) + (l.sub ? measure(l.sub, FONT_SUB) : 0)));
     return { lines, width, height: lines.length * LINE };
   }
+  const oneLine = (T, desc) => finish([desc ? { title: T, sub: ' · ' + desc } : { title: T }]);
+  const twoLines = (T, desc) => finish(desc ? [{ title: T }, { sub: desc }] : [{ title: T }]);
+  const wrapped = (T, desc, maxW) =>
+    finish([
+      ...wrap(T, FONT_TITLE, maxW).map((t) => ({ title: t })),
+      ...(desc ? wrap(desc, FONT_SUB, maxW).map((s) => ({ sub: s })) : []),
+    ]);
 
-  /* ---------- mise en page des encadrés (de l'intérieur vers l'extérieur) ---------- */
-  // Chaque encadré reçoit : xa/xb (bords), va/vb (partie visible), top/bottom
-  // (distances à la ligne), label, labelPos ('top' | 'inside' | 'below').
-  function layoutBox(p, kids, S) {
-    p.xa = S.x(p.start);
-    p.xb = S.x(p.end);
-    if (p.xb - p.xa < 16) {
-      const c = (p.xa + p.xb) / 2;
-      p.xa = c - 8;
-      p.xb = c + 8;
-    }
-    p.va = Math.max(p.xa, 4);
-    p.vb = Math.min(p.xb, S.width - 4);
-    const children = kids.get(p.id) || [];
-    children.forEach((c) => layoutBox(c, kids, S));
-    const ct = Math.max(0, ...children.map((c) => c.top));
-    const cb = Math.max(0, ...children.map((c) => c.bottom));
-
-    const base = BASE[p.depth];
-    const desc = p.sub || p.desc;
-    const room = p.vb - p.va - PAD * 2;
-    if (p.depth === 0) {
-      // grand encadré : titre et description en haut, à l'intérieur
-      p.label = layoutText(p.title, desc, Math.max(60, room));
-      p.labelPos = 'top';
-      p.bottom = Math.max(base, cb) + PAD;
-      p.top = Math.max(base, ct) + PAD + p.label.height + 4;
-    } else {
-      // encadré imbriqué : en bas, à l'intérieur s'il tient (2 lignes max),
-      // sinon sous l'encadré (placé ensuite par placeBelow)
-      const inside = layoutText(p.title, desc, Math.max(10, room));
-      const fits = inside.lines.length <= 2 && inside.width <= room;
-      p.label = inside;
-      p.labelPos = fits ? 'inside' : 'below';
-      p.top = Math.max(base, ct) + PAD;
-      p.bottom = Math.max(base, cb) + PAD + (fits ? p.label.height + 2 : 0);
-      if (fits) p.labelY = p.bottom - PAD - p.label.height;
-    }
+  // Règle de placement d'un titre + description :
+  // 1. une ligne dans l'encadré ; 2. description sous le titre, dans l'encadré ;
+  // 3. dehors, aligné sur le bord gauche (une ligne, puis deux) ;
+  // 4. dehors, centré sur l'encadré ; 5. dehors, avec retours à la ligne.
+  function chooseLabel(box, cont) {
+    const T = box.title.toUpperCase();
+    const desc = box.sub || box.desc;
+    const room = box.vb - box.va - PAD * 2;
+    const one = oneLine(T, desc);
+    if (one.width <= room) return { label: one, inside: true };
+    const two = twoLines(T, desc);
+    if (two.width <= room) return { label: two, inside: true };
+    const left = Math.max(box.va, cont.left);
+    for (const l of [one, two]) if (left + l.width <= cont.right) return { label: l, inside: false, x: left };
+    const center = (box.va + box.vb) / 2;
+    const clampX = (w) => Math.max(cont.left, Math.min(cont.right - w, center - w / 2));
+    for (const l of [one, two]) if (l.width <= cont.right - cont.left) return { label: l, inside: false, x: clampX(l.width) };
+    const w = wrapped(T, desc, Math.max(40, cont.right - cont.left));
+    return { label: w, inside: false, x: clampX(w.width) };
   }
 
-  // Étiquettes « sous l'encadré » : alignées sur le bord gauche de leur encadré,
-  // elles peuvent en déborder vers la droite mais restent dans le grand encadré,
-  // sans jamais passer sur un autre encadré ni sur une autre étiquette.
-  function placeBelow(root, kids) {
-    const all = [];
-    const walk = (p) => (kids.get(p.id) || []).forEach((c) => {
-      all.push(c);
-      walk(c);
-    });
-    walk(root);
-    const obstacles = all.map((d) => ({ x0: d.va, x1: d.vb, y0: -d.top, y1: d.bottom }));
-    let bottom = root.bottom - PAD;
-    all.filter((c) => c.labelPos === 'below').sort((a, b) => a.va - b.va).forEach((c) => {
-      const left = Math.max(c.va, root.va + PAD);
-      const room = root.vb - PAD - left;
-      // trop près du bord droit du grand encadré : toute sa largeur intérieure,
-      // en restant le plus près possible de l'encadré
-      const alignRight = room < 150;
-      const maxW = alignRight ? root.vb - root.va - PAD * 2 : Math.min(room, 300);
-      c.label = layoutText(c.title, c.sub || c.desc, Math.max(40, maxW));
-      const w = c.label.width;
-      const x = alignRight ? Math.max(root.va + PAD, Math.min(c.va, root.vb - PAD - w)) : left;
-      let y = c.bottom + 6;
+  /* ---------- mise en page des encadrés ---------- */
+  // Encadré imbriqué : son étiquette « dehors » va juste en dessous, dans son
+  // parent (qui grandit), en évitant les encadrés et étiquettes voisins. Elle peut
+  // dépasser le parent vers la droite, mais jamais le grand encadré.
+  function layoutBox(p, kids, cont) {
+    const children = kids.get(p.id) || [];
+    children.forEach((c) => layoutBox(c, kids, cont));
+    let ct = 0;
+    let cb = 0;
+    const placed = children.map((c) => ({ x0: c.va, x1: c.vb, y0: -c.top, y1: c.bottom }));
+    children.forEach((c) => {
+      ct = Math.max(ct, c.top);
+      cb = Math.max(cb, c.bottom);
+      if (c.inside) return;
+      const { width: w, height: h } = c.label;
+      let y = c.bottom + 4;
       let moved = true;
       while (moved) {
         moved = false;
-        for (const r of obstacles) {
-          if (x < r.x1 + 6 && r.x0 < x + w + 6 && y < r.y1 + 4 && r.y0 < y + c.label.height + 2) {
-            y = r.y1 + 5;
+        for (const r of placed) {
+          if (c.labelX < r.x1 + 6 && r.x0 < c.labelX + w + 6 && y < r.y1 + 3 && r.y0 < y + h + 2) {
+            y = r.y1 + 4;
             moved = true;
           }
         }
       }
-      obstacles.push({ x0: x, x1: x + w, y0: y, y1: y + c.label.height });
-      c.labelX = x;
+      placed.push({ x0: c.labelX, x1: c.labelX + w, y0: y, y1: y + h });
       c.labelY = y;
-      c.leadX = alignRight ? (c.va + c.vb) / 2 : x + 4;
-      bottom = Math.max(bottom, y + c.label.height);
+      cb = Math.max(cb, y + h);
     });
-    root.bottom = bottom + PAD;
+    const base = BASE[p.depth];
+    if (p.depth === 0) {
+      const choice = chooseLabel(p, cont.root(p));
+      p.label = choice.label;
+      p.inside = choice.inside;
+      p.labelX = choice.inside ? p.va + PAD : choice.x;
+      p.bottom = Math.max(base, cb) + PAD;
+      p.top = Math.max(base, ct) + PAD + (p.inside ? p.label.height + 4 : 0);
+    } else {
+      const choice = chooseLabel(p, cont.nested(p));
+      p.label = choice.label;
+      p.inside = choice.inside;
+      p.labelX = choice.inside ? p.va + PAD : choice.x;
+      p.top = Math.max(base, ct) + PAD;
+      p.bottom = Math.max(base, cb) + PAD + (p.inside ? p.label.height + 2 : 0);
+      if (p.inside) p.labelY = p.bottom - PAD - p.label.height;
+    }
   }
 
   /* ---------- dessin ---------- */
@@ -242,7 +230,7 @@
     return n;
   };
 
-  // Éléments de la frise et de la version texte, par identifiant.
+  // Éléments de la frise et de la version texte, par identifiant (liens croisés).
   const graphEls = new Map();
   const textEls = new Map();
 
@@ -302,11 +290,69 @@
     return g;
   }
 
+  const wave = (x) => Math.sin(x / 55) * 3 + Math.sin(x / 23) * 1.2;
+  function wavyPath(xa, xb, y) {
+    let d = '';
+    for (let x = xa; x <= xb; x += 6) d += (d ? ' L' : 'M') + x.toFixed(1) + ' ' + (y + wave(x)).toFixed(1);
+    return d + ` L${xb.toFixed(1)} ${(y + wave(xb)).toFixed(1)}`;
+  }
+
+  // Place des étiquettes sur des étages, sans chevauchement horizontal.
+  function levels(items, gap) {
+    const rows = [];
+    items.forEach((it) => {
+      let l = rows.findIndex((row) => row.every((r) => it.x0 > r.x1 + gap || it.x1 < r.x0 - gap));
+      if (l < 0) {
+        rows.push([]);
+        l = rows.length - 1;
+      }
+      rows[l].push(it);
+      it.level = l;
+    });
+    return rows;
+  }
+
   function draw(root, data, now) {
     const S = buildScale(data, now);
+    const W = S.width;
     graphEls.clear();
+    const nowKey = keyOf(now);
+    const xn = S.x(now);
 
-    // 1. encadrés
+    // 1. géométrie horizontale (ne dépend que des dates)
+    const byId = new Map(data.periods.map((p) => [p.id, p]));
+    data.periods.forEach((p) => {
+      p.xa = S.x(p.start);
+      p.xb = S.x(p.end);
+      if (p.xb - p.xa < 16) {
+        const c = (p.xa + p.xb) / 2;
+        p.xa = c - 8;
+        p.xb = c + 8;
+      }
+      p.va = Math.max(p.xa, 4);
+      p.vb = Math.min(p.xb, W - 4);
+      p.planned = keyOf(p.start) > nowKey;
+    });
+    const rootOf = (p) => (p.parent ? rootOf(byId.get(p.parent)) : p);
+    const isAncestor = (a, p) => {
+      for (let q = p.parent && byId.get(p.parent); q; q = q.parent && byId.get(q.parent)) if (q === a) return true;
+      return false;
+    };
+    const cont = {
+      root: () => ({ left: 4, right: W - 4 }),
+      // dehors, un encadré imbriqué reste dans son grand encadré et s'arrête
+      // avant le prochain encadré sans lien de parenté avec lui
+      nested: (p) => {
+        const r = rootOf(p);
+        let right = r.vb - PAD;
+        data.periods.forEach((b) => {
+          if (b !== p && rootOf(b) === r && !isAncestor(b, p) && !isAncestor(p, b) && b.va >= p.vb) right = Math.min(right, b.va - 6);
+        });
+        return { left: r.va + PAD, right: Math.max(right, p.vb) };
+      },
+    };
+
+    // 2. encadrés (de l'intérieur vers l'extérieur)
     const kids = new Map();
     const roots = [];
     data.periods.forEach((p) => {
@@ -315,21 +361,36 @@
         kids.get(p.parent).push(p);
       } else roots.push(p);
     });
-    const W = S.width;
-    roots.forEach((p) => {
-      layoutBox(p, kids, S);
-      placeBelow(p, kids);
+    roots.forEach((p) => layoutBox(p, kids, cont));
+
+    // 3. voies : deux grands encadrés qui se chevauchent dans le temps vont sur
+    //    des voies différentes (activités en parallèle)
+    const lanes = [];
+    [...roots].sort((a, b) => keyOf(a.start) - keyOf(b.start)).forEach((p) => {
+      let l = lanes.findIndex((lane) => lane.every((q) => keyOf(q.end) < keyOf(p.start) || keyOf(p.end) < keyOf(q.start)));
+      if (l < 0) {
+        lanes.push([]);
+        l = lanes.length - 1;
+      }
+      lanes[l].push(p);
+      p.lane = l;
     });
-    // tous les grands encadrés ont la même hauteur : frise plus lisible
-    const TOP = Math.max(BASE[0], ...roots.map((p) => p.top));
-    const BOT = Math.max(BASE[0], ...roots.map((p) => p.bottom));
-    roots.forEach((p) => {
-      p.top = TOP;
-      p.bottom = BOT;
+    const laneInfo = lanes.map((lane) => {
+      const top = Math.max(BASE[0], ...lane.map((p) => p.top));
+      const bottom = Math.max(BASE[0], ...lane.map((p) => p.bottom));
+      lane.forEach((p) => {
+        p.top = top;
+        p.bottom = bottom;
+      });
+      // étiquettes des grands encadrés trop étroits : au-dessus de l'encadré
+      const outside = lane.filter((p) => !p.inside).map((p) => ({ p, x0: p.labelX, x1: p.labelX + p.label.width }));
+      const rows = levels(outside, 10);
+      const rowH = rows.map((row) => Math.max(...row.map((it) => it.p.label.height)) + 6);
+      outside.forEach((it) => (it.p.aboveOffset = rowH.slice(0, it.level + 1).reduce((a, b) => a + b, 0)));
+      return { top, bottom, above: rowH.reduce((a, b) => a + b, 0) };
     });
 
-    // 2. nœuds : légendes en haut, puis en bas quand le haut est plein
-    const xn = S.x(now);
+    // 4. nœuds : légendes en haut, puis en bas quand le haut est plein
     const nodes = [...data.events].sort((a, b) => keyOf(a.date) - keyOf(b.date)).map((e) => {
       const x = S.x(e.date);
       const width = Math.max(measure(e.code, FONT_CODE), measure(e.title, FONT_SUB));
@@ -344,11 +405,20 @@
       n.band = band;
       n.level = level;
     });
-    const topLevels = rows.top.length;
-    const bottomLevels = rows.bottom.length;
-    const Y0 = RULER + 8 + topLevels * NODE_ROW + TOP;
-    const H = Math.round(Y0 + BOT + 10 + bottomLevels * NODE_ROW + 26);
-    const yOf = (x) => Y0 + Math.sin(x / 55) * 3 + Math.sin(x / 23) * 1.2;
+
+    // 5. hauteurs : règle, légendes du haut, voie principale, voies parallèles, légendes du bas
+    const topNodes = rows.top.length * NODE_ROW;
+    const laneY = [];
+    let y = RULER + 8 + topNodes;
+    laneInfo.forEach((L, i) => {
+      y += (i ? LANE_GAP : 0) + L.above + L.top;
+      laneY.push(y);
+      y += L.bottom;
+    });
+    const Y0 = laneY[0];
+    const yOf = (x) => Y0 + wave(x);
+    const lastBottom = y;
+    const H = Math.round(lastBottom + 10 + rows.bottom.length * NODE_ROW + 26);
 
     const svg = el('svg', {
       class: 'tl',
@@ -356,7 +426,7 @@
       width: W,
       height: H,
       role: 'img',
-      'aria-label': 'Frise du parcours : périodes d\'études, de stage et de projet en encadrés, projets courts en points sur la ligne, et suite possible.',
+      'aria-label': 'Frise du parcours : périodes en encadrés, activités en parallèle sur une voie à part, projets courts en points sur la ligne, éléments prévus en pointillés et suite possible.',
     });
     const defs = el('defs');
     svg.append(defs);
@@ -364,7 +434,7 @@
     const layerLines = el('g');
     const layerText = el('g');
 
-    // repères : années et mois élargis
+    // repères : années et mois
     for (let m = 0; m < S.n; m++) {
       const abs = S.startM + m;
       const p = { y: Math.floor(abs / 12), m: abs % 12, d: 1 };
@@ -381,42 +451,63 @@
     svg.append(el('line', { x1: 0, x2: W, y1: H - 14, y2: H - 14, class: 'tl__bound' }));
 
     // encadrés et leurs textes
-    const drawBox = (p) => {
-      const g = el('g', { class: `tl__box tl__box--d${p.depth}` });
-      g.append(el('rect', { x: p.xa, y: Y0 - p.top, width: p.xb - p.xa, height: p.top + p.bottom }));
-      g.append(el('title', {}, `${p.title} — ${formatRange(p.start, p.end)}${p.desc ? '\n' + p.desc : ''}`));
+    const drawBox = (p, ly) => {
+      const g = el('g', { class: `tl__box tl__box--d${p.depth}` + (p.planned ? ' is-planned' : '') });
+      g.append(el('rect', { x: p.xa, y: ly - p.top, width: p.xb - p.xa, height: p.top + p.bottom }));
+      g.append(el('title', {}, `${p.title} — ${formatRange(p.start, p.end)}${p.planned ? ' (prévu)' : ''}${p.desc ? '\n' + p.desc : ''}`));
       linkable(g, p, p.title);
       graphEls.set(p.id, g);
       layerBoxes.append(g);
       let label;
-      if (p.labelPos === 'top') label = textBlock(p.va + PAD, Y0 - p.top + 5, p.label);
-      else if (p.labelPos === 'inside') label = textBlock(p.va + PAD, Y0 + p.labelY, p.label);
-      else {
-        label = textBlock(p.labelX, Y0 + p.labelY, p.label);
-        layerLines.append(el('line', { x1: p.leadX, x2: p.leadX, y1: Y0 + p.bottom, y2: Y0 + p.labelY + 1, class: 'tl__lead' }));
+      if (p.depth === 0) {
+        label = p.inside
+          ? textBlock(p.labelX, ly - p.top + 5, p.label)
+          : textBlock(p.labelX, ly - p.top - p.aboveOffset, p.label);
+      } else if (p.inside) {
+        label = textBlock(p.labelX, ly + p.labelY, p.label);
+      } else {
+        label = textBlock(p.labelX, ly + p.labelY, p.label);
+        const lx = Math.max(p.va + 3, Math.min(p.vb - 3, p.labelX + 4));
+        layerLines.append(el('line', { x1: lx, x2: lx, y1: ly + p.bottom, y2: ly + p.labelY + 1, class: 'tl__lead' }));
       }
+      if (p.planned) label.classList.add('is-planned');
       linkable(label, p, p.title);
       layerText.append(label);
-      (kids.get(p.id) || []).forEach(drawBox);
+      (kids.get(p.id) || []).forEach((c) => drawBox(c, ly));
     };
-    roots.forEach(drawBox);
+    roots.forEach((p) => drawBox(p, laneY[p.lane]));
 
-    // la ligne de vie : depuis le hors-champ à gauche jusqu'à aujourd'hui
-    let d = '';
-    for (let x = -10; x <= xn; x += 6) d += (d ? ' L' : 'M') + x.toFixed(1) + ' ' + yOf(x).toFixed(1);
-    d += ` L${xn.toFixed(1)} ${yOf(xn).toFixed(1)}`;
-    layerLines.append(el('path', { d, class: 'tl__main' }));
+    // la ligne de vie : pleine jusqu'à aujourd'hui, en pointillés sur ce qui est prévu
+    layerLines.append(el('path', { d: wavyPath(-10, xn, Y0), class: 'tl__main' }));
+    const plannedEnd = Math.max(xn, ...lanes[0].filter((p) => keyOf(p.end) > nowKey).map((p) => p.xb));
+    if (plannedEnd > xn) layerLines.append(el('path', { d: wavyPath(xn, plannedEnd, Y0), class: 'tl__main tl__main--planned' }));
+
+    // voies parallèles : une piste part de la ligne, longe l'encadré puis la rejoint
+    lanes.slice(1).forEach((lane, i) => {
+      const ly = laneY[i + 1];
+      lane.forEach((p) => {
+        const a = p.xa;
+        const b = p.xb;
+        // partie vécue (jusqu'à aujourd'hui) en trait plein, le reste en pointillés
+        const split = Math.max(a + 8, Math.min(b - 8, xn));
+        const lived = `M${a - 22} ${yOf(a - 22)} C ${a - 8} ${yOf(a - 22)}, ${a - 6} ${ly}, ${a + 8} ${ly} L ${split} ${ly}`;
+        const rest = `M${split} ${ly} L ${b - 8} ${ly} C ${b + 6} ${ly}, ${b + 8} ${yOf(b + 22)}, ${b + 22} ${yOf(b + 22)}`;
+        layerLines.append(el('path', { d: lived, class: 'tl__track' + (p.planned ? ' tl__track--planned' : '') }));
+        layerLines.append(el('path', { d: rest, class: 'tl__track' + (keyOf(p.end) > nowKey ? ' tl__track--planned' : '') }));
+      });
+    });
 
     // nœuds et leurs légendes
+    const TOP0 = laneInfo[0].top + laneInfo[0].above;
     nodes.forEach((n) => {
-      const y = yOf(n.x);
-      const g = el('g', { class: 'tl__node' + (n.e.key ? ' tl__node--key' : '') });
-      g.append(el('rect', { x: n.x - 6, y: y - 6, width: 12, height: 12, transform: `rotate(45 ${n.x} ${y})` }));
+      const ny = yOf(n.x);
+      const g = el('g', { class: 'tl__node' + (n.e.key ? ' tl__node--key' : '') + (keyOf(n.e.date) > nowKey ? ' is-planned' : '') });
+      g.append(el('rect', { x: n.x - 6, y: ny - 6, width: 12, height: 12, transform: `rotate(45 ${n.x} ${ny})` }));
       g.append(el('title', {}, `${n.e.title} — ${formatRange(n.e.date)}`));
-      const ly = n.band === 'top' ? Y0 - TOP - 22 - n.level * NODE_ROW : Y0 + BOT + 24 + n.level * NODE_ROW;
+      const ly = n.band === 'top' ? Y0 - TOP0 - 22 - n.level * NODE_ROW : lastBottom + 24 + n.level * NODE_ROW;
       layerLines.append(el('line', {
         x1: n.x, x2: n.x,
-        y1: n.band === 'top' ? y - 8 : y + 8,
+        y1: n.band === 'top' ? ny - 8 : ny + 8,
         y2: n.band === 'top' ? ly + 17 : ly - 13,
         class: 'tl__lead',
       }));
@@ -431,22 +522,23 @@
     });
 
     // aujourd'hui
-    const yn = yOf(xn);
     layerLines.append(el('line', { x1: xn, x2: xn, y1: 40, y2: H - 18, class: 'tl__now' }));
     layerText.append(el('text', { x: xn - 6, y: H - 20, class: 'tl__now-label', 'text-anchor': 'end' }, 'AUJOURD\'HUI'));
 
-    // futur : branches possibles, en pointillés qui s'estompent vers la droite
+    // suite possible : branches en pointillés qui s'estompent, depuis le dernier élément prévu
+    const xo = plannedEnd;
+    const yo = yOf(xo);
     data.future.forEach((f, i) => {
-      const xd = Math.max(xn + 50, S.x(f.start));
-      const yb = yn + f.offset;
+      const xd = Math.max(xo + 50, S.x(f.start));
+      const yb = yo + f.offset;
       const xEnd = Math.min(W - 5, xd + 150);
       const id = 'tl-fade-' + i;
-      const grad = el('linearGradient', { id, gradientUnits: 'userSpaceOnUse', x1: xn, x2: xEnd, y1: 0, y2: 0 });
+      const grad = el('linearGradient', { id, gradientUnits: 'userSpaceOnUse', x1: xo, x2: xEnd, y1: 0, y2: 0 });
       grad.append(el('stop', { offset: '0', 'stop-color': '#6cbf45', 'stop-opacity': '0.95' }));
       grad.append(el('stop', { offset: '1', 'stop-color': '#6cbf45', 'stop-opacity': '0.05' }));
       defs.append(grad);
       const g = el('g', { class: 'tl__future' });
-      g.append(el('path', { d: `M${xn} ${yn} C ${xn + 30} ${yn}, ${xn + 25} ${yb}, ${xn + 60} ${yb} L ${xEnd} ${yb}`, stroke: `url(#${id})` }));
+      g.append(el('path', { d: `M${xo} ${yo} C ${xo + 30} ${yo}, ${xo + 25} ${yb}, ${xo + 60} ${yb} L ${xEnd} ${yb}`, stroke: `url(#${id})` }));
       g.append(el('rect', { x: xd - 5, y: yb - 5, width: 10, height: 10 }));
       layerLines.append(g);
       const head = `${f.title.toUpperCase()} · ${MONTHS[f.start.m].toUpperCase()} ${f.start.y}`;
@@ -471,7 +563,7 @@
   let nowX = 0;
   // aujourd'hui aux deux tiers de la largeur visible : le passé récent et la suite
   function centerOnNow(box) {
-    if (box.clientWidth > 0) box.scrollLeft = Math.max(0, nowX - box.clientWidth * 0.66);
+    if (box.clientWidth > 0) box.scrollLeft = Math.max(0, nowX - box.clientWidth * 0.55);
   }
 
   function setupScroll(box) {
@@ -510,9 +602,10 @@
   }
 
   /* ---------- version texte : encadrés imbriqués, du plus récent au plus ancien ---------- */
-  function drawText(root, data) {
+  function drawText(root, data, now) {
     const make = (tag, cls, content) => FV.el(tag, cls, content);
     const inside = (date, p) => keyOf(p.start) <= keyOf(date) && keyOf(date) <= keyOf(p.end);
+    const nowKey = keyOf(now);
 
     // chaque événement va dans la période la plus profonde qui le contient
     const children = new Map(data.periods.map((p) => [p.id, []]));
@@ -536,9 +629,10 @@
       items.sort((a, b) => b.at - a.at).forEach((item) => {
         if (item.kind === 'period') {
           const { p } = item;
-          const box = make('section', 'frise__box');
+          const planned = keyOf(p.start) > nowKey;
+          const box = make('section', 'frise__box' + (planned ? ' frise__box--planned' : ''));
           const head = make('div', 'frise__head');
-          head.append(make('time', null, formatRange(p.start, p.end)), make('b', null, p.title));
+          head.append(make('time', null, formatRange(p.start, p.end) + (planned ? ' · prévu' : '')), make('b', null, p.title));
           if (p.sub) head.append(make('span', 'frise__sub', p.sub));
           box.append(head);
           const desc = make('p', 'frise__desc', p.desc ? p.desc + ' ' : '');
@@ -604,7 +698,7 @@
         graph.dataset.scroll = '1';
         setupScroll(graph);
       }
-      if (textRoot) drawText(textRoot, data);
+      if (textRoot) drawText(textRoot, data, now);
     },
   };
 })(window.FV);

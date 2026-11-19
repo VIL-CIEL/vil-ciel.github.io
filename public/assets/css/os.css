@@ -1628,6 +1628,39 @@ canvas.px {
   filter: drop-shadow(0 0 4px rgb(255 230 190 / 40%));
 }
 
+/* ligne prévue, piste parallèle */
+.tl__main--planned {
+  stroke-dasharray: 7 6;
+  opacity: 0.6;
+  filter: none;
+}
+
+.tl__track {
+  fill: none;
+  stroke: #e6dcc4;
+  stroke-width: 1.6;
+  opacity: 0.75;
+}
+
+.tl__track--planned {
+  stroke-dasharray: 5 5;
+  opacity: 0.5;
+}
+
+/* éléments prévus (après aujourd'hui) : en pointillés, plus discrets */
+.tl__box.is-planned rect {
+  fill: rgb(165 113 255 / 3%);
+  stroke-dasharray: 5 4;
+}
+
+.tl .is-planned {
+  opacity: 0.8;
+}
+
+.frise__box--planned {
+  border-style: dashed;
+}
+
 /* encadrés : plus profonds = plus marqués */
 .tl__box rect {
   fill: rgb(165 113 255 / 5%);

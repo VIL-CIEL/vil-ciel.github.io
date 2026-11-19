@@ -31,6 +31,8 @@ et le projet respecte le [versionnage sémantique](https://semver.org/lang/fr/) 
 - Formulaire de contact fonctionnel (Formspree) : validation, anti-robots, retour
   d'envoi dans la page.
 - Nouveau projet : API REST de devis (TypeScript, Express, PostgreSQL).
+- Parcours : activités en parallèle sur une voie à part (temps partiel chez PMA pendant
+  CPE), éléments prévus en pointillés (CDD chez PMA).
 - Fenêtre du stage : plugin PyMoDAQ Cellkraft (publié sur PyPI).
 
 ### Modifié
