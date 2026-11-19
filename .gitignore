@@ -48,3 +48,8 @@ ehthumbs.db
 *.sublime-workspace
 *.swp
 *~
+
+# ──────────────────────────────────────────────────────────────
+# Fichiers générés au déploiement
+# ──────────────────────────────────────────────────────────────
+public/assets/img/cv-apercu.png

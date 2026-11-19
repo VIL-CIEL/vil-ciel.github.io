@@ -23,6 +23,12 @@ et le projet respecte le [versionnage sémantique](https://semver.org/lang/fr/) 
 - Scènes pixel art animées dans les fenêtres DAP (capteurs → Raspberry Pi → ZeroMQ →
   PyMoDAQ), stage (banc thermique relié par NI-DAQmx) et bénévolat (plaine, cycle
   jour/nuit), avec un moteur d'animation unique qui s'arrête hors écran.
+- Parcours en timeline façon *Loki* : projets en branches cliquables, branche élaguée
+  pour CPE Lyon, futur « à écrire ».
+- Profil : méthode de travail et aparté sur l'usage de l'IA.
+- CV : aperçu de la première page généré au déploiement, téléchargement direct.
+- Formulaire de contact fonctionnel (Formspree) : validation, anti-robots, retour
+  d'envoi dans la page.
 
 ### Modifié
 - Contenus mis à jour : BTS CIEL obtenu (2026), recherche d'alternance pour la rentrée

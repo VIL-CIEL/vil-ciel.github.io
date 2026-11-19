@@ -17,8 +17,8 @@ Légende : ✅ terminé · 🚧 en cours · ⬜ à faire
   d'exploitation fictif, chaque projet est un programme avec une animation pixel art
   dessinée en code. Style rétro / terminal, base sombre, violet en minorité, glitch
   ponctuel. Maquette de référence hors dépôt : `Portofolio_Project/maquette-os.html`.
-- Sprints v2-1 (fondations) et **v2-2 (pixel art)** terminés côté code, en attente du
-  test dans Firefox. Fond d'écran : bannière convertie en ASCII (variante 4), image
+- Sprints v2-1 (fondations), v2-2 (pixel art) et **v2-3 (programmes système)**
+  terminés côté code, en attente du test dans Firefox. Fond d'écran : bannière convertie en ASCII (variante 4), image
   définitive à récupérer.
 - Le statut affiché vient de `public/data/profile.json`.
 
@@ -29,18 +29,34 @@ Légende : ✅ terminé · 🚧 en cours · ⬜ à faire
       l'image définitive en haute résolution (`public/assets/img/fond-banniere.png`, pas encore versionnée),
       puis retirer les variantes 1-3 et le sélecteur de test du menu.
 - [ ] Tester dans Firefox les scènes DAP, stage et plaine (rendu, fluidité, consommation).
-- [ ] Sprint v2-3 : Profil (méthode de travail + aparté sur l'usage de l'IA), Parcours
-      en timeline façon *Loki* (branches, CPE élagué, futur non dessiné), aperçu du CV
-      généré au déploiement, contact via Formspree (compte à créer), terminal.
+- [ ] Tester le formulaire de contact en conditions réelles (un vrai envoi depuis le
+      site en ligne ou en local) et vérifier la réception du mail.
+- [ ] Vérifier au premier déploiement de la v2 que l'aperçu du CV est bien généré par
+      GitHub Actions (`public/assets/img/cv-apercu.png`).
 - [ ] Sprint v2-4 : fenêtres complètes des autres projets + animations (s'appuie sur
       les fiches projet en Markdown à rassembler).
 - [ ] Sprint v2-5 : accessibilité, audit de performance, polices hébergées sur le site,
       SEO, docs, `version.json` 2.0.0, fusion dans `main`, tag `v2.0.0`.
-- [ ] Photos des PyMoDAQ Days à intégrer dans la fenêtre DAP ; dates des projets
-      d'école à confirmer pour la timeline.
+- [ ] Photos des PyMoDAQ Days à intégrer dans la fenêtre DAP.
+- [ ] Projets repérés sur GitHub et absents du portfolio : `devis-api` (API REST
+      TypeScript, Express, PostgreSQL), `pymodaq_plugins_cellkraft`,
+      `pymodaq_plugins_teaching` — à ajouter ou non (sprint v2-4).
 
 ## Journal
 
+- 2026-11-19 : sprint v2-3 (programmes système). Profil : « Méthode de travail »
+  (5 étapes) et aparté « Comment j'utilise l'IA » repris de la section du README.
+  Parcours : timeline façon *Loki* en SVG (`parcours.js`) — ligne principale de la
+  première au BTS obtenu, projets en branches cliquables, branche élaguée pour CPE
+  Lyon, ligne arrêtée à aujourd'hui avec un curseur « ALTERNANCE 2027 — à écrire » ;
+  journal texte conservé dessous. Dates des projets d'école : Recherche textuelle en
+  première (2022-2023), Pygame en terminale (2023-2024), Unity en BTS 1 (2024-2025) —
+  les dates de commit GitHub ne servent pas (dépôts recréés le 2026-01-08). CV : aperçu
+  de la première page généré par GitHub Actions au déploiement (`pdftoppm`, étape non
+  bloquante), repli affiché sinon. Contact : formulaire relié à Formspree en
+  JavaScript simple (`contact.js`, sans bibliothèque externe), validation en français,
+  champ piège anti-robots, objet du mail préfixé « Portfolio — », envoi classique sans
+  JavaScript ; testé avec un envoi simulé uniquement.
 - 2026-11-18 : sprint v2-2 (pixel art). Moteur `scenes.js` : une seule boucle
   d'animation, qui ne dessine que les scènes visibles (fenêtre ouverte, non réduite, à
   l'écran, onglet actif) et dort entre deux images (≈15 réveils/s avec trois scènes,
@@ -105,8 +121,9 @@ LISEZ-MOI, redirections des anciennes adresses, 404.
 Moteur d'animation (une boucle, arrêt hors écran), scènes DAP, stage et plaine.
 Code terminé, en attente du test Firefox.
 
-### ⬜ Sprint v2-3 — Programmes système
+### 🚧 Sprint v2-3 — Programmes système
 Profil, Parcours en timeline façon *Loki*, CV avec aperçu, contact Formspree, terminal.
+Code terminé, en attente du test Firefox et d'un vrai envoi de formulaire.
 
 ### ⬜ Sprint v2-4 — Autres projets
 TVA Dashboard, CC Radio System, Unity, Pygame, recherche textuelle, portfolio.

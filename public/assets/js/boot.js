@@ -93,6 +93,8 @@
     FV.drawWallpaper(true);
     FV.windows.init();
     FV.scenes?.init();
+    FV.parcours?.init();
+    FV.contact?.init();
     clock();
 
     $('#replay-boot').addEventListener('click', () => {

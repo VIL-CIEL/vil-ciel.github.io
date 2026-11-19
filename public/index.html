@@ -48,6 +48,8 @@
     <script src="assets/js/wallpaper.js" defer></script>
     <script src="assets/js/windows.js" defer></script>
     <script src="assets/js/scenes.js" defer></script>
+    <script src="assets/js/parcours.js" defer></script>
+    <script src="assets/js/contact.js" defer></script>
     <script src="assets/js/boot.js" defer></script>
   </head>
   <body>
@@ -395,9 +397,10 @@
             <div class="txt">
               <h3>Méthode de travail</h3>
               <ul>
-                <li><strong>Découper</strong> : sprints courts, une fonctionnalité à la fois.</li>
-                <li><strong>Versionner</strong> : numéros de version, changelog, sauvegardes.</li>
-                <li><strong>Mesurer</strong> : audits de performance avant d'optimiser.</li>
+                <li><strong>Découper</strong> : sprints courts, une fonctionnalité à la fois, testée avant de passer à la suite.</li>
+                <li><strong>Versionner</strong> : numéros de version, changelog, sauvegarde avant chaque modification.</li>
+                <li><strong>Mesurer</strong> : audits de performance et de lisibilité avant d'optimiser.</li>
+                <li><strong>Valider</strong> : recettes explicites (validé, partiel, non validé), limites assumées.</li>
                 <li><strong>Documenter</strong> : README, wiki, journal de développement.</li>
               </ul>
             </div>
@@ -414,42 +417,84 @@
               <dd data-profile="diplome">BTS CIEL (2026)</dd>
             </dl>
           </div>
+          <aside class="note" aria-labelledby="note-ia">
+            <h3 class="note__title" id="note-ia">Comment j'utilise l'IA</h3>
+            <p>J'utilise l'intelligence artificielle comme un véritable <strong>outil de productivité</strong>, et je l'assume : elle fait aujourd'hui partie du métier de développeur, et je préfère <strong>la maîtriser</strong> plutôt que l'ignorer.</p>
+            <p>Je me documente en profondeur sur ces outils pour les utiliser avec discernement. L'IA accélère la mise en œuvre ; elle ne remplace <strong>ni la conception, ni les décisions techniques, ni la compréhension du code</strong>. Ce portfolio en est un exemple : je sais ce qui a été construit, pourquoi, et comment le faire évoluer.</p>
+          </aside>
         </div>
       </section>
 
-      <section class="win" id="w-parcours" data-app="parcours" data-title="PARCOURS.log" data-path="C:/SYSTÈME" aria-label="Parcours">
+      <section class="win win--wide" id="w-parcours" data-app="parcours" data-title="PARCOURS.log" data-path="C:/SYSTÈME" aria-label="Parcours">
         <div class="win__body">
+          <div class="timeline-head">
+            <span>SACRED TIMELINE // <b>FABIEN VILLEDIEU</b></span>
+            <span>VARIANCE EN ATTENTE // <b>2027</b></span>
+          </div>
+          <div class="timeline" id="timeline"></div>
+          <div class="timeline-legend" aria-hidden="true">
+            <span><i class="timeline-legend__main"></i>Parcours</span>
+            <span><i class="timeline-legend__branch"></i>Projet (cliquer pour ouvrir)</span>
+            <span><i class="timeline-legend__pruned"></i>Branche élaguée</span>
+            <span><i class="timeline-legend__caret"></i>À écrire</span>
+          </div>
+          <div class="txt txt--pad"><h3>Journal — version texte</h3></div>
           <div class="log">
-            <div class="log__row log__row--next"><time>2027</time><span class="log__mark">▶</span><div><b>Alternance</b><span class="log__desc">Développement logiciel — recherche en cours.</span></div></div>
+            <div class="log__row log__row--next"><time>2027</time><span class="log__mark">▶</span><div><b>Alternance</b><span class="log__desc">Développement logiciel — la suite reste à écrire.</span></div></div>
+            <div class="log__row"><time>Oct.–nov. 2026</time><span class="log__mark">■</span><div><b>TVA Dashboard</b><span class="log__desc">Projet personnel : extension Firefox. <button class="link-btn" type="button" data-open="tva">ouvrir</button></span></div></div>
             <div class="log__row log__row--key"><time>Oct. 2026</time><span class="log__mark">★</span><div><b>PyMoDAQ Days — Paris</b><span class="log__desc">Présentation en anglais du projet DAP. <button class="link-btn" type="button" data-open="dap">ouvrir</button></span></div></div>
-            <div class="log__row"><time>Sept. 2026</time><span class="log__mark">■</span><div><b>CPE Lyon</b><span class="log__desc">Sept. – nov. 2026.</span></div></div>
-            <div class="log__row log__row--key"><time>Juin 2026</time><span class="log__mark">★</span><div><b>BTS CIEL obtenu</b><span class="log__desc">Option Informatique &amp; Réseaux.</span></div></div>
+            <div class="log__row log__row--pruned"><time>Sept.–nov. 2026</time><span class="log__mark">✕</span><div><b>CPE Lyon</b><span class="log__desc">Trois mois de cursus, branche élaguée faute d'alternance.</span></div></div>
+            <div class="log__row"><time>Juin 2026</time><span class="log__mark">■</span><div><b>CC Radio System</b><span class="log__desc">Projet personnel : radio réseau pour Minecraft. <button class="link-btn" type="button" data-open="rsmp">ouvrir</button></span></div></div>
+            <div class="log__row log__row--key"><time>Juin 2026</time><span class="log__mark">★</span><div><b>BTS CIEL obtenu</b><span class="log__desc">Option informatique &amp; réseaux.</span></div></div>
             <div class="log__row"><time>2025-2026</time><span class="log__mark">■</span><div><b>Projet d'examen — DAP</b><span class="log__desc">CETHIL, équipe de 4. <button class="link-btn" type="button" data-open="dap">ouvrir</button></span></div></div>
-            <div class="log__row"><time>Mai 2025</time><span class="log__mark">■</span><div><b>Stage — CETHIL</b><span class="log__desc">8 semaines, interface d'acquisition. <button class="link-btn" type="button" data-open="ihm">ouvrir</button></span></div></div>
-            <div class="log__row"><time>2024</time><span class="log__mark">■</span><div><b>BTS CIEL</b><span class="log__desc">Entrée en BTS, option IR.</span></div></div>
-            <div class="log__row"><time>2024</time><span class="log__mark">■</span><div><b>Bac général</b><span class="log__desc">Spécialités Mathématiques et NSI.</span></div></div>
+            <div class="log__row"><time>Mai–juil. 2025</time><span class="log__mark">■</span><div><b>Stage — CETHIL</b><span class="log__desc">8 semaines, interface d'acquisition. <button class="link-btn" type="button" data-open="ihm">ouvrir</button></span></div></div>
+            <div class="log__row"><time>2024-2025</time><span class="log__mark">■</span><div><b>Jeu Unity</b><span class="log__desc">Projet de première année de BTS. <button class="link-btn" type="button" data-open="unity">ouvrir</button></span></div></div>
+            <div class="log__row"><time>2024</time><span class="log__mark">■</span><div><b>BTS CIEL</b><span class="log__desc">Entrée en BTS, option informatique &amp; réseaux.</span></div></div>
+            <div class="log__row log__row--key"><time>Juin 2024</time><span class="log__mark">★</span><div><b>Bac général</b><span class="log__desc">Spécialités mathématiques et NSI.</span></div></div>
+            <div class="log__row"><time>2023-2024</time><span class="log__mark">■</span><div><b>Jeu Pygame</b><span class="log__desc">Projet de terminale. <button class="link-btn" type="button" data-open="pygame">ouvrir</button></span></div></div>
+            <div class="log__row"><time>2022-2023</time><span class="log__mark">■</span><div><b>Recherche textuelle</b><span class="log__desc">Projet de première. <button class="link-btn" type="button" data-open="recherche">ouvrir</button></span></div></div>
           </div>
         </div>
       </section>
 
       <section class="win" id="w-cv" data-app="cv" data-title="CV.pdf" data-path="C:/SYSTÈME" aria-label="CV">
         <div class="win__body">
-          <div class="pad">
-            <p class="txt__hint">L'aperçu du CV arrive au sprint 3. En attendant :</p>
-            <a class="btn btn--violet" href="assets/pdf/CV_VILLEDIEU_FABIEN.pdf" download>⤓ Télécharger le CV (PDF)</a>
+          <div class="cv">
+            <a class="cv__page" href="assets/pdf/CV_VILLEDIEU_FABIEN.pdf" target="_blank" rel="noopener" aria-label="Ouvrir le CV en PDF dans un nouvel onglet">
+              <span class="cv__fallback">Aperçu généré à la mise en ligne.<br />Le PDF reste disponible ci-dessous.</span>
+              <img src="assets/img/cv-apercu.png" alt="Aperçu de la première page du CV de Fabien Villedieu" loading="lazy" onerror="this.hidden = true" />
+            </a>
+            <div class="cv__actions">
+              <a class="btn btn--violet" href="assets/pdf/CV_VILLEDIEU_FABIEN.pdf" download>⤓ Télécharger le PDF</a>
+              <a class="btn" href="assets/pdf/CV_VILLEDIEU_FABIEN.pdf" target="_blank" rel="noopener">Ouvrir dans un onglet ↗</a>
+            </div>
           </div>
         </div>
       </section>
 
       <section class="win" id="w-contact" data-app="contact" data-title="CONTACT.msg" data-path="C:/SYSTÈME" aria-label="Contact">
         <div class="win__body">
+          <form class="form" id="contact-form" action="https://formspree.io/f/xkjrbaqb" method="POST">
+            <div class="form__row">
+              <label>Nom<input name="name" autocomplete="name" maxlength="80" required /><span class="form__error" data-error-for="name"></span></label>
+              <label>E-mail<input name="email" type="email" autocomplete="email" maxlength="120" required /><span class="form__error" data-error-for="email"></span></label>
+            </div>
+            <label>Sujet<input name="subject" maxlength="120" placeholder="Alternance 2027, question sur un projet…" /><span class="form__error" data-error-for="subject"></span></label>
+            <label>Message<textarea name="message" maxlength="4000" required></textarea><span class="form__error" data-error-for="message"></span></label>
+            <!-- champ piège invisible : les robots le remplissent, Formspree rejette alors l'envoi -->
+            <input class="form__trap" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" />
+            <div class="form__actions">
+              <button class="btn btn--violet" type="submit">Envoyer ▶</button>
+              <span class="form__status" data-form-status role="status" aria-live="polite"></span>
+            </div>
+            <p class="txt__hint">Le message est transmis par Formspree, un service d'envoi de formulaires, puis m'arrive par e-mail. Vos coordonnées ne servent qu'à vous répondre.</p>
+          </form>
           <div class="coords">
             <a href="mailto:fabien.villedieu.pro@gmail.com"><span>MAIL</span>fabien.villedieu.pro@gmail.com</a>
             <a href="https://github.com/VIL-CIEL" rel="noopener"><span>GH</span>github.com/VIL-CIEL</a>
             <a href="https://linkedin.com/in/fabien-villedieu/" rel="noopener"><span>IN</span>linkedin — fabien-villedieu</a>
             <div><span>LOC</span>Lyon, France</div>
           </div>
-          <p class="pad txt__hint">Le formulaire de contact arrive au sprint 3.</p>
         </div>
       </section>
 

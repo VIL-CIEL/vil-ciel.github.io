@@ -57,6 +57,8 @@ public/                          # Racine web (seul dossier publié)
     │   ├── wallpaper.js         # Fond d'écran ASCII (statique)
     │   ├── windows.js           # Fenêtres, barre des tâches, menu, notifications, terminal
     │   ├── scenes.js            # Moteur et scènes pixel art des fenêtres
+    │   ├── parcours.js          # Timeline du parcours (SVG)
+    │   ├── contact.js           # Formulaire de contact (Formspree)
     │   └── boot.js              # Boot + initialisation (chargé en dernier)
     ├── pdf/CV_VILLEDIEU_FABIEN.pdf
     ├── img/                     # Photo, favicon, captures dans projects/
@@ -125,9 +127,17 @@ hors périmètre pour ce portfolio statique : §3.1 `install.php`, §3.2 migrati
 API), §8 upload de fichiers, §9 tchat, §10 notifications serveur, §11 sauvegardes BDD,
 §15 tâches planifiées, §16 API / Hub / webhooks, §17.1 stack backend PHP/MySQL.
 
-Le site ne dépose aucun cookie. Le formulaire de contact (sprint 3) passera par un
-service tiers (Formspree) qui transmet le message par e-mail : une mention l'indiquera
-à côté du formulaire.
+Le site ne dépose aucun cookie. Le formulaire de contact passe par un service tiers
+(Formspree, endpoint `https://formspree.io/f/xkjrbaqb`) qui transmet le message par
+e-mail ; une mention l'indique sous le formulaire. Envoi en `fetch` (JSON) quand
+JavaScript est actif, envoi HTML classique sinon ; champ piège `_gotcha` contre les
+robots.
+
+## Aperçu du CV
+
+L'aperçu (première page en PNG) n'est pas versionné : le workflow de déploiement le
+génère avec `pdftoppm` à partir de `assets/pdf/CV_VILLEDIEU_FABIEN.pdf`. Remplacer le
+PDF suffit. L'étape est non bloquante ; sans aperçu, la fenêtre CV affiche un repli.
 
 ## Méthode de travail
 

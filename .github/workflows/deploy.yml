@@ -40,6 +40,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
+      # Aperçu du CV (1re page en PNG) régénéré à chaque déploiement : remplacer
+      # le PDF suffit. Non bloquant : sans aperçu, la fenêtre CV affiche un repli.
+      - name: Generate CV preview
+        continue-on-error: true
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq poppler-utils
+          pdftoppm -png -r 110 -f 1 -l 1 -singlefile \
+            public/assets/pdf/CV_VILLEDIEU_FABIEN.pdf public/assets/img/cv-apercu
       - uses: actions/upload-pages-artifact@v3
         with:
           # Seul le dossier public/ est publié.
