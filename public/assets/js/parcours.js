@@ -47,10 +47,11 @@
     { t0: 2025.68, t1: 2026.38, h: 140, code: 'DAP', sub: 'Projet de fin de BTS', app: 'dap', flag: true },
     { t0: 2026.47, t1: 2026.6, h: 80, code: 'RSMP', sub: 'CC Radio System', app: 'rsmp' },
     { t0: 2026.73, t1: 2026.87, h: 170, code: 'TVA', sub: 'TVA Dashboard', app: 'tva' },
+    { t0: 2026.8, t1: 2026.84, h: 110, code: 'API', sub: 'API REST de devis', app: 'devis' },
   ];
 
   // Branche élaguée : les trois mois à CPE Lyon.
-  const PRUNED = { t0: 2026.67, t1: 2026.86, depth: 110, title: 'CPE LYON', sub: 'Sept. – nov. 2026 · élaguée' };
+  const PRUNED = { t0: 2026.67, t1: 2026.86, depth: 95, title: 'CPE LYON', sub: 'Sept. – nov. 2026 · élaguée' };
 
   const node = (tag, attrs, text) => {
     const n = document.createElementNS(NS, tag);
@@ -117,8 +118,9 @@
       const g = node('g', { class: 'tl__pruned' });
       g.append(node('path', { d: `M${x0} ${yb} C ${x0 + 12} ${yb}, ${x0 + 6} ${yd}, ${x0 + 34} ${yd} L ${x1} ${yd}` }));
       g.append(node('text', { x: x1 - 6, y: yd + 6, class: 'tl__cross' }, '✕'));
-      g.append(node('text', { x: x0 + 40, y: yd - 8, class: 'tl__code' }, PRUNED.title));
-      g.append(node('text', { x: x0 + 40, y: yd + 20, class: 'tl__sub' }, PRUNED.sub));
+      // étiquettes sous la trace, pour ne pas croiser la croix de fin
+      g.append(node('text', { x: x0 + 40, y: yd + 24, class: 'tl__code' }, PRUNED.title));
+      g.append(node('text', { x: x0 + 40, y: yd + 40, class: 'tl__sub' }, PRUNED.sub));
       svg.append(g);
     }
 
@@ -141,8 +143,8 @@
     // … et le futur n'est pas encore écrit : un curseur qui attend la suite
     const xn = xOf(NOW);
     const yn = yOf(xn);
-    svg.append(node('line', { x1: xn, x2: xn, y1: 52, y2: 412, class: 'tl__now' }));
-    svg.append(node('text', { x: xn - 6, y: 410, class: 'tl__now-label', 'text-anchor': 'end' }, 'MAINTENANT'));
+    svg.append(node('line', { x1: xn, x2: xn, y1: 52, y2: 426, class: 'tl__now' }));
+    svg.append(node('text', { x: xn - 6, y: 435, class: 'tl__now-label', 'text-anchor': 'end' }, 'MAINTENANT'));
     svg.append(node('rect', { x: xn + 6, y: yn - 9, width: 9, height: 18, class: 'tl__caret' }));
     const future = node('g', { class: 'tl__future' });
     future.append(node('text', { x: xn + 24, y: yn - 6, class: 'tl__code' }, 'ALTERNANCE 2027'));

@@ -106,6 +106,7 @@
           <button class="ico" type="button" data-open="dap"><canvas class="px" width="16" height="16" data-icon="dap" aria-hidden="true"></canvas><span>DAP.exe</span></button>
           <button class="ico" type="button" data-open="ihm"><canvas class="px" width="16" height="16" data-icon="ihm" aria-hidden="true"></canvas><span>STAGE_IHM.exe</span></button>
           <button class="ico" type="button" data-open="tva"><canvas class="px" width="16" height="16" data-icon="tva" aria-hidden="true"></canvas><span>TVA_DASH.exe</span></button>
+          <button class="ico" type="button" data-open="devis"><canvas class="px" width="16" height="16" data-icon="devis" aria-hidden="true"></canvas><span>DEVIS_API.exe</span></button>
           <button class="ico" type="button" data-open="rsmp"><canvas class="px" width="16" height="16" data-icon="rsmp" aria-hidden="true"></canvas><span>CC_RADIO.exe</span></button>
         </div>
         <div class="group">
@@ -283,6 +284,58 @@
         </div>
       </section>
 
+      <!-- ===================== API DE DEVIS ===================== -->
+      <section class="win" id="w-devis" data-app="devis" data-title="DEVIS_API.exe" data-path="C:/PROJETS/CANDIDATURE" aria-label="API REST de gestion de devis">
+        <div class="win__body">
+          <div class="scene"><span class="scene__todo">ANIMATION À VENIR</span><canvas class="px" width="192" height="64" aria-hidden="true"></canvas></div>
+          <div class="win__head">
+            <span class="code" aria-hidden="true">API</span>
+            <div>
+              <h2>API REST DE DEVIS</h2>
+              <p>Un morceau d'ERP en TypeScript : clients, devis, lignes et cycle de vie des statuts.</p>
+            </div>
+          </div>
+          <div class="pills">
+            <span class="pill pill--violet"><span>Délai</span><span>Livré en 4-5 jours</span></span>
+            <span class="pill"><span>Cadre</span><span>Candidature d'alternance</span></span>
+            <span class="pill pill--ok"><span>Tests</span><span>Règles de statut</span></span>
+          </div>
+          <div class="cols">
+            <div class="txt">
+              <h3>Le contexte</h3>
+              <p>Après un premier entretien pour une alternance, l'entreprise m'a demandé un <strong>livrable technique à rendre en moins d'une semaine</strong>, sur une stack que je n'avais jamais utilisée. Je l'ai livré en <strong>4 à 5 jours</strong>.</p>
+              <h3>Apprendre vite</h3>
+              <p>TypeScript, Express et PostgreSQL étaient nouveaux pour moi, et le délai ne laissait pas le temps de tout apprendre seul. J'ai utilisé l'IA <strong>comme un professeur, dans l'esprit d'un TP</strong> : elle m'a donné une base sur laquelle travailler et m'a accompagné dans l'apprentissage rapide du langage.</p>
+              <h3>Ce que fait l'API</h3>
+              <ul>
+                <li>12 routes pour les clients, les devis et leurs lignes, avec des erreurs toujours au même format.</li>
+                <li>Cycle de vie imposé : brouillon → envoyé → signé ou refusé, et rien d'autre.</li>
+                <li>On n'envoie pas un devis vide, on ne modifie les lignes que d'un brouillon, on ne supprime pas un client qui a des devis.</li>
+              </ul>
+              <h3>Mes choix</h3>
+              <ul>
+                <li><strong>SQL écrit à la main</strong>, requêtes paramétrées : aucune valeur reçue n'est collée dans le SQL (pas d'injection).</li>
+                <li><strong>Total calculé à la lecture</strong>, jamais stocké : il ne peut pas se désynchroniser des lignes.</li>
+                <li><strong>Montants exacts</strong> (<code>NUMERIC</code>), renvoyés en texte pour éviter les erreurs d'arrondi.</li>
+                <li><strong>Règles de statut dans une fonction pure</strong>, testée sans serveur ni base.</li>
+                <li>Codes HTTP distincts : 400 requête mal formée, 404 introuvable, 409 conflit avec l'état actuel.</li>
+                <li>Changement de statut conditionnel : deux envois simultanés du même devis, un seul réussit.</li>
+              </ul>
+              <h3>Limites assumées</h3>
+              <p>Pas d'authentification ni de pagination, et un cas de concurrence identifié sur l'ajout de lignes (la correction serait une transaction avec verrouillage). Elles sont documentées dans le README plutôt que masquées.</p>
+            </div>
+            <dl class="meta">
+              <dt>Stack</dt>
+              <dd><div class="chips"><span class="chip">TypeScript</span><span class="chip">Node.js</span><span class="chip">Express 5</span><span class="chip">PostgreSQL</span></div></dd>
+              <dt>Période</dt>
+              <dd>Octobre 2026</dd>
+              <dt>Code</dt>
+              <dd><a class="btn" href="https://github.com/VIL-CIEL/devis-api" rel="noopener">GitHub ↗</a></dd>
+            </dl>
+          </div>
+        </div>
+      </section>
+
       <!-- ===================== AUTRES PROJETS (contenu complet au sprint 4) ===================== -->
       <section class="win" id="w-tva" data-app="tva" data-title="TVA_DASH.exe" data-path="C:/PROJETS/PERSO" aria-label="TVA Dashboard">
         <div class="win__body">
@@ -446,6 +499,7 @@
           <div class="txt txt--pad"><h3>Journal — version texte</h3></div>
           <div class="log">
             <div class="log__row log__row--next"><time>2027</time><span class="log__mark">▶</span><div><b>Alternance</b><span class="log__desc">Développement logiciel — la suite reste à écrire.</span></div></div>
+            <div class="log__row"><time>Oct. 2026</time><span class="log__mark">■</span><div><b>API REST de devis</b><span class="log__desc">Livrable technique d'une candidature d'alternance, en 4-5 jours. <button class="link-btn" type="button" data-open="devis">ouvrir</button></span></div></div>
             <div class="log__row"><time>Oct.–nov. 2026</time><span class="log__mark">■</span><div><b>TVA Dashboard</b><span class="log__desc">Projet personnel : extension Firefox. <button class="link-btn" type="button" data-open="tva">ouvrir</button></span></div></div>
             <div class="log__row log__row--key"><time>Oct. 2026</time><span class="log__mark">★</span><div><b>PyMoDAQ Days — Paris</b><span class="log__desc">Présentation en anglais du projet DAP. <button class="link-btn" type="button" data-open="dap">ouvrir</button></span></div></div>
             <div class="log__row log__row--pruned"><time>Sept.–nov. 2026</time><span class="log__mark">✕</span><div><b>CPE Lyon</b><span class="log__desc">Trois mois de cursus, branche élaguée faute d'alternance.</span></div></div>

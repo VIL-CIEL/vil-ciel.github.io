@@ -38,13 +38,19 @@ Légende : ✅ terminé · 🚧 en cours · ⬜ à faire
 - [ ] Sprint v2-5 : accessibilité, audit de performance, polices hébergées sur le site,
       SEO, docs, `version.json` 2.0.0, fusion dans `main`, tag `v2.0.0`.
 - [ ] Photos des PyMoDAQ Days à intégrer dans la fenêtre DAP.
-- [ ] Sprint v2-4 : décider comment présenter `devis-api` (API REST TypeScript,
-      Express, PostgreSQL ; livrable technique d'une candidature d'alternance, techno
-      découverte pour l'occasion) — nom de l'entreprise affiché ou non, et mention de
-      la façon dont il a été appris (exception à la règle des mentions IA à valider).
+- [ ] Sprint v2-4 : animation de la fenêtre `devis-api` (contenu déjà en place).
 
 ## Journal
 
+- 2026-11-19 : ajout du projet `devis-api` (API REST de devis en TypeScript, Express 5,
+  PostgreSQL), livrable technique d'une candidature d'alternance réalisé en 4-5 jours
+  sur une stack nouvelle. Décisions : l'entreprise n'est pas nommée ; une section
+  « Apprendre vite » explique l'usage de l'IA comme professeur, dans l'esprit d'un TP
+  (troisième exception validée à la règle des mentions IA). Fenêtre complète (contexte,
+  routes, règles métier, choix techniques, limites assumées), icône, entrée dans le
+  menu, le terminal, la timeline et le journal. Timeline : étiquettes de la branche
+  CPE déplacées sous la trace (la croix les recouvrait), « MAINTENANT » sous la ligne
+  rouge ; contrôle automatique des chevauchements d'étiquettes : aucun.
 - 2026-11-19 : Recherche textuelle replacée en terminale (2023-2024), comme l'indique
   la description du dépôt GitHub. Fenêtre du stage : ajout du plugin
   `pymodaq_plugins_cellkraft` (pilotage du générateur de vapeur Cellkraft E1500 en

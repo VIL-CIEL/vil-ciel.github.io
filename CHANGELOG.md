@@ -29,6 +29,8 @@ et le projet respecte le [versionnage sémantique](https://semver.org/lang/fr/) 
 - CV : aperçu de la première page généré au déploiement, téléchargement direct.
 - Formulaire de contact fonctionnel (Formspree) : validation, anti-robots, retour
   d'envoi dans la page.
+- Nouveau projet : API REST de devis (TypeScript, Express, PostgreSQL).
+- Fenêtre du stage : plugin PyMoDAQ Cellkraft (publié sur PyPI).
 
 ### Modifié
 - Contenus mis à jour : BTS CIEL obtenu (2026), recherche d'alternance pour la rentrée

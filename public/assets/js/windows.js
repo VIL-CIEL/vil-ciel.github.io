@@ -187,7 +187,7 @@
   function buildStart() {
     const list = $('#start-list');
     const SECTIONS = [
-      ['Projets', ['dap', 'ihm', 'tva', 'rsmp', 'unity', 'pygame', 'recherche', 'folio']],
+      ['Projets', ['dap', 'ihm', 'tva', 'devis', 'rsmp', 'unity', 'pygame', 'recherche', 'folio']],
       ['Bénévolat', ['arcadia']],
       ['Personnel', ['lisezmoi', 'profil', 'parcours', 'cv', 'contact', 'terminal']],
     ];
@@ -234,7 +234,7 @@
     term.addEventListener('click', () => {
       if (!window.getSelection()?.toString()) input.focus();
     });
-    const apps = ['dap', 'ihm', 'tva', 'rsmp', 'unity', 'pygame', 'recherche', 'folio', 'arcadia', 'profil', 'parcours', 'cv', 'contact'];
+    const apps = ['dap', 'ihm', 'tva', 'devis', 'rsmp', 'unity', 'pygame', 'recherche', 'folio', 'arcadia', 'profil', 'parcours', 'cv', 'contact'];
     const CMD = {
       help: () => 'help · ls · open <programme> · whoami · status · clear',
       ls: () => apps.map((a) => winOf(a)?.dataset.title).filter(Boolean).join('   '),

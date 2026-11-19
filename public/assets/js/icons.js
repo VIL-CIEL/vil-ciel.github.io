@@ -113,6 +113,21 @@
       P.r(5, 10, 3, 1, C.w);
       P.r(9, 10, 1, 1, C.v);
     },
+    devis(P) {
+      frame(P);
+      // accolades d'un objet JSON
+      P.r(4, 6, 1, 6, C.v);
+      P.p(5, 6, C.v);
+      P.p(5, 11, C.v);
+      P.p(3, 9, C.v);
+      P.r(11, 6, 1, 6, C.v);
+      P.p(10, 6, C.v);
+      P.p(10, 11, C.v);
+      P.p(12, 9, C.v);
+      P.r(7, 7, 2, 1, C.w);
+      P.r(7, 9, 2, 1, C.l);
+      P.r(7, 11, 1, 1, C.l);
+    },
     rsmp(P) {
       frame(P);
       P.r(4, 6, 5, 6, C.g);
