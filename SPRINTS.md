@@ -38,12 +38,19 @@ Légende : ✅ terminé · 🚧 en cours · ⬜ à faire
 - [ ] Sprint v2-5 : accessibilité, audit de performance, polices hébergées sur le site,
       SEO, docs, `version.json` 2.0.0, fusion dans `main`, tag `v2.0.0`.
 - [ ] Photos des PyMoDAQ Days à intégrer dans la fenêtre DAP.
-- [ ] Projets repérés sur GitHub et absents du portfolio : `devis-api` (API REST
-      TypeScript, Express, PostgreSQL), `pymodaq_plugins_cellkraft`,
-      `pymodaq_plugins_teaching` — à ajouter ou non (sprint v2-4).
+- [ ] Sprint v2-4 : décider comment présenter `devis-api` (API REST TypeScript,
+      Express, PostgreSQL ; livrable technique d'une candidature d'alternance, techno
+      découverte pour l'occasion) — nom de l'entreprise affiché ou non, et mention de
+      la façon dont il a été appris (exception à la règle des mentions IA à valider).
 
 ## Journal
 
+- 2026-11-19 : Recherche textuelle replacée en terminale (2023-2024), comme l'indique
+  la description du dépôt GitHub. Fenêtre du stage : ajout du plugin
+  `pymodaq_plugins_cellkraft` (pilotage du générateur de vapeur Cellkraft E1500 en
+  Modbus TCP, lecture de pression), co-écrit avec deux chercheurs et publié sur PyPI
+  dans l'organisation PyMoDAQ. `pymodaq_plugins_teaching` (fork de test au début du
+  stage) n'est pas présenté.
 - 2026-11-19 : sprint v2-3 (programmes système). Profil : « Méthode de travail »
   (5 étapes) et aparté « Comment j'utilise l'IA » repris de la section du README.
   Parcours : timeline façon *Loki* en SVG (`parcours.js`) — ligne principale de la

@@ -40,8 +40,8 @@
 
   // Branches : les projets, partis de la ligne au moment où je les ai faits.
   const BRANCHES = [
-    { t0: 2022.8, t1: 2023.35, h: 80, code: 'RECH', sub: 'Recherche textuelle', app: 'recherche' },
-    { t0: 2023.8, t1: 2024.35, h: 140, code: 'PYG', sub: 'Jeu Pygame', app: 'pygame' },
+    { t0: 2023.72, t1: 2024.02, h: 80, code: 'RECH', sub: 'Recherche textuelle', app: 'recherche' },
+    { t0: 2023.88, t1: 2024.38, h: 140, code: 'PYG', sub: 'Jeu Pygame', app: 'pygame' },
     { t0: 2024.8, t1: 2025.25, h: 80, code: 'UNTY', sub: 'Jeu Unity', app: 'unity' },
     { t0: 2025.38, t1: 2025.56, h: 170, code: 'STAGE', sub: 'IHM Pymodaq · CETHIL', app: 'ihm' },
     { t0: 2025.68, t1: 2026.38, h: 140, code: 'DAP', sub: 'Projet de fin de BTS', app: 'dap', flag: true },
