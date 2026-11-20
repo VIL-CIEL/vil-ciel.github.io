@@ -38,12 +38,21 @@ et le projet respecte le [versionnage sémantique](https://semver.org/lang/fr/) 
 - Fenêtres complètes et scènes animées pour TVA Dashboard (lien vers Mozilla), CC Radio
   System, UnderCore (Unity), TaleUnder (Pygame), la recherche textuelle et ce portfolio ;
   scène animée pour l'API de devis.
+- Fenêtre DAP : liens vers le dépôt, PyPI et le wiki. Fenêtre du stage : galerie.
+- Image d'aperçu pour le partage du lien et données structurées pour les moteurs de
+  recherche.
+- Résumé en anglais (LISEZ-MOI et commande `en`), terminal enrichi : `projets`, `cv`,
+  `contact`, `neofetch`, historique avec les flèches.
+- Accessibilité : focus visible partout, retour du focus à la fermeture des fenêtres,
+  sortie du terminal annoncée aux lecteurs d'écran.
 
 ### Modifié
 - Contenus mis à jour : BTS CIEL obtenu (2026), recherche d'alternance pour la rentrée
   2027, présentation en anglais aux PyMoDAQ Days, piste V2 du projet DAP (LECO),
   description du banc de test du stage.
 - Les jeux prennent leur vrai nom : UnderCore // Unity et TaleUnder // Pygame.
+- Polices hébergées sur le site (plus d'appel à Google Fonts), captures des projets en
+  WebP (2,6 Mo → 0,5 Mo).
 - Page 404 refaite au style de l'interface (chemins absolus).
 - `sitemap.xml` réduit à la page unique.
 

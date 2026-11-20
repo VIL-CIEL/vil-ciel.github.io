@@ -17,9 +17,10 @@ Légende : ✅ terminé · 🚧 en cours · ⬜ à faire
   d'exploitation fictif, chaque projet est un programme avec une animation pixel art
   dessinée en code. Style rétro / terminal, base sombre, violet en minorité, glitch
   ponctuel. Maquette de référence hors dépôt : `Portofolio_Project/maquette-os.html`.
-- Sprints v2-1 (fondations), v2-2 (pixel art), v2-3 (programmes système) et
-  **v2-4 (autres projets)** terminés côté code, en attente du test dans Firefox. Fond d'écran : bannière convertie en ASCII (variante 4), image
-  définitive à récupérer.
+- Sprints v2-1 à v2-4 terminés et validés (formulaire de contact et animations testés
+  en conditions réelles le 2026-11-20). Sprint v2-5 (finitions) terminé côté code ;
+  reste la sortie de la v2. Fond d'écran : bannière convertie en ASCII (variante 4),
+  image définitive à récupérer.
 - Le statut affiché vient de `public/data/profile.json`.
 
 ## Prochaines étapes
@@ -32,17 +33,26 @@ Légende : ✅ terminé · 🚧 en cours · ⬜ à faire
       Le logo du serveur communautaire reste visible (décision du 2026-11-18). Récupérer
       l'image définitive en haute résolution (`public/assets/img/fond-banniere.png`, pas encore versionnée),
       puis retirer les variantes 1-3 et le sélecteur de test du menu.
-- [ ] Tester dans Firefox les dix scènes (rendu, fluidité, consommation).
-- [ ] Tester le formulaire de contact en conditions réelles (un vrai envoi depuis le
-      site en ligne ou en local) et vérifier la réception du mail.
 - [ ] Vérifier au premier déploiement de la v2 que l'aperçu du CV est bien généré par
       GitHub Actions (`public/assets/img/cv-apercu.png`).
-- [ ] Sprint v2-5 : accessibilité, audit de performance, polices hébergées sur le site,
-      SEO, docs, `version.json` 2.0.0, fusion dans `main`, tag `v2.0.0`.
+- [ ] Sortie de la v2 : `version.json` 2.0.0, changelog daté, fusion dans `main`, tag
+      `v2.0.0` (décision sur l'image du fond d'écran avant).
 - [ ] Photos des PyMoDAQ Days à intégrer dans la fenêtre DAP.
 
 ## Journal
 
+- 2026-11-20 : sprint v2-5 (finitions). Polices hébergées sur le site (WOFF2 par plage
+  de caractères, préchargées, licences OFL jointes) : plus aucune requête externe.
+  Captures des projets en WebP (2,6 Mo → 0,5 Mo), galerie ajoutée à la fenêtre du
+  stage, liens dépôt / PyPI / wiki dans la fenêtre DAP. Image de partage 1200×630
+  (nom, statut, deux scènes du site), carte Twitter et données structurées `Person`.
+  Accessibilité : contour de focus par défaut, retour du focus à l'élément d'origine à
+  la fermeture, focus sur la tâche quand on réduit, terminal en `aria-live`, contrastes
+  vérifiés (≥ 4,5:1). Résumé en anglais dans LISEZ-MOI et commande `en` ; terminal :
+  `projets`, `cv`, `contact`, `neofetch`, `sudo`, `exit`, noms des jeux acceptés par
+  `open`, historique avec les flèches. Mesuré : HTML + CSS + JS ≈ 64 Ko compressés,
+  chargement local < 0,1 s. Formulaire de contact et animations validés par un test
+  réel.
 - 2026-11-19 : sprint v2-4 (autres projets). Fenêtres complètes (contexte, ce que fait
   le projet, choix ou difficultés, ce que j'en retiens, stack, lien) pour TVA Dashboard
   (lien vers la page Mozilla), CC Radio System (projet rapide pour une construction du
@@ -205,8 +215,9 @@ Fenêtres complètes et scènes de TVA Dashboard, CC Radio System, UnderCore (Un
 TaleUnder (Pygame), recherche textuelle, ce portfolio, et scène de devis-api.
 Code terminé, en attente du test Firefox.
 
-### ⬜ Sprint v2-5 — Finitions et sortie
-Accessibilité, performance, polices locales, SEO, documentation, v2.0.0.
+### 🚧 Sprint v2-5 — Finitions et sortie
+Accessibilité, performance, polices locales, SEO, documentation : faits. Reste la
+sortie : version 2.0.0, fusion dans `main`, tag `v2.0.0`.
 
 ---
 

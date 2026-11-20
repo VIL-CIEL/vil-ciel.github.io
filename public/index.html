@@ -21,6 +21,25 @@
     />
     <meta property="og:url" content="https://vil-ciel.github.io/" />
     <meta property="og:locale" content="fr_FR" />
+    <meta property="og:image" content="https://vil-ciel.github.io/assets/img/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Fabien Villedieu, développeur logiciel à Lyon : portfolio en forme de système d'exploitation, avec deux fenêtres animées en pixel art." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Fabien Villedieu",
+        "jobTitle": "Développeur logiciel",
+        "url": "https://vil-ciel.github.io/",
+        "image": "https://vil-ciel.github.io/assets/img/profile.jpg",
+        "address": { "@type": "PostalAddress", "addressLocality": "Lyon", "addressCountry": "FR" },
+        "alumniOf": { "@type": "EducationalOrganization", "name": "BTS CIEL" },
+        "knowsAbout": ["Python", "PyMoDAQ", "C#", "TypeScript", "JavaScript", "Lua", "PostgreSQL"],
+        "sameAs": ["https://github.com/VIL-CIEL"]
+      }
+    </script>
     <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
 
     <!-- JS actif + boot de première visite, avant le rendu (aucun flash du bureau) -->
@@ -35,12 +54,8 @@
       })();
     </script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=VT323&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preload" href="assets/fonts/plex-mono-400-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="assets/fonts/vt323-400-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="assets/css/os.css" />
 
     <script src="assets/js/core.js" defer></script>
@@ -136,6 +151,17 @@
               <li><a class="btn" href="assets/pdf/CV_VILLEDIEU_FABIEN.pdf" download>⤓ CV.pdf</a> mon CV, directement.</li>
             </ul>
             <p class="txt__hint">Astuce : chaque fenêtre a sa propre adresse, pratique pour partager un projet. Échap ferme la fenêtre active.</p>
+            <details class="en" lang="en">
+              <summary>In English</summary>
+              <p>I'm Fabien Villedieu, a software developer based in Lyon, France, with a two-year degree in IT and networks (BTS CIEL, 2026). I'm looking for a <strong>work-study position (alternance) starting September 2027</strong>.</p>
+              <ul>
+                <li><strong>DAP</strong>: PyMoDAQ plugins that drive low-cost acquisition boards (Raspberry Pi) instead of ~€1,000 modules. Published on PyPI and <strong>presented in English at PyMoDAQ Days 2026</strong> in Paris.</li>
+                <li><strong>Lab internship</strong> at CETHIL: acquisition software for a thermal test bench, co-author of a published PyMoDAQ plugin.</li>
+                <li><strong>devis-api</strong>: a REST API in TypeScript, Express and PostgreSQL, delivered in under a week on a new stack.</li>
+                <li><strong>TVA Dashboard</strong>: a Firefox extension published on Mozilla's add-ons site.</li>
+              </ul>
+              <p>Each icon on the desktop opens a project. Type <code>en</code> in the terminal for this summary, or reach me through <button class="link-btn" type="button" data-open="contact">CONTACT.msg</button>.</p>
+            </details>
           </div>
         </div>
       </section>
@@ -186,10 +212,12 @@
               <dd>≈150 h · 2025-2026</dd>
               <dt>Partenaire</dt>
               <dd>CETHIL</dd>
+              <dt>Liens</dt>
+              <dd><a class="btn" href="https://github.com/PyMoDAQ/pymodaq_plugins_raspberry" rel="noopener">GitHub ↗</a><a class="btn" href="https://pypi.org/project/pymodaq-plugins-raspberry/" rel="noopener">PyPI ↗</a><a class="btn" href="https://wiki-plugins-dap-pymodaq.github.io/" rel="noopener">Wiki ↗</a></dd>
             </dl>
           </div>
           <div class="gallery">
-            <figure><img src="assets/img/projects/dap-pymodaq-dashboard.png" alt="Interface PyMoDAQ avec le plugin Raspberry Pi" loading="lazy" /><figcaption>PyMoDAQ — plugin Pi 3B</figcaption></figure>
+            <figure><img src="assets/img/projects/dap-pymodaq-dashboard.webp" alt="Interface PyMoDAQ avec le plugin Raspberry Pi" loading="lazy" /><figcaption>PyMoDAQ — plugin Pi 3B</figcaption></figure>
             <figure><div class="placeholder">Photo<br />PyMoDAQ Days</div><figcaption>Paris — oct. 2026</figcaption></figure>
           </div>
         </div>
@@ -241,6 +269,12 @@
               <dt>Suite</dt>
               <dd><button class="btn btn--violet" type="button" data-open="dap">Ouvrir DAP →</button></dd>
             </dl>
+          </div>
+          <div class="gallery">
+            <figure><img src="assets/img/projects/IHM_Pymodaq.webp" alt="Vue d'ensemble de l'interface d'acquisition PyMoDAQ" loading="lazy" /><figcaption>Interface d'acquisition</figcaption></figure>
+            <figure><img src="assets/img/projects/IHM_Pymodaq_Explication.webp" alt="Schéma explicatif de l'interface" loading="lazy" /><figcaption>Schéma de l'interface</figcaption></figure>
+            <figure><img src="assets/img/projects/composant_banc.webp" alt="Composants du banc de test" loading="lazy" /><figcaption>Composants du banc</figcaption></figure>
+            <figure><img src="assets/img/projects/Log_exemple.webp" alt="Exemple de journal de l'application" loading="lazy" /><figcaption>Journal de l'application</figcaption></figure>
           </div>
         </div>
       </section>
@@ -468,10 +502,10 @@
             </dl>
           </div>
           <div class="gallery">
-            <figure><img src="assets/img/projects/jeuUnity.png" alt="Écran principal d'UnderCore" loading="lazy" /><figcaption>Écran principal</figcaption></figure>
-            <figure><img src="assets/img/projects/jeuUnity-CombatPlayerTurn.png" alt="Combat, tour du joueur" loading="lazy" /><figcaption>Combat — tour du joueur</figcaption></figure>
-            <figure><img src="assets/img/projects/jeuUnity-Door.png" alt="Passage d'une zone à une autre par une porte" loading="lazy" /><figcaption>Passage entre zones</figcaption></figure>
-            <figure><img src="assets/img/projects/jeuUnity-Stats.png" alt="Statistiques du personnage" loading="lazy" /><figcaption>Statistiques</figcaption></figure>
+            <figure><img src="assets/img/projects/jeuUnity.webp" alt="Écran principal d'UnderCore" loading="lazy" /><figcaption>Écran principal</figcaption></figure>
+            <figure><img src="assets/img/projects/jeuUnity-CombatPlayerTurn.webp" alt="Combat, tour du joueur" loading="lazy" /><figcaption>Combat — tour du joueur</figcaption></figure>
+            <figure><img src="assets/img/projects/jeuUnity-Door.webp" alt="Passage d'une zone à une autre par une porte" loading="lazy" /><figcaption>Passage entre zones</figcaption></figure>
+            <figure><img src="assets/img/projects/jeuUnity-Stats.webp" alt="Statistiques du personnage" loading="lazy" /><figcaption>Statistiques</figcaption></figure>
           </div>
         </div>
       </section>
@@ -516,8 +550,8 @@
             </dl>
           </div>
           <div class="gallery">
-            <figure><img src="assets/img/projects/Jeu_Pygame-Monde.png" alt="Exploration du monde semi-ouvert" loading="lazy" /><figcaption>Monde semi-ouvert</figcaption></figure>
-            <figure><img src="assets/img/projects/Jeu_Pygame-playerTurn.png" alt="Combat au tour par tour, tour du joueur" loading="lazy" /><figcaption>Combat — tour du joueur</figcaption></figure>
+            <figure><img src="assets/img/projects/Jeu_Pygame-Monde.webp" alt="Exploration du monde semi-ouvert" loading="lazy" /><figcaption>Monde semi-ouvert</figcaption></figure>
+            <figure><img src="assets/img/projects/Jeu_Pygame-playerTurn.webp" alt="Combat au tour par tour, tour du joueur" loading="lazy" /><figcaption>Combat — tour du joueur</figcaption></figure>
           </div>
         </div>
       </section>
@@ -564,7 +598,7 @@
             </dl>
           </div>
           <div class="gallery">
-            <figure><img src="assets/img/projects/recherche.png" alt="Interface Tkinter du logiciel de recherche textuelle" loading="lazy" /><figcaption>Interface Tkinter</figcaption></figure>
+            <figure><img src="assets/img/projects/recherche.webp" alt="Interface Tkinter du logiciel de recherche textuelle" loading="lazy" /><figcaption>Interface Tkinter</figcaption></figure>
           </div>
         </div>
       </section>
@@ -733,7 +767,7 @@
       <section class="win" id="w-terminal" data-app="terminal" data-title="TERMINAL" data-path="C:/SYSTÈME" aria-label="Terminal">
         <div class="win__body">
           <div class="term" id="term">
-            <div class="term__out" id="term-out">FV-SHELL v2.0 — tapez help
+            <div class="term__out" id="term-out" aria-live="polite">FV-SHELL v2.0 — tapez help · type en for English
 </div>
             <form class="term__in" id="term-form"><span>fv&gt;</span><input id="term-in" aria-label="Commande" autocomplete="off" spellcheck="false" /></form>
           </div>

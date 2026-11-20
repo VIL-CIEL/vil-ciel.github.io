@@ -9,6 +9,7 @@
   let cascade = 0;
 
   const winOf = (app) => document.getElementById('w-' + app);
+  const opener = new WeakMap(); // élément qui avait le focus à l'ouverture
   const taskOf = (win) => $(`.task[data-app="${win.dataset.app}"]`);
   const isOpen = (win) => win.classList.contains('is-open');
   const visibleWindows = () =>
@@ -98,6 +99,8 @@
       restore(win);
       return;
     }
+    const from = document.activeElement;
+    if (from && from !== document.body && !win.contains(from)) opener.set(win, from);
     win.classList.add('is-open');
     // comme un vrai logiciel : chaque ouverture repart du haut
     const body = win.querySelector('.win__body');
@@ -142,7 +145,12 @@
     if (next) {
       focus(next);
       next.querySelector('.win__btns [data-act="close"]').focus({ preventScroll: true });
+    } else {
+      // plus de fenêtre : le focus revient là où il était (icône, bouton, lien…)
+      const back = opener.get(win);
+      if (back?.isConnected && back.offsetParent !== null) back.focus({ preventScroll: true });
     }
+    opener.delete(win);
   }
 
   function minimize(win) {
@@ -151,6 +159,7 @@
     const task = taskOf(win);
     task?.classList.add('is-min');
     task?.classList.remove('is-active');
+    if (win.contains(document.activeElement)) task?.focus({ preventScroll: true });
     FV.onWindowChange?.();
   }
 
@@ -234,28 +243,96 @@
     term.addEventListener('click', () => {
       if (!window.getSelection()?.toString()) input.focus();
     });
-    const apps = ['dap', 'ihm', 'tva', 'devis', 'rsmp', 'unity', 'pygame', 'recherche', 'folio', 'arcadia', 'profil', 'parcours', 'cv', 'contact'];
+    const apps = ['dap', 'ihm', 'tva', 'devis', 'rsmp', 'unity', 'pygame', 'recherche', 'folio', 'arcadia', 'profil', 'parcours', 'cv', 'contact', 'lisezmoi'];
+    // noms acceptés en plus des identifiants : open undercore, open taleunder…
+    const ALIAS = { undercore: 'unity', taleunder: 'pygame', stage: 'ihm', api: 'devis', radio: 'rsmp', portfolio: 'folio', benevolat: 'arcadia', minecraft: 'arcadia' };
+    const PROJECTS = [
+      ['dap', 'plugins PyMoDAQ pour cartes low-cost (projet de fin de BTS)'],
+      ['ihm', 'stage au CETHIL : acquisition d\'un banc thermique'],
+      ['devis', 'API REST en TypeScript, Express et PostgreSQL'],
+      ['tva', 'extension Firefox publiée chez Mozilla'],
+      ['rsmp', 'radio réseau en Lua pour Minecraft'],
+      ['unity', 'UnderCore, jeu Unity en C#'],
+      ['pygame', 'TaleUnder, jeu Pygame en Python'],
+      ['recherche', 'naïf contre Boyer-Moore-Horspool'],
+      ['folio', 'ce site'],
+    ];
+    const openApp = (app) => {
+      open(app);
+      return 'ouverture de ' + winOf(app).dataset.title + '…';
+    };
     const CMD = {
-      help: () => 'help · ls · open <programme> · whoami · status · clear',
+      help: () =>
+        [
+          'help          cette aide',
+          'ls            liste des programmes',
+          'projets       les projets en une ligne',
+          'open <nom>    ouvre un programme (open dap, open undercore…)',
+          'cv · contact  raccourcis',
+          'whoami        qui je suis',
+          'status        ce que je cherche',
+          'neofetch      fiche système',
+          'en            summary in English',
+          'clear         efface l\'écran',
+        ].join('\n'),
       ls: () => apps.map((a) => winOf(a)?.dataset.title).filter(Boolean).join('   '),
+      projets: () => PROJECTS.map(([a, d]) => `${winOf(a).dataset.title.padEnd(15)} ${d}`).join('\n') + '\n→ open <nom> pour en ouvrir un',
+      cv: () => openApp('cv'),
+      contact: () => openApp('contact'),
       whoami: () => 'Fabien Villedieu — développeur logiciel, Lyon.',
       status: () => `statut : ${FV.profile.statut}\ndébut  : ${FV.profile.debut}\nzone   : ${FV.profile.zone}`,
+      neofetch: () =>
+        [
+          '    /\\      fabien@fv-os',
+          '   /  \\     ------------',
+          '  / FV \\    OS       : FV-OS 2.0 (HTML · CSS · JS)',
+          '  \\    /    Hôte     : GitHub Pages',
+          '   \\  /     Shell    : fv-sh',
+          `    \\/      Diplôme  : ${FV.profile.diplome}`,
+          '            Langages : Python · C# · TypeScript · JS · Lua',
+          `            Statut   : ${FV.profile.statut}`,
+          `            Zone     : ${FV.profile.zone}`,
+        ].join('\n'),
+      en: () =>
+        [
+          'Fabien Villedieu — software developer, Lyon (France).',
+          'BTS CIEL graduate (IT & networks, 2026), looking for a work-study',
+          'position (alternance) starting September 2027.',
+          'Highlights: PyMoDAQ plugins for low-cost boards (presented in English',
+          'at PyMoDAQ Days 2026), lab internship at CETHIL, a TypeScript REST API,',
+          'a Firefox extension. Type "projets" or open LISEZ-MOI for more.',
+        ].join('\n'),
+      sudo: () => 'fabien n\'est pas dans le fichier sudoers. Cet incident sera signalé.',
+      exit: () => {
+        close(winOf('terminal'));
+        return null;
+      },
       clear: () => {
         out.textContent = '';
         return null;
       },
     };
+    // historique des commandes (flèches haut / bas)
+    const history = [];
+    let cursor = 0;
+    input.addEventListener('keydown', (e) => {
+      if (e.key !== 'ArrowUp' && e.key !== 'ArrowDown') return;
+      e.preventDefault();
+      cursor = Math.max(0, Math.min(history.length, cursor + (e.key === 'ArrowUp' ? -1 : 1)));
+      input.value = history[cursor] || '';
+    });
     $('#term-form').addEventListener('submit', (e) => {
       e.preventDefault();
       const raw = input.value.trim();
       input.value = '';
       if (!raw) return;
-      const [cmd, arg] = raw.toLowerCase().split(/\s+/);
+      history.push(raw);
+      cursor = history.length;
+      const [cmd, arg0] = raw.toLowerCase().split(/\s+/);
+      const arg = ALIAS[arg0] || arg0;
       let reply;
-      if (cmd === 'open' && apps.includes(arg)) {
-        open(arg);
-        reply = 'ouverture de ' + arg + '…';
-      } else if (CMD[cmd]) reply = CMD[cmd]();
+      if (cmd === 'open') reply = apps.includes(arg) ? openApp(arg) : `programme introuvable : ${arg0 || '?'} — tapez ls`;
+      else if (Object.hasOwn(CMD, cmd)) reply = CMD[cmd]();
       else reply = `commande inconnue : ${cmd} — tapez help`;
       if (reply !== null) out.textContent += `fv> ${raw}\n${reply}\n`;
       term.scrollTop = term.scrollHeight;

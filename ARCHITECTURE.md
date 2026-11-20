@@ -61,8 +61,9 @@ public/                          # Racine web (seul dossier publié)
     │   ├── parcours.js          # Timeline du parcours (SVG)
     │   ├── contact.js           # Formulaire de contact (Formspree)
     │   └── boot.js              # Boot + initialisation (chargé en dernier)
+    ├── fonts/                   # IBM Plex Mono et VT323 (WOFF2) + licences OFL
     ├── pdf/CV_VILLEDIEU_FABIEN.pdf
-    ├── img/                     # Photo, favicon, captures dans projects/
+    ├── img/                     # Photo, favicon, image de partage, captures (WebP) dans projects/
     └── pages/                   # Anciennes adresses v1 : redirections vers /#fenêtre
 ```
 
@@ -112,15 +113,31 @@ exposé dans le site.
 ## Accessibilité et responsive (§6.4)
 
 - Tout est utilisable au clavier : icônes et boutons natifs, Échap pour fermer, focus
-  visible, ordre de tabulation logique.
+  visible partout (contour violet par défaut), ordre de tabulation logique. À
+  l'ouverture, le focus va dans la fenêtre ; à la fermeture de la dernière fenêtre, il
+  revient sur l'élément qui l'avait ouverte ; réduire une fenêtre le place sur sa tâche.
+- La frise est navigable au clavier (Tab puis Entrée sur un nœud) et doublée d'une
+  version texte. La sortie du terminal est annoncée aux lecteurs d'écran (`aria-live`).
+- Contrastes vérifiés : textes secondaires ≥ 4,5:1 sur tous les fonds.
+- Résumé en anglais (`lang="en"`) dans LISEZ-MOI et avec la commande `en` du terminal.
 - Les fenêtres ont `role="dialog"` et un nom accessible ; les éléments décoratifs
   (fond ASCII, icônes, scènes) sont `aria-hidden`.
 - Sans JavaScript, toutes les fenêtres s'affichent les unes sous les autres.
 - Mobile-first pour le contenu, écran d'accueil dédié sous 760 px.
 
+## Performance
+
+- Polices hébergées sur le site, découpées par plage de caractères (seuls les morceaux
+  utilisés sont chargés) et préchargées ; aucune requête vers un autre domaine.
+- Captures des projets en WebP (avec ou sans perte selon l'image), chargement différé.
+- Mesuré dans le navigateur interne : HTML + CSS + JS ≈ 64 Ko compressés ; dix scènes
+  ouvertes ≈ 13,5 ms de JS par seconde, aucun travail quand rien n'est animé.
+
 ## Référencement (SEO)
 
-- Titre, description, Open Graph, `canonical` et `theme-color` sur la page.
+- Titre, description, Open Graph (avec image de partage 1200×630,
+  `assets/img/og-image.png`), carte Twitter, `canonical` et `theme-color` sur la page.
+- Données structurées `Person` (JSON-LD) : nom, métier, ville, compétences, GitHub.
 - Contenu complet dans le HTML ; `sitemap.xml` réduit à la racine.
 - Les anciennes pages v1 sont des redirections `noindex` avec `canonical` vers la
   fenêtre correspondante. La page 404 est `noindex`.

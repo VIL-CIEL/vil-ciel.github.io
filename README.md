@@ -35,7 +35,7 @@ de modifier ces fichiers sur GitHub pour mettre le site à jour.
 - **HTML5** sémantique : tout le contenu des fenêtres est présent dans la page
 - **CSS vanilla** (variables CSS, Grid, Flexbox, `clip-path`)
 - **JavaScript vanilla** (ES6+, scripts classiques `defer`, canvas pour le pixel art)
-- **Polices** : IBM Plex Mono et VT323
+- **Polices** : IBM Plex Mono et VT323, hébergées sur le site (licence SIL OFL)
 - **Hébergement** : GitHub Pages
 - **CI/CD** : GitHub Actions (lint + déploiement)
 
