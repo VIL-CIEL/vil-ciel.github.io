@@ -36,7 +36,9 @@ Légende : ✅ terminé · 🚧 en cours · ⬜ à faire
 - [ ] Vérifier au premier déploiement de la v2 que l'aperçu du CV est bien généré par
       GitHub Actions (`public/assets/img/cv-apercu.png`).
 - [ ] Sortie de la v2 : `version.json` 2.0.0, changelog daté, fusion dans `main`, tag
-      `v2.0.0` (décision sur l'image du fond d'écran avant).
+      `v2.0.0`. En attente de la bannière HD (décision du 2026-11-20) : la versionner,
+      en faire le seul fond d'écran et retirer les variantes 1-3 et le sélecteur avant
+      la mise en ligne.
 - [ ] Photos des PyMoDAQ Days à intégrer dans la fenêtre DAP.
 
 ## Journal
