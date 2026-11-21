@@ -3,8 +3,8 @@
 Portfolio web personnel de Fabien Villedieu (développeur logiciel, BTS CIEL).
 Site **statique** déployé via **GitHub Pages**.
 
-> **Refonte v2 en cours** sur la branche `refonte-v2` : la version en ligne (`main`)
-> reste la v1 jusqu'à la sortie de la v2.0.0. Avancement dans [SPRINTS.md](SPRINTS.md).
+> Version en ligne : **v2.0.0**, l'interface « OS personnel ». Avancement dans
+> [SPRINTS.md](SPRINTS.md).
 
 ## Aperçu
 
@@ -99,8 +99,8 @@ lint le code puis publie `public/` sur GitHub Pages (Source : « GitHub Actions 
 
 - Le projet avance par **sprints** (1 sprint = 1 fonctionnalité), suivis dans
   [SPRINTS.md](SPRINTS.md).
-- Hors refonte, on **commite directement sur `main`**. La refonte v2 se fait sur la
-  branche `refonte-v2`, fusionnée dans `main` à sa sortie.
+- On **commite directement sur `main`**. Seule une refonte complète passe par une
+  branche à part (la v2 a été construite sur `refonte-v2`, fusionnée à sa sortie).
 - Versionnage sémantique `MAJEUR.MINEUR.CORRECTIF`, **tag Git** `vX.Y.Z` à chaque
   version publiée, historisée dans [CHANGELOG.md](CHANGELOG.md).
 - Les fichiers de documentation racine sont mis à jour **à chaque sprint**.

@@ -10,17 +10,15 @@ Légende : ✅ terminé · 🚧 en cours · ⬜ à faire
 
 ## État actuel
 
-- Version en ligne : **v1.7.0** (`main`, `public/version.json`). Un commit publié sur
-  `main` = une version taguée `vMAJEUR.MINEUR.CORRECTIF`.
-- 🚧 **Refonte v2 « OS personnel »** sur la branche **`refonte-v2`** (la v1 reste en
-  ligne jusqu'à la fusion). DA validée le 2026-11-18 : le portfolio est un système
+- Version en ligne : **v2.0.0** (`main`, `public/version.json`), publiée le
+  2026-11-21. Un commit publié sur `main` = une version taguée
+  `vMAJEUR.MINEUR.CORRECTIF`. Le travail reprend directement sur `main`.
+- ✅ **Refonte v2 « OS personnel »** terminée et fusionnée : le portfolio est un système
   d'exploitation fictif, chaque projet est un programme avec une animation pixel art
   dessinée en code. Style rétro / terminal, base sombre, violet en minorité, glitch
   ponctuel. Maquette de référence hors dépôt : `Portofolio_Project/maquette-os.html`.
-- Sprints v2-1 à v2-4 terminés et validés (formulaire de contact et animations testés
-  en conditions réelles le 2026-11-20). Sprint v2-5 (finitions) terminé. Fond
-  d'écran définitif : la bannière (`assets/img/fond-banniere.webp`) convertie en
-  ASCII, seul fond restant. Reste la sortie de la v2.
+- Fond d'écran : la bannière source (`assets/img/fond-banniere.webp`, 3168×792)
+  convertie en ASCII.
 - Le statut affiché vient de `public/data/profile.json`.
 
 ## Prochaines étapes
@@ -29,15 +27,24 @@ Légende : ✅ terminé · 🚧 en cours · ⬜ à faire
       possible. Selon l'issue, PMA ou CPE deviendra la voie principale (l'autre passant
       en parallèle) : clé `prioritaire` à basculer dans `public/data/parcours.json`
       (CPE = 1 aujourd'hui), dates et descriptions à ajuster, et `profile.json`.
-- [ ] Vérifier au premier déploiement de la v2 que l'aperçu du CV est bien généré par
-      GitHub Actions (`public/assets/img/cv-apercu.png`).
-- [ ] Sortie de la v2 : `version.json` 2.0.0, changelog daté `[2.0.0]`, `lastmod` du
-      sitemap, fusion dans `main`, tag `v2.0.0`. Plus rien ne bloque : en attente du
-      feu vert après vérification du fond d'écran dans Firefox.
+- [ ] Vérifier sur le site en ligne que l'aperçu du CV est bien généré par GitHub
+      Actions (`public/assets/img/cv-apercu.png`).
 - [ ] Photos des PyMoDAQ Days à intégrer dans la fenêtre DAP.
+- [ ] À décider : nom de domaine personnel branché sur GitHub Pages, et renommage du
+      compte GitHub `VIL-CIEL` (adresses absolues, JSON-LD et liens à reprendre).
 
 ## Journal
 
+- 2026-11-21 : sortie de la **v2.0.0**. Fond d'écran recalculé depuis la bannière
+  source en pleine résolution (PNG 3168×792 converti en WebP qualité 90 : 1 Mo →
+  64 Ko, écart mesuré sur la carte d'encre des logos négligeable ; le PNG brut reste
+  hors dépôt). Lint de la CI passé en local avant la fusion : guillemets autour de
+  « VT323 », sélecteur `.timeline` dupliqué fusionné, variable inutilisée retirée
+  (aucun effet visuel, vérifié). `version.json` 2.0.0, changelog daté, `lastmod` du
+  sitemap, fusion de `refonte-v2` dans `main`, tag `v2.0.0`. Limite connue : ouvert
+  directement depuis le disque (`file://`), le fond d'écran ne s'affiche pas, le
+  navigateur interdisant de lire les pixels d'une image locale ; tester via le
+  serveur local.
 - 2026-11-21 : fond d'écran définitif. Il n'existe pas de version HD de la bannière :
   l'image d'origine (2000×500, avant publication sur LinkedIn) est la source et devient
   `assets/img/fond-banniere.webp`, versionnée. Variantes de test 1 à 3 (nébuleuse,
@@ -202,29 +209,26 @@ Légende : ✅ terminé · 🚧 en cours · ⬜ à faire
 
 ---
 
-## 🚧 Refonte v2 — « OS personnel »
+## ✅ Refonte v2 : « OS personnel » (v2.0.0)
 
-### 🚧 Sprint v2-1 — Fondations
+### ✅ Sprint v2-1 : Fondations
 Boot, bureau, fond d'écran ASCII, barre des tâches (raccourci CV, statut), gestionnaire
 de fenêtres (Échap, défilement réinitialisé, adresses directes), mobile, `profile.json`,
 LISEZ-MOI, redirections des anciennes adresses, 404.
 
-### 🚧 Sprint v2-2 — Pixel art
+### ✅ Sprint v2-2 : Pixel art
 Moteur d'animation (une boucle, arrêt hors écran), scènes DAP, stage et plaine.
-Code terminé, en attente du test Firefox.
 
-### 🚧 Sprint v2-3 — Programmes système
-Profil, Parcours en timeline façon *Loki*, CV avec aperçu, contact Formspree, terminal.
-Code terminé, en attente du test Firefox et d'un vrai envoi de formulaire.
+### ✅ Sprint v2-3 : Programmes système
+Profil, Parcours en frise chronologique, CV avec aperçu, contact Formspree, terminal.
 
-### 🚧 Sprint v2-4 — Autres projets
+### ✅ Sprint v2-4 : Autres projets
 Fenêtres complètes et scènes de TVA Dashboard, CC Radio System, UnderCore (Unity),
 TaleUnder (Pygame), recherche textuelle, ce portfolio, et scène de devis-api.
-Code terminé, en attente du test Firefox.
 
-### 🚧 Sprint v2-5 — Finitions et sortie
-Accessibilité, performance, polices locales, SEO, documentation : faits. Reste la
-sortie : version 2.0.0, fusion dans `main`, tag `v2.0.0`.
+### ✅ Sprint v2-5 : Finitions et sortie
+Accessibilité, performance, polices locales, SEO, documentation, fond d'écran
+définitif. Publiée en v2.0.0 le 2026-11-21.
 
 ---
 

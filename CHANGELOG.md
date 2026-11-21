@@ -5,7 +5,7 @@ Toutes les modifications notables de ce projet sont documentées ici.
 Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/)
 et le projet respecte le [versionnage sémantique](https://semver.org/lang/fr/) (`MAJEUR.MINEUR.CORRECTIF`).
 
-## [Non publié] — refonte v2 (branche `refonte-v2`)
+## [2.0.0] - 2026-11-21
 
 ### Ajouté
 - Nouvelle interface en forme de **système d'exploitation** : boot de première visite

@@ -2,7 +2,7 @@
 
 Ce document décrit l'organisation du projet et les choix techniques, conformément
 au référentiel de développement (§2.2). Il décrit la **v2** (interface « OS personnel »),
-en cours de réalisation sur la branche `refonte-v2`.
+en ligne depuis la v2.0.0.
 
 ## Nature du projet
 
@@ -204,5 +204,6 @@ PDF suffit. L'étape est non bloquante ; sans aperçu, la fenêtre CV affiche un
 ## Méthode de travail
 
 Développement par **sprints** (1 sprint = 1 fonctionnalité), suivis dans `SPRINTS.md`.
-La refonte v2 se fait sur la branche `refonte-v2`, fusionnée dans `main` à la sortie
-(tag `v2.0.0`) ; hors refonte, commits directement sur `main`.
+Commits directement sur `main`. Seule une refonte complète passe par une branche à
+part : la v2 a été construite sur `refonte-v2`, fusionnée dans `main` à sa sortie
+(tag `v2.0.0`).
