@@ -1053,7 +1053,6 @@
   SCENES.pygame = () => {
     const R = FV.rng(11);
     const WW = 288; // largeur du monde (répété en boucle)
-    const VIEW = 136;
     const POIS = [70, 190]; // points d'intérêt
     const MSGS = ['PANNEAU : VILLAGE AU NORD', 'PANNEAU : FORET PROFONDE'];
     const world = (() => {

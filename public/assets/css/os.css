@@ -114,7 +114,7 @@
 }
 
 @font-face {
-  font-family: vt323;
+  font-family: "VT323";
   font-style: normal;
   font-weight: 400;
   font-display: swap;
@@ -123,7 +123,7 @@
 }
 
 @font-face {
-  font-family: vt323;
+  font-family: "VT323";
   font-style: normal;
   font-weight: 400;
   font-display: swap;
@@ -149,7 +149,7 @@
   --warn: #e6b84a;
   --alert: #e44b3f;
   --mono: "IBM Plex Mono", consolas, "Courier New", monospace;
-  --crt: vt323, "IBM Plex Mono", monospace;
+  --crt: "VT323", "IBM Plex Mono", monospace;
   --tb: 46px;
   --bevel: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
   --bevel-sm: polygon(0 0, calc(100% - 7px) 0, 100% 7px, 100% 100%, 7px 100%, 0 calc(100% - 7px));
@@ -1695,9 +1695,6 @@ canvas.px {
     linear-gradient(rgb(138 133 146 / 6%) 1px, transparent 1px),
     linear-gradient(90deg, rgb(138 133 146 / 6%) 1px, transparent 1px);
   background-size: 40px 40px;
-}
-
-.timeline {
   cursor: grab;
 }
 
