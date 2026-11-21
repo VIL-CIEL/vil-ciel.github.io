@@ -27,8 +27,6 @@ Légende : ✅ terminé · 🚧 en cours · ⬜ à faire
       possible. Selon l'issue, PMA ou CPE deviendra la voie principale (l'autre passant
       en parallèle) : clé `prioritaire` à basculer dans `public/data/parcours.json`
       (CPE = 1 aujourd'hui), dates et descriptions à ajuster, et `profile.json`.
-- [ ] Vérifier sur le site en ligne que l'aperçu du CV est bien généré par GitHub
-      Actions (`public/assets/img/cv-apercu.png`).
 - [ ] Photos des PyMoDAQ Days à intégrer dans la fenêtre DAP.
 - [ ] À décider : nom de domaine personnel branché sur GitHub Pages, et renommage du
       compte GitHub `VIL-CIEL` (adresses absolues, JSON-LD et liens à reprendre).
@@ -44,7 +42,9 @@ Légende : ✅ terminé · 🚧 en cours · ⬜ à faire
   sitemap, fusion de `refonte-v2` dans `main`, tag `v2.0.0`. Limite connue : ouvert
   directement depuis le disque (`file://`), le fond d'écran ne s'affiche pas, le
   navigateur interdisant de lire les pixels d'une image locale ; tester via le
-  serveur local.
+  serveur local. Déploiement vérifié en ligne : lint et déploiement au vert, aperçu du
+  CV bien généré par GitHub Actions et affiché dans la fenêtre CV, fond d'écran
+  dessiné, aucune erreur en console.
 - 2026-11-21 : fond d'écran définitif. Il n'existe pas de version HD de la bannière :
   l'image d'origine (2000×500, avant publication sur LinkedIn) est la source et devient
   `assets/img/fond-banniere.webp`, versionnée. Variantes de test 1 à 3 (nébuleuse,
