@@ -1,7 +1,6 @@
 /* =====================================================================
-   Fond d'écran ASCII : calculé une fois (et au redimensionnement), dessiné
-   sur un canvas, statique. Variantes en test : 1 nébuleuse, 2 circuit,
-   3 signal + initiales, 4 bannière (image convertie en ASCII).
+   Fond d'écran ASCII : la bannière convertie en caractères, calculée une
+   fois (et au redimensionnement), dessinée sur un canvas, statique.
    ===================================================================== */
 'use strict';
 
@@ -9,8 +8,8 @@
   // Niveaux de violet, du plus discret au plus visible (0 = vide).
   const SHADES = [null, '#221932', '#2e2145', '#3f2c60', '#56398a', '#6f4cb5', '#8a63db'];
   const FONT_FAMILY = '"IBM Plex Mono", consolas, monospace';
-  // la bannière demande une police plus fine pour garder le détail des logos
-  const FONT_SIZE = { 1: 13, 2: 13, 3: 13, 4: 8 };
+  // police fine pour garder le détail des logos
+  const FONT_SIZE = 8;
 
   /* =====================================================================
      Conversion image → ASCII par correspondance de forme
@@ -84,9 +83,9 @@
     return glyphs;
   }
 
-  /* ---------- 4. bannière ---------- */
+  /* ---------- bannière ---------- */
   // Remplacer le fichier suffit : la zone des logos est détectée automatiquement.
-  const BANNER_SRC = 'assets/img/fond-banniere.png';
+  const BANNER_SRC = 'assets/img/fond-banniere.webp';
   const LOGO_HEIGHT = 0.62; // hauteur max du bloc de logos, en part de l'écran
   const LOGO_WIDTH = 0.8; // largeur max du bloc de logos
   const LOGO_LUM = 30; // en dessous : trait sombre des logos (le dégradé ne descend pas sous ~35)
@@ -141,7 +140,7 @@
     });
   }
 
-  function banner(cols, rows, rand, cell, size) {
+  function banner(cols, rows, cell, size) {
     const iw = bannerImg.naturalWidth;
     const box = logoBox;
     const { vecs } = buildGlyphs(cell, size);
@@ -229,139 +228,6 @@
     return grid;
   }
 
-  /* ---------- 1. nébuleuse : bruit de valeur sur 2 octaves ---------- */
-  function nebula(cols, rows, rand) {
-    const lattice = new Map();
-    const at = (x, y) => {
-      const key = x * 7919 + y;
-      if (!lattice.has(key)) lattice.set(key, rand());
-      return lattice.get(key);
-    };
-    const smooth = (t) => t * t * (3 - 2 * t);
-    const noise = (x, y) => {
-      const x0 = Math.floor(x);
-      const y0 = Math.floor(y);
-      const fx = smooth(x - x0);
-      const fy = smooth(y - y0);
-      const top = at(x0, y0) * (1 - fx) + at(x0 + 1, y0) * fx;
-      const bottom = at(x0, y0 + 1) * (1 - fx) + at(x0 + 1, y0 + 1) * fx;
-      return top * (1 - fy) + bottom * fy;
-    };
-    const RAMP = '.·:-=+*#';
-    const grid = [];
-    for (let y = 0; y < rows; y++) {
-      for (let x = 0; x < cols; x++) {
-        const d = noise(x / 22, y / 9) * 0.7 + noise(x / 7, y / 3) * 0.3;
-        if (d < 0.52 || rand() < 0.35) {
-          grid.push([' ', 0]);
-          continue;
-        }
-        const k = Math.min(0.999, (d - 0.52) / 0.4);
-        grid.push([RAMP[(k * RAMP.length) | 0], 1 + ((k * 4) | 0)]);
-      }
-    }
-    return grid;
-  }
-
-  /* ---------- 2. circuit : pistes en angles droits + nœuds ---------- */
-  // Coins indexés par les deux côtés reliés (triés) : B bas, L gauche, R droite, T haut.
-  const CORNERS = { BR: '┌', BL: '┐', RT: '└', LT: '┘' };
-
-  function circuit(cols, rows, rand) {
-    const grid = Array.from({ length: cols * rows }, () => [' ', 0]);
-    const set = (x, y, ch, lvl) => {
-      if (x >= 0 && y >= 0 && x < cols && y < rows) grid[y * cols + x] = [ch, lvl];
-    };
-    const free = (x, y) => x >= 0 && y >= 0 && x < cols && y < rows && grid[y * cols + x][0] === ' ';
-    const traces = Math.round((cols * rows) / 260);
-    for (let n = 0; n < traces; n++) {
-      let x = (rand() * cols) | 0;
-      let y = (rand() * rows) | 0;
-      if (!free(x, y)) continue;
-      let horizontal = rand() < 0.65;
-      let dir = rand() < 0.5 ? -1 : 1;
-      const lvl = rand() < 0.15 ? 3 : 1 + ((rand() * 2) | 0);
-      set(x, y, 'o', 4);
-      let length = 8 + ((rand() * 30) | 0);
-      while (length-- > 0) {
-        const nx = horizontal ? x + dir : x;
-        const ny = horizontal ? y : y + dir;
-        if (!free(nx, ny)) break;
-        if (length > 2 && rand() < 0.08) {
-          // virage à 90° : le coin relie le côté d'arrivée et le côté de départ
-          const newDir = rand() < 0.5 ? -1 : 1;
-          const from = horizontal ? (dir > 0 ? 'L' : 'R') : (dir > 0 ? 'T' : 'B');
-          const to = horizontal ? (newDir > 0 ? 'B' : 'T') : (newDir > 0 ? 'R' : 'L');
-          set(nx, ny, CORNERS[[from, to].sort().join('')], lvl);
-          x = nx;
-          y = ny;
-          horizontal = !horizontal;
-          dir = newDir;
-          continue;
-        }
-        set(nx, ny, horizontal ? '─' : '│', lvl);
-        x = nx;
-        y = ny;
-      }
-      set(x, y, rand() < 0.5 ? 'o' : '■', 4);
-      if (rand() < 0.25) {
-        const label = '0x' + ((rand() * 255) | 0).toString(16).toUpperCase().padStart(2, '0');
-        for (let i = 0; i < label.length; i++) if (free(x + 2 + i, y)) set(x + 2 + i, y, label[i], 1);
-      }
-    }
-    return grid;
-  }
-
-  /* ---------- 3. signal + initiales ---------- */
-  const BIG = [
-    '#########   ##        ##',
-    '##          ##        ##',
-    '##           ##      ## ',
-    '#######      ##      ## ',
-    '##            ##    ##  ',
-    '##             ##  ##   ',
-    '##              ####    ',
-    '##               ##     ',
-  ];
-
-  function signal(cols, rows, rand) {
-    const grid = [];
-    for (let i = 0; i < cols * rows; i++) {
-      grid.push(rand() < 0.045 ? [rand() < 0.5 ? '0' : '1', 1] : [' ', 0]);
-    }
-    const set = (x, y, ch, lvl) => {
-      if (x >= 0 && y >= 0 && x < cols && y < rows) grid[y * cols + x] = [ch, lvl];
-    };
-    // deux traces d'oscilloscope
-    [[0.34, 3.2, 26, 3], [0.62, 2.1, 41, 2]].forEach(([pos, amp, period, lvl]) => {
-      let prev = null;
-      for (let x = 0; x < cols; x++) {
-        const y = Math.round(rows * pos + Math.sin(x / period * Math.PI * 2) * amp + Math.sin(x / 9) * 0.6);
-        let ch = '-';
-        if (prev !== null) ch = y < prev ? '/' : y > prev ? '\\' : '-';
-        set(x, y, ch, lvl);
-        prev = y;
-      }
-    });
-    // initiales en grand, en bas à droite, écrites avec des 0 et des 1
-    const ox = cols - BIG[0].length - 4;
-    const oy = rows - BIG.length - 3;
-    BIG.forEach((line, dy) => {
-      for (let dx = 0; dx < line.length; dx++) {
-        if (line[dx] === '#') set(ox + dx, oy + dy, rand() < 0.5 ? '0' : '1', 3);
-      }
-    });
-    return grid;
-  }
-
-  const VARIANTS = { 1: nebula, 2: circuit, 3: signal, 4: banner };
-
-  function variant() {
-    const fromUrl = new URLSearchParams(window.location.search).get('fond');
-    const chosen = fromUrl || FV.store.get('fv-fond') || '1';
-    return VARIANTS[chosen] ? chosen : '1';
-  }
-
   /* ---------- dessin sur canvas (une passe par teinte) ---------- */
   function paint(canvas, grid, cols, rows, cell, size, cssW, cssH) {
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -390,51 +256,53 @@
 
   let lastSize = '';
   let drawing = false;
+  let pending = false; // taille changée pendant un dessin : à refaire ensuite
 
   FV.drawWallpaper = async (force) => {
     const canvas = FV.$('#wallpaper');
-    if (!canvas || drawing) return;
-    const current = variant();
-    const size = FONT_SIZE[current];
+    if (!canvas) return;
+    if (drawing) {
+      pending = true;
+      return;
+    }
+    const size = FONT_SIZE;
     const cssW = canvas.clientWidth;
     const cssH = canvas.clientHeight;
-    const key = cssW + 'x' + cssH + ':' + current;
+    // canvas pas encore affiché : il sera dessiné quand il aura une taille
+    if (!cssW || !cssH) return;
+    const key = cssW + 'x' + cssH;
     if (!force && key === lastSize) return;
     drawing = true;
-    let fallback = false;
     try {
       // la police doit être chargée avant de mesurer les caractères
       if (document.fonts) await document.fonts.load(`${size}px "IBM Plex Mono"`).catch(() => {});
-      if (current === '4') await loadBanner();
+      await loadBanner();
       const ctx = canvas.getContext('2d');
       ctx.font = `${size}px ${FONT_FAMILY}`;
       const cell = { width: ctx.measureText('M').width || size * 0.6, height: Math.ceil(size * 1.15) };
       const cols = Math.ceil(cssW / cell.width) + 1;
       const rows = Math.ceil(cssH / cell.height) + 1;
-      const grid = VARIANTS[current](cols, rows, FV.rng(2026), cell, size);
+      const grid = banner(cols, rows, cell, size);
       paint(canvas, grid, cols, rows, cell, size, cssW, cssH);
       lastSize = key;
     } catch (err) {
-      // image absente ou erreur : on retombe sur la première variante
+      // image absente : le bureau reste sur sa couleur de fond
       console.warn('Fond d\'écran :', err);
-      if (current !== '1') {
-        FV.store.set('fv-fond', '1');
-        fallback = true;
-      }
     } finally {
       drawing = false;
     }
-    if (fallback) FV.drawWallpaper(true);
-  };
-
-  FV.setWallpaper = (n) => {
-    FV.store.set('fv-fond', String(n));
-    FV.drawWallpaper(true);
+    if (pending) {
+      pending = false;
+      FV.drawWallpaper(false);
+    }
   };
 
   let timer = 0;
-  window.addEventListener('resize', () => {
+  const redraw = () => {
     clearTimeout(timer);
     timer = setTimeout(() => FV.drawWallpaper(false), 200);
-  });
+  };
+  const canvas = FV.$('#wallpaper');
+  if (canvas && 'ResizeObserver' in window) new ResizeObserver(redraw).observe(canvas);
+  else window.addEventListener('resize', redraw);
 })(window.FV);

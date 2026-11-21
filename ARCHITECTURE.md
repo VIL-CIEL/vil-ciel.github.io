@@ -81,10 +81,12 @@ exposé dans le site.
 
 ## Pixel art et performance
 
-- Fond d'écran ASCII **calculé une fois** (et au redimensionnement), dessiné sur un
-  canvas, puis **statique**. Variante bannière : l'image est convertie en ASCII par
-  correspondance de forme (6 zones circulaires par caractère, comparées aux 95
-  caractères ASCII dessinés dans la police du site) avec renforcement du contraste.
+- Fond d'écran ASCII **calculé une fois** (et à chaque changement de taille du canvas),
+  dessiné sur un canvas, puis **statique**. Source : la bannière
+  (`assets/img/fond-banniere.webp`), convertie en ASCII par correspondance de forme
+  (6 zones circulaires par caractère, comparées aux 95 caractères ASCII dessinés dans
+  la police du site) avec renforcement du contraste. La zone des logos est détectée
+  automatiquement : remplacer l'image suffit.
 - Icônes dessinées une fois sur des canvas 16×16 agrandis sans lissage
   (`image-rendering: pixelated`).
 - Scènes animées (`scenes.js`, 192×64 agrandies sans lissage) : une **seule boucle

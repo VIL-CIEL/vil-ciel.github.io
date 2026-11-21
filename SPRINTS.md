@@ -18,9 +18,9 @@ Légende : ✅ terminé · 🚧 en cours · ⬜ à faire
   dessinée en code. Style rétro / terminal, base sombre, violet en minorité, glitch
   ponctuel. Maquette de référence hors dépôt : `Portofolio_Project/maquette-os.html`.
 - Sprints v2-1 à v2-4 terminés et validés (formulaire de contact et animations testés
-  en conditions réelles le 2026-11-20). Sprint v2-5 (finitions) terminé côté code ;
-  reste la sortie de la v2. Fond d'écran : bannière convertie en ASCII (variante 4),
-  image définitive à récupérer.
+  en conditions réelles le 2026-11-20). Sprint v2-5 (finitions) terminé. Fond
+  d'écran définitif : la bannière (`assets/img/fond-banniere.webp`) convertie en
+  ASCII, seul fond restant. Reste la sortie de la v2.
 - Le statut affiché vient de `public/data/profile.json`.
 
 ## Prochaines étapes
@@ -29,19 +29,24 @@ Légende : ✅ terminé · 🚧 en cours · ⬜ à faire
       possible. Selon l'issue, PMA ou CPE deviendra la voie principale (l'autre passant
       en parallèle) : clé `prioritaire` à basculer dans `public/data/parcours.json`
       (CPE = 1 aujourd'hui), dates et descriptions à ajuster, et `profile.json`.
-- [ ] Fond d'écran : piste retenue = bannière LinkedIn convertie en ASCII (variante 4).
-      Le logo du serveur communautaire reste visible (décision du 2026-11-18). Récupérer
-      l'image définitive en haute résolution (`public/assets/img/fond-banniere.png`, pas encore versionnée),
-      puis retirer les variantes 1-3 et le sélecteur de test du menu.
 - [ ] Vérifier au premier déploiement de la v2 que l'aperçu du CV est bien généré par
       GitHub Actions (`public/assets/img/cv-apercu.png`).
-- [ ] Sortie de la v2 : `version.json` 2.0.0, changelog daté, fusion dans `main`, tag
-      `v2.0.0`. En attente de la bannière HD (décision du 2026-11-20) : la versionner,
-      en faire le seul fond d'écran et retirer les variantes 1-3 et le sélecteur avant
-      la mise en ligne.
+- [ ] Sortie de la v2 : `version.json` 2.0.0, changelog daté `[2.0.0]`, `lastmod` du
+      sitemap, fusion dans `main`, tag `v2.0.0`. Plus rien ne bloque : en attente du
+      feu vert après vérification du fond d'écran dans Firefox.
 - [ ] Photos des PyMoDAQ Days à intégrer dans la fenêtre DAP.
 
 ## Journal
+
+- 2026-11-21 : fond d'écran définitif. Il n'existe pas de version HD de la bannière :
+  l'image d'origine (2000×500, avant publication sur LinkedIn) est la source et devient
+  `assets/img/fond-banniere.webp`, versionnée. Variantes de test 1 à 3 (nébuleuse,
+  circuit, signal) et sélecteur du menu retirés. Corrigé au passage : si le canvas
+  n'avait pas encore de taille au premier dessin (bureau masqué), le fond restait vide
+  (l'ancien repli sur la variante 1 masquait le problème). Le fond est maintenant
+  redessiné dès que le canvas change de taille (`ResizeObserver`), et une taille
+  changée pendant un dessin est rejouée ensuite. Vérifié dans le navigateur interne :
+  bureau 1024×722 et mobile 375×812, aucun message en console.
 
 - 2026-11-20 : sprint v2-5 (finitions). Polices hébergées sur le site (WOFF2 par plage
   de caractères, préchargées, licences OFL jointes) : plus aucune requête externe.

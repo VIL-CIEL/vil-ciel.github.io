@@ -101,9 +101,6 @@
       FV.$('#start').hidden = true;
       boot();
     });
-    FV.$$('[data-fond]').forEach((btn) =>
-      btn.addEventListener('click', () => FV.setWallpaper(btn.dataset.fond))
-    );
 
     // la classe is-booting est posée dès le <head> pour une première visite
     if (document.documentElement.classList.contains('is-booting')) boot();

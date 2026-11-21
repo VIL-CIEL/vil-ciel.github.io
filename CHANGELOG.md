@@ -10,7 +10,7 @@ et le projet respecte le [versionnage sémantique](https://semver.org/lang/fr/) 
 ### Ajouté
 - Nouvelle interface en forme de **système d'exploitation** : boot de première visite
   (passable, non rejoué), bureau avec icônes de programmes dessinées en code, encadré
-  Profil, fond d'écran ASCII généré (3 variantes en test), barre des tâches (menu,
+  Profil, fond d'écran ASCII, barre des tâches (menu,
   fenêtres ouvertes, raccourci de téléchargement du CV, statut, heure).
 - Gestionnaire de fenêtres : déplacer, réduire, fermer (bouton ou Échap, en cascade),
   défilement remis en haut à chaque ouverture, une adresse par fenêtre (`/#dap`…).
